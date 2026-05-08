@@ -1,0 +1,171 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageSidebar from '../components/PageSidebar.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+
+const sidebarItems = [
+  { label: 'REACH OUT', href: '/contact' },
+  { label: 'STATUS',    href: '#status' },
+];
+---
+
+<PageLayout title="Contact" description="How to find Freddie — builder of KTT.DEV.">
+  <PageSidebar slot="sidebar" heading="CONTACT" items={sidebarItems} activeHref="/contact" />
+
+  <div class="contact-content">
+
+    <header class="page-section frame" data-animate="page-section">
+      <SectionLabel>Contact</SectionLabel>
+      <p class="mono-copy">Building in the open. Here's how to find me.</p>
+    </header>
+
+    <section class="page-section frame" aria-label="Contact methods" data-animate="page-section">
+      <SectionLabel>Reach out</SectionLabel>
+      <ul class="contact-list">
+        <li>
+          <a class="contact-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer">
+            <span class="contact-dot" aria-hidden="true"></span>
+            <span class="contact-label">GITHUB</span>
+            <span class="contact-value">FreddieKT</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="contact-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer">
+            <span class="contact-dot" aria-hidden="true"></span>
+            <span class="contact-label">X</span>
+            <span class="contact-value">@ktythaung</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="contact-row" href="mailto:hello@ktt.dev">
+            <span class="contact-dot" aria-hidden="true"></span>
+            <span class="contact-label">EMAIL</span>
+            <span class="contact-value">hello@ktt.dev</span>
+            <span class="contact-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="status" class="page-section frame status-panel" aria-label="Current status" data-animate="page-section">
+      <SectionLabel>Status</SectionLabel>
+      <div class="status-terminal">
+        <div class="status-line">
+          <span class="status-key">OPEN TO</span>
+          <span class="status-sep">:</span>
+          <span class="status-val">interesting problems</span>
+        </div>
+        <div class="status-line">
+          <span class="status-key">BUILDING</span>
+          <span class="status-sep">:</span>
+          <span class="status-val">KTT.DEV labs</span>
+        </div>
+        <div class="status-line">
+          <span class="status-key">STATUS</span>
+          <span class="status-sep">:</span>
+          <span class="status-val">
+            <span class="status-dot" aria-hidden="true"></span>
+            ACTIVE
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>
+
+<style>
+  .contact-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: var(--border-solid);
+  }
+
+  .contact-list li + li { border-top: var(--border-solid); }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    transition: background 160ms ease;
+  }
+
+  .contact-row:hover { background: var(--accent-soft); }
+
+  .contact-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  .contact-label {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: 5rem;
+  }
+
+  .contact-value {
+    font-size: var(--text-sm);
+    color: var(--foreground-soft);
+    flex: 1;
+  }
+
+  .contact-arrow {
+    color: var(--accent);
+    margin-left: auto;
+  }
+
+  .status-panel { background: var(--panel-overlay); }
+
+  .status-terminal {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.85rem;
+    border: var(--border-dashed);
+    background: var(--terminal-overlay);
+    font-size: var(--text-sm);
+  }
+
+  .status-line {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .status-key {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    min-width: 8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .status-sep { color: var(--muted); }
+
+  .status-val {
+    color: var(--foreground-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>
