@@ -1,0 +1,130 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageSidebar from '../components/PageSidebar.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+
+interface Note {
+  date: string;
+  title: string;
+  summary: string;
+}
+
+const notes: Note[] = [
+  {
+    date: '2026-05-09',
+    title: 'Why I removed the terminal card from the hero',
+    summary: 'The TerminalCard was heavy dev-coded aesthetic. Removing it let the ProfileStatusCard breathe and eliminated the empty-space stretch problem.',
+  },
+  {
+    date: '2026-05-08',
+    title: 'Switching align-items from stretch to start in the hero grid',
+    summary: 'stretch was forcing the hero photo panel to match the height of the right column, leaving a large empty area below the content.',
+  },
+];
+
+const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
+---
+
+<PageLayout title="Notes" description="Short decision logs and build notes from KTT.DEV.">
+  <PageSidebar slot="sidebar" heading="NOTES" items={sidebarItems} activeHref="/notes" />
+
+  <div class="notes-content">
+
+    <header class="page-section frame" data-animate="page-section">
+      <SectionLabel>Notes</SectionLabel>
+      <p class="mono-copy">Short decision logs and build notes.</p>
+    </header>
+
+    {notes.length > 0 ? (
+      <section class="page-section frame" aria-label="Note list" data-animate="page-section">
+        <ul class="notes-list">
+          {notes.map((note) => (
+            <li class="note-row">
+              <time class="note-date" datetime={note.date}>{note.date}</time>
+              <div class="note-body">
+                <p class="note-title">{note.title}</p>
+                <p class="mono-copy note-summary">{note.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : (
+      <section class="page-section frame" data-animate="page-section">
+        <div class="empty-state">// no notes yet — check back soon</div>
+      </section>
+    )}
+
+  </div>
+</PageLayout>
+
+<style>
+  .notes-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .notes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: var(--border-solid);
+  }
+
+  .note-row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: start;
+    transition: background 160ms ease;
+  }
+
+  .note-row:hover { background: var(--accent-soft); }
+
+  .note-row + .note-row { border-top: var(--border-solid); }
+
+  .note-date {
+    font-size: var(--text-xs);
+    color: var(--muted-faint);
+    letter-spacing: 0.08em;
+    padding-top: 0.1rem;
+    white-space: nowrap;
+  }
+
+  .note-title {
+    margin: 0 0 0.35rem;
+    font-size: var(--text-sm);
+    color: var(--foreground);
+    letter-spacing: 0.02em;
+  }
+
+  .note-summary {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .empty-state {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    padding: 1rem;
+    border: var(--border-dashed);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 600px) {
+    .note-row {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+  }
+</style>
