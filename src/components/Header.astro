@@ -12,10 +12,10 @@ interface Props {
 }
 
 const { navItems = [
-  { label: 'ABOUT', href: '#about' },
-  { label: 'LABS', href: '#labs' },
-  { label: 'NOTES', href: '#notes' },
-  { label: 'WORK', href: '#work' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'LABS',  href: '/labs/afterglow' },
+  { label: 'NOTES', href: '/notes' },
+  { label: 'WORK',  href: '#work' },
 ] } = Astro.props;
 ---
 
@@ -34,7 +34,7 @@ const { navItems = [
     ))}
   </nav>
 
-  <a class="primary-pill" href="#contact">&gt; CONTACT</a>
+  <a class="primary-pill" href="/contact">&gt; CONTACT</a>
 </header>
 
 <style>

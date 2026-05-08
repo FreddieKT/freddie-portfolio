@@ -5,6 +5,7 @@ export interface ProjectMetric {
 
 export interface Project {
   index: string;
+  slug: string;
   title: string;
   label: string;
   category: string;
@@ -18,10 +19,11 @@ export interface Project {
 export const projects: Project[] = [
   {
     index: '01',
+    slug: 'afterglow',
     title: 'AFTERGLOW',
     label: 'terminal memory',
     category: 'DAILY RECALL AGENT',
-    summary: 'End your session with tomorrow’s starting point.',
+    summary: 'End your session with tomorrow\'s starting point.',
     command: 'afterglow --today',
     output: ['generating digest…', 'memories captured', 'plan for tomorrow'],
     metrics: [
@@ -32,6 +34,7 @@ export const projects: Project[] = [
   },
   {
     index: '02',
+    slug: 'unfog',
     title: 'UNFOG',
     label: 'decision clarity',
     category: 'NOTE CLARITY ENGINE',
@@ -46,6 +49,7 @@ export const projects: Project[] = [
   },
   {
     index: '03',
+    slug: 'promptglass',
     title: 'PROMPTGLASS',
     label: 'prompt linting',
     category: 'PROMPT OBSERVER',
@@ -60,6 +64,7 @@ export const projects: Project[] = [
   },
   {
     index: '04',
+    slug: 'kairos-lab',
     title: 'KAIROS LAB',
     label: 'visual systems',
     category: 'EXPERIMENTAL SYSTEMS',

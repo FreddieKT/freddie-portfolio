@@ -10,6 +10,7 @@ const { project } = Astro.props;
 ---
 
 <article class="project-card corner-frame" aria-labelledby={`project-${project.index}`} data-animate="project-card">
+  <a href={`/labs/${project.slug}`} class="card-link" aria-label={`View ${project.title} detail`}></a>
   <div class="project-top">
     <div>
       <p class="project-index">{project.index}</p>
@@ -52,6 +53,29 @@ const { project } = Astro.props;
     min-height: 100%;
     background: var(--panel-overlay);
     border: var(--border-solid);
+    position: relative;
+  }
+
+  .card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: var(--radius-md);
+  }
+
+  .project-card > *:not(.card-link) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .project-card:has(.card-link:hover) {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .project-card:has(.card-link:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
   .project-top {
