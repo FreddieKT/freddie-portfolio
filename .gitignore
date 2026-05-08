@@ -5,3 +5,4 @@ dist/
 .context/
 *.output
 .DS_Store
+.claude

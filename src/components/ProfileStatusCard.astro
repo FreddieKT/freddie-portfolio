@@ -25,7 +25,7 @@ const cubitRows = [
     <p class="mono-copy profile-role">{role}</p>
   </div>
 
-  <div class="cubit-stage dashed-panel" aria-label="Pixel cubit mascot identity layer">
+  <div class="cubit-stage" aria-label="Pixel cubit mascot identity layer">
     <div class="cubit-grid" aria-hidden="true">
       {cubitRows.flatMap((row, rowIndex) =>
         [...row].map((cell, columnIndex) => (
@@ -102,6 +102,12 @@ const cubitRows = [
     border-radius: calc(var(--radius-md) - 0.35rem);
     background: var(--surface-terminal);
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+    animation: float-cubit 4s ease-in-out infinite;
+  }
+
+  @keyframes float-cubit {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
   }
 
   .cubit-cell {
@@ -113,11 +119,24 @@ const cubitRows = [
   .cubit-cell.is-filled {
     background: var(--accent-soft);
     box-shadow: 0 0 0 1px color-mix(in srgb, var(--foreground) 20%, transparent);
+    animation: pulse-cell 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-cell {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; box-shadow: 0 0 4px color-mix(in srgb, var(--accent-soft) 40%, transparent); }
   }
 
   .cubit-cell.is-eye {
     background: var(--accent);
     box-shadow: 0 0 0 1px var(--foreground), 0 0 10px color-mix(in srgb, var(--accent) 55%, transparent);
+    transform-origin: center;
+    animation: blink-eye 4s infinite;
+  }
+
+  @keyframes blink-eye {
+    0%, 95%, 100% { transform: scaleY(1); }
+    97% { transform: scaleY(0.1); }
   }
 
   .cubit-copy {
