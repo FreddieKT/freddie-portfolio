@@ -1,0 +1,86 @@
+---
+interface SidebarItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: SidebarItem[];
+  activeHref: string;
+  heading?: string;
+}
+
+const { items, activeHref, heading } = Astro.props;
+---
+
+<nav class="page-sidebar" aria-label="Section navigation">
+  {heading && <p class="sidebar-heading">{heading}</p>}
+  <ul class="sidebar-list">
+    {items.map((item) => (
+      <li>
+        <a
+          class:list={['sidebar-item', item.href === activeHref && 'is-active']}
+          href={item.href}
+          data-animate="sidebar-item"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .page-sidebar {
+    position: sticky;
+    top: 1.5rem;
+    border: var(--border-solid);
+    background: var(--panel-overlay);
+    border-radius: var(--radius-md);
+  }
+
+  .sidebar-heading {
+    margin: 0;
+    padding: 0.6rem 1rem;
+    font-size: var(--text-xs);
+    color: var(--muted-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: var(--border-solid);
+  }
+
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar-item {
+    display: block;
+    padding: 0.65rem 1rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-left: 2px solid transparent;
+    transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+  }
+
+  .sidebar-item:hover,
+  .sidebar-item:focus-visible {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+    outline: none;
+  }
+
+  .sidebar-item.is-active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-list li + li {
+    border-top: var(--border-solid);
+  }
+</style>

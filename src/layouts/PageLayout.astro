@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import FooterStatus from '../components/FooterStatus.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'KTT.DEV — Strange tools for real life' } = Astro.props;
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} — KTT.DEV</title>
+    <meta name="description" content={description} />
+    <script is:inline>
+      const t = localStorage.getItem('ktt-dev-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    </script>
+  </head>
+  <body>
+    <main id="top" class="page-shell">
+      <div class="frame page-frame">
+        <Header navItems={[
+          { label: 'ABOUT', href: '/about' },
+          { label: 'LABS',  href: '/labs/afterglow' },
+          { label: 'NOTES', href: '/notes' },
+          { label: 'WORK',  href: '/#work' },
+        ]} />
+        <div class="page-layout">
+          <slot name="sidebar" />
+          <div class="page-main">
+            <slot />
+          </div>
+        </div>
+      </div>
+      <FooterStatus />
+    </main>
+
+    <script>
+      import { gsap } from 'gsap';
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        gsap.set('[data-animate="sidebar-item"]', { autoAlpha: 0, x: -12 });
+        gsap.set('[data-animate="page-section"]', { autoAlpha: 0, y: 16 });
+        gsap.to('[data-animate="sidebar-item"]', {
+          autoAlpha: 1, x: 0, duration: 0.4, ease: 'power2.out', stagger: 0.06,
+        });
+        gsap.to('[data-animate="page-section"]', {
+          autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08, delay: 0.1,
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .page-frame {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .page-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(1rem, 2vw, 1.5rem) 0;
+    align-items: start;
+  }
+
+  .page-main {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    .page-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
