@@ -1,89 +1,54 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageSidebar from '../components/PageSidebar.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 
-interface Note {
-  date: string;
-  title: string;
-  summary: string;
-}
-
-const notes: Note[] = [
-  {
-    date: '2026-05-09',
-    title: 'Why I removed the terminal card from the hero',
-    summary: 'The TerminalCard was heavy dev-coded aesthetic. Removing it let the ProfileStatusCard breathe and eliminated the empty-space stretch problem. The card was visually interesting but added noise to a section that should introduce the person, not the tooling. Lesson: hero sections should earn trust quickly — complexity belongs deeper in the page.',
-  },
-  {
-    date: '2026-05-08',
-    title: 'Switching align-items from stretch to start in the hero grid',
-    summary: 'stretch was forcing the hero photo panel to match the height of the right column, leaving a large empty area below the subtitle and tags. The fix was one property — align-items: start — which lets each column collapse to its natural height. The visual difference was immediate and obvious. Most layout bugs are one property away from obvious once you know what to look for.',
-  },
-  {
-    date: '2026-05-07',
-    title: 'Why the accent color failed in light mode',
-    summary: 'The dark-mode accent (#b5d9fd) was reused directly in the light theme tokens. On a white background it produced a ~1.97:1 contrast ratio — well below WCAG AA threshold of 4.5:1. The fix was replacing it with #2563eb in the light token block. The takeaway: design tokens that work in dark mode are not automatically safe for light mode. Each theme needs its own contrast audit, not just a color swap.',
-  },
-  {
-    date: '2026-05-06',
-    title: 'On using GSAP for portfolio animations',
-    summary: 'The original implementation animated the entire hero section as a single unit — one fade, one y offset. Switching to a timeline that cascades portrait → eyebrow → heading → subtitle → tags individually created a much more polished feel without adding complexity. The key insight: GSAP timelines with negative offsets (-=0.25) let you overlap animations smoothly. The result feels intentional rather than just "things fade in".',
-  },
-  {
-    date: '2026-05-05',
-    title: 'corner-frame vs border-radius — the mismatch problem',
-    summary: 'The .project-card class declared border-radius: 2px in scoped CSS, but the computed value was 8px due to a cascade override. The corner-frame pseudo-elements use clip-path polygons designed for sharp corners, so the bracket decorations were floating inside a rounded card. The fix: align the declaration with the computed reality (var(--radius-md)). CSS specificity bugs are easier to spot when you check computed styles in devtools rather than reading the source.',
-  },
-  {
-    date: '2026-05-04',
-    title: 'Building the sidebar layout with Astro named slots',
-    summary: 'The PageLayout uses a named slot (slot="sidebar") to accept the PageSidebar component from each page. This keeps layout concerns in the layout file and content concerns in the page file. The sidebar is sticky (position: sticky; top: 1.5rem) so it stays visible while scrolling through long content. One gotcha: named slots in Astro require the slot attribute on the component itself, not on a wrapping element.',
-  },
-  {
-    date: '2026-05-03',
-    title: 'Static routes vs dynamic routes — when to use getStaticPaths',
-    summary: 'For the four lab projects, the choice was between individual static files (/labs/afterglow.astro) and one dynamic route (/labs/[slug].astro with getStaticPaths). Dynamic routes won for one reason: the data already lives in projects.ts. Adding a fifth project means adding one object to an array — zero file creation required. Static routes would mean copying boilerplate every time. The rule of thumb: if your pages share a template and their data lives in one place, use a dynamic route.',
-  },
-  {
-    date: '2026-05-02',
-    title: 'Theme persistence and the FOUC problem',
-    summary: 'The initial page load had a flash of dark theme before the light theme applied from localStorage. The root HTML always starts with data-theme="dark" on the server. The fix was a short inline script in <head> that reads localStorage and sets the theme attribute before the first paint. This script must be inline (not deferred) and must be in <head> — any other placement causes the flash. The ThemeToggle is:inline for the same reason.',
-  },
-  {
-    date: '2026-05-01',
-    title: 'Ghost link overlay pattern for clickable cards',
-    summary: 'Making a full card clickable without wrapping it in an anchor (which disrupts layout) uses a position:absolute overlay link as the first child inside the card. The card needs position:relative (already provided by .corner-frame), all other children get z-index:2, and the overlay link gets z-index:1 with inset:0. The :has() selector on the parent card enables hover styles without JavaScript. The pattern is clean, accessible, and works with any card layout.',
-  },
-];
+const allNotes = await getCollection('notes');
+const notes = allNotes.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 
 const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
 ---
 
-<PageLayout title="Notes" description="Short decision logs and build notes from KTT.DEV.">
+<PageLayout title="Notes" description="Short knowledge notes and build logs from KTT.DEV.">
   <PageSidebar slot="sidebar" heading="NOTES" items={sidebarItems} activeHref="/notes" />
 
   <div class="notes-content">
 
     <header class="page-section frame" data-animate="page-section">
       <SectionLabel>Notes</SectionLabel>
-      <p class="mono-copy">Short decision logs and build notes.</p>
+      <p class="mono-copy">Knowledge notes, build logs, and things worth writing down.</p>
     </header>
 
     {notes.length > 0 ? (
-      <section class="page-section frame" aria-label="Note list" data-animate="page-section">
-        <ul class="notes-list">
-          {notes.map((note) => (
-            <li class="note-row">
-              <time class="note-date" datetime={note.date}>{note.date}</time>
-              <div class="note-body">
-                <p class="note-title">{note.title}</p>
-                <p class="mono-copy note-summary">{note.summary}</p>
+      <div class="notes-grid">
+        {notes.map((note) => {
+          const slug = note.id.replace(/\.md$/, '');
+          return (
+            <article class="note-card frame" data-animate="page-section">
+              <div class="note-meta">
+                <time class="note-date" datetime={note.data.date}>{note.data.date}</time>
+                {note.data.tags.length > 0 && (
+                  <div class="note-tags" aria-label="Tags">
+                    {note.data.tags.map((tag: string) => (
+                      <span class="note-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
               </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+              <h2 class="note-title">
+                <a href={`/notes/${slug}`}>{note.data.title}</a>
+              </h2>
+              <p class="mono-copy note-summary">{note.data.summary}</p>
+              <a class="note-read-link" href={`/notes/${slug}`} aria-label={`Read: ${note.data.title}`}>
+                Read note →
+              </a>
+            </article>
+          );
+        })}
+      </div>
     ) : (
       <section class="page-section frame" data-animate="page-section">
         <div class="empty-state">// no notes yet — check back soon</div>
@@ -106,46 +71,100 @@ const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
     gap: 0.75rem;
   }
 
-  .notes-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: var(--border-solid);
-  }
-
-  .note-row {
+  .notes-grid {
     display: grid;
-    grid-template-columns: 9rem 1fr;
     gap: 1rem;
-    padding: 1rem;
-    align-items: start;
-    transition: background 160ms ease;
   }
 
-  .note-row:hover { background: var(--accent-soft); }
+  /* Note card */
+  .note-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
 
-  .note-row + .note-row { border-top: var(--border-solid); }
+  .note-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Meta row — date + tags */
+  .note-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
 
   .note-date {
     font-size: var(--text-xs);
     color: var(--muted-faint);
-    letter-spacing: 0.08em;
-    padding-top: 0.1rem;
+    letter-spacing: 0.1em;
     white-space: nowrap;
   }
 
-  .note-title {
-    margin: 0 0 0.35rem;
-    font-size: var(--text-sm);
-    color: var(--foreground);
-    letter-spacing: 0.02em;
+  .note-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
   }
 
-  .note-summary {
+  .note-tag {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border: 1px dashed var(--border-dashed-color);
     font-size: var(--text-xs);
-    color: var(--muted);
-    line-height: 1.6;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Title */
+  .note-title {
     margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .note-title a {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .note-title a:hover {
+    color: var(--accent);
+  }
+
+  /* Summary */
+  .note-summary {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 72ch;
+  }
+
+  /* Read link */
+  .note-read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-xs);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    transition: gap 160ms ease;
+  }
+
+  .note-read-link:hover {
+    gap: 0.75rem;
   }
 
   .empty-state {
@@ -154,12 +173,5 @@ const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
     padding: 1rem;
     border: var(--border-dashed);
     font-family: var(--font-mono);
-  }
-
-  @media (max-width: 600px) {
-    .note-row {
-      grid-template-columns: 1fr;
-      gap: 0.35rem;
-    }
   }
 </style>

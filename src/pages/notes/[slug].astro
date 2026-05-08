@@ -1,0 +1,291 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageSidebar from '../../components/PageSidebar.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({
+    params: { slug: note.id.replace(/\.md$/, '') },
+    props: { note },
+  }));
+}
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const slug = note.id.replace(/\.md$/, '');
+
+const allNotes = await getCollection('notes');
+const sorted = allNotes.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const sidebarItems = [
+  { label: '← All Notes', href: '/notes' },
+  ...sorted.map((n) => ({
+    label: n.data.title,
+    href: `/notes/${n.id.replace(/\.md$/, '')}`,
+  })),
+];
+---
+
+<PageLayout title={note.data.title} description={note.data.summary}>
+  <PageSidebar
+    slot="sidebar"
+    heading="NOTES"
+    items={sidebarItems}
+    activeHref={`/notes/${slug}`}
+  />
+
+  <article class="note-article">
+
+    <header class="note-header frame page-section" data-animate="page-section">
+      <div class="note-meta">
+        <time class="note-date" datetime={note.data.date}>{note.data.date}</time>
+        {note.data.tags.length > 0 && (
+          <div class="note-tags">
+            {note.data.tags.map((tag: string) => (
+              <span class="note-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+      <h1 class="note-title">{note.data.title}</h1>
+      <p class="mono-copy note-summary">{note.data.summary}</p>
+    </header>
+
+    <div class="note-body frame page-section" data-animate="page-section">
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="note-footer frame page-section" data-animate="page-section">
+      <a class="back-link" href="/notes">← Back to all notes</a>
+    </footer>
+
+  </article>
+</PageLayout>
+
+<style>
+  .note-article {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* Header */
+  .note-header {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .note-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .note-date {
+    font-size: var(--text-xs);
+    color: var(--muted-faint);
+    letter-spacing: 0.1em;
+  }
+
+  .note-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .note-tag {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border: 1px dashed var(--border-dashed-color);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .note-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--foreground);
+  }
+
+  .note-summary {
+    color: var(--muted);
+    font-size: var(--text-md);
+    line-height: 1.65;
+    max-width: 68ch;
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: var(--border-solid);
+  }
+
+  /* Prose */
+  .note-body {
+    background: var(--panel-overlay);
+  }
+
+  .prose {
+    max-width: 72ch;
+  }
+
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--foreground);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--border-solid);
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(h3) {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--foreground-soft);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .prose :global(p) {
+    color: var(--foreground-soft);
+    font-size: var(--text-md);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    color: var(--foreground-soft);
+    font-size: var(--text-md);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .prose :global(strong) {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .prose :global(code):not(.prose :global(pre) :global(code)) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: var(--border-solid);
+    padding: 0.15em 0.45em;
+    border-radius: var(--radius-sm);
+  }
+
+  .prose :global(pre) {
+    background: var(--surface-terminal);
+    border: var(--border-dashed);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: var(--text-sm);
+    color: var(--foreground-soft);
+    font-family: var(--font-mono);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    margin: 1.25rem 0;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin: 1.25rem 0;
+    border: var(--border-solid);
+  }
+
+  .prose :global(th) {
+    text-align: left;
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.6rem 0.75rem;
+    border-bottom: var(--border-solid);
+    background: var(--panel-overlay);
+  }
+
+  .prose :global(td) {
+    color: var(--foreground-soft);
+    padding: 0.6rem 0.75rem;
+    border-bottom: var(--border-solid);
+    vertical-align: top;
+  }
+
+  .prose :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .prose :global(a) {
+    color: var(--accent);
+    text-underline-offset: 3px;
+  }
+
+  .prose :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  .note-footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .back-link {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 160ms ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+</style>
