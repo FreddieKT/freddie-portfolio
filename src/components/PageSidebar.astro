@@ -16,14 +16,15 @@ const { items, activeHref, heading } = Astro.props;
 <nav class="page-sidebar" aria-label="Section navigation">
   {heading && <p class="sidebar-heading">{heading}</p>}
   <ul class="sidebar-list">
-    {items.map((item) => (
+    {items.map((item, index) => (
       <li>
         <a
           class:list={['sidebar-item', item.href === activeHref && 'is-active']}
           href={item.href}
           data-animate="sidebar-item"
         >
-          {item.label}
+          <span class="sidebar-num">{String(index + 1).padStart(2, '0')}</span>
+          <span class="sidebar-label">{item.label}</span>
         </a>
       </li>
     ))}
@@ -56,7 +57,9 @@ const { items, activeHref, heading } = Astro.props;
   }
 
   .sidebar-item {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     padding: 0.65rem 1rem;
     font-size: var(--text-xs);
     color: var(--muted);
@@ -66,12 +69,38 @@ const { items, activeHref, heading } = Astro.props;
     transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
   }
 
+  .sidebar-num {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--muted);
+    border-right: 1px dashed var(--border-solid);
+    padding-right: 0.75rem;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+
   .sidebar-item:hover,
   .sidebar-item:focus-visible {
     color: var(--accent);
     background: var(--accent-soft);
     border-left-color: var(--accent);
     outline: none;
+  }
+
+  .sidebar-item:hover .sidebar-num,
+  .sidebar-item:focus-visible .sidebar-num {
+    color: var(--accent);
+    border-right-color: var(--accent);
+  }
+
+  .sidebar-item.is-active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-item.is-active .sidebar-num {
+    color: var(--accent);
+    border-right-color: var(--accent);
   }
 
   .sidebar-item.is-active {
