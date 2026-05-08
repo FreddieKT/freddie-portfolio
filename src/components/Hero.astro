@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="hero-copy hero-photo-panel corner-frame" aria-labelledby="hero-title">
+<section class="hero-copy hero-photo-panel" aria-labelledby="hero-title">
   <div class="hero-intro">
     <figure class="hero-portrait-frame" data-animate="hero-portrait">
       <Image
@@ -59,12 +59,8 @@ const {
 
   .hero-photo-panel {
     overflow: hidden;
-    border: var(--border-solid);
+    border: none;
     border-radius: var(--radius-md);
-    background:
-      linear-gradient(180deg, var(--terminal-overlay), transparent 38%),
-      var(--surface-panel);
-    box-shadow: var(--shadow-panel);
   }
 
   .hero-intro {

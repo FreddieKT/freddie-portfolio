@@ -35,51 +35,22 @@ const sidebarItems = projects.map((p) => ({
   />
 
   <article class="labs-detail">
-    <header class="page-section frame lab-hero" data-animate="page-section">
-      <SectionLabel>{project.category}</SectionLabel>
-      <h1 class="lab-title">{project.title}</h1>
-      <p class="mini-kicker">{project.label}</p>
-    </header>
+    <div class="page-section frame combined-panel" data-animate="page-section">
+      <div class="markdown-prose">
+        <h1>{project.title}</h1>
+        <p class="meta"><strong>{project.category}</strong> &middot; {project.label}</p>
 
-    <section class="page-section frame" aria-label="Summary" data-animate="page-section">
-      <SectionLabel>Summary</SectionLabel>
-      <p class="mono-copy">{project.summary}</p>
-    </section>
+        <h2>Summary</h2>
+        <p>{project.summary}</p>
 
-    <section class="page-section frame terminal-panel" aria-label="Terminal output" data-animate="page-section">
-      <div class="terminal-head">
-        <div class="terminal-head-left">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span>TERMINAL</span>
-        </div>
-        <span class="terminal-path">KTT@devbox:~</span>
-      </div>
-      <div class="terminal-body">
-        <div class="terminal-row">
-          <code class="terminal-cmd">ktt.dev$ {project.command}</code>
-        </div>
-        {project.output.map((line) => (
-          <div class="terminal-row">
-            <span class="terminal-check" aria-hidden="true">✓</span>
-            <span class="terminal-out">{line}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {project.metrics && project.metrics.length > 0 && (
-      <section class="page-section frame" aria-label="Prototype indicators" data-animate="page-section">
-        <SectionLabel>Indicators</SectionLabel>
-        <div class="indicators-grid">
-          {project.metrics.map((m) => (
-            <div class="indicator-cell">
-              <span class="indicator-label">{m.name}</span>
-              <strong class="indicator-value">{m.value}</strong>
-            </div>
+        <h2>Details</h2>
+        <ul>
+          {project.output.map((line) => (
+            <li>{line}</li>
           ))}
-        </div>
-      </section>
-    )}
+        </ul>
+      </div>
+    </div>
 
     <nav class="page-section frame project-nav" aria-label="Project navigation" data-animate="page-section">
       <a class="nav-pill" href={`/labs/${prev.slug}`}>← {prev.title}</a>
@@ -99,91 +70,57 @@ const sidebarItems = projects.map((p) => ({
     border-radius: var(--radius-md);
   }
 
-  .lab-hero {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  .lab-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    line-height: 1;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--foreground);
-  }
-
-  .terminal-panel {
-    display: grid;
-    gap: 0.75rem;
+  .combined-panel {
     background: var(--panel-overlay);
   }
 
-  .terminal-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 0.75rem;
-    border-bottom: var(--border-solid);
-    font-size: var(--text-xs);
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .terminal-head-left {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .terminal-path { color: var(--accent); }
-
-  .terminal-body {
-    display: grid;
-    gap: 0.55rem;
-    font-size: var(--text-sm);
-  }
-
-  .terminal-row {
-    display: flex;
-    gap: 0.75rem;
-    align-items: baseline;
-  }
-
-  .terminal-cmd {
-    color: var(--accent);
+  .markdown-prose {
     font-family: var(--font-mono);
+    color: var(--foreground-soft);
+    line-height: 1.6;
   }
 
-  .terminal-check { color: var(--success); flex-shrink: 0; }
-  .terminal-out   { color: var(--muted); }
-
-  .indicators-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-top: 0.75rem;
+  .markdown-prose h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--foreground);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
-  .indicator-cell {
-    border: var(--border-solid);
-    padding: 0.75rem;
-    display: grid;
-    gap: 0.25rem;
-  }
-
-  .indicator-label {
-    font-size: var(--text-xs);
-    color: var(--muted);
-    letter-spacing: 0.12em;
+  .markdown-prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--foreground);
+    margin: 2rem 0 0.75rem 0;
+    padding-bottom: 0.25rem;
+    border-bottom: var(--border-dashed);
     text-transform: uppercase;
   }
 
-  .indicator-value {
-    font-family: var(--font-display);
-    font-size: var(--text-md);
+  .markdown-prose p {
+    margin: 0 0 1rem 0;
+  }
+
+  .markdown-prose .meta {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .markdown-prose ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .markdown-prose li {
+    margin-bottom: 0.5rem;
+  }
+
+  .markdown-prose li::marker {
     color: var(--accent);
   }
 

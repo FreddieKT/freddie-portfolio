@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import ProfileStatusCard from '../components/ProfileStatusCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import FooterStatus from '../components/FooterStatus.astro';
@@ -27,10 +26,6 @@ import { projects } from '../data/projects';
 
         <div class="hero-grid">
           <Hero />
-
-          <div class="hero-side">
-            <ProfileStatusCard />
-          </div>
         </div>
       </section>
 
@@ -82,7 +77,7 @@ import { projects } from '../data/projects';
         gsap.set('[data-animate="hero-subhead"]', { autoAlpha: 0, y: 14 });
         gsap.set('[data-animate="hero-tag"]', { autoAlpha: 0, x: -10 });
 
-        gsap.set('[data-animate="hero-status-card"], [data-animate="section-panel"], [data-animate="project-card"], [data-animate="metrics-strip"], [data-animate="metric-cell"]', {
+        gsap.set('[data-animate="section-panel"], [data-animate="project-card"], [data-animate="metrics-strip"], [data-animate="metric-cell"]', {
           autoAlpha: 0,
           y: 18,
         });
@@ -94,14 +89,6 @@ import { projects } from '../data/projects';
           .to('[data-animate="hero-heading"]',  { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.28')
           .to('[data-animate="hero-subhead"]',  { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.22')
           .to('[data-animate="hero-tag"]',      { autoAlpha: 1, x: 0, duration: 0.32, stagger: 0.07 }, '-=0.18');
-
-        gsap.to('[data-animate="hero-status-card"]', {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          delay: 0.12,
-        });
 
         gsap.to('[data-animate="section-panel"]', {
           autoAlpha: 1,
@@ -164,14 +151,6 @@ import { projects } from '../data/projects';
     align-items: start;
   }
 
-  .hero-side {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    align-items: start;
-    align-content: start;
-  }
-
   .content-stack {
     display: grid;
     gap: 1rem;
@@ -202,10 +181,6 @@ import { projects } from '../data/projects';
       grid-template-columns: 1fr;
     }
 
-    .hero-side {
-      grid-template-columns: 1fr;
-    }
-
     .project-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -221,7 +196,6 @@ import { projects } from '../data/projects';
       padding: 0.75rem;
     }
 
-    .hero-side,
     .project-grid {
       grid-template-columns: 1fr;
     }
