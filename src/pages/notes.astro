@@ -13,12 +13,47 @@ const notes: Note[] = [
   {
     date: '2026-05-09',
     title: 'Why I removed the terminal card from the hero',
-    summary: 'The TerminalCard was heavy dev-coded aesthetic. Removing it let the ProfileStatusCard breathe and eliminated the empty-space stretch problem.',
+    summary: 'The TerminalCard was heavy dev-coded aesthetic. Removing it let the ProfileStatusCard breathe and eliminated the empty-space stretch problem. The card was visually interesting but added noise to a section that should introduce the person, not the tooling. Lesson: hero sections should earn trust quickly — complexity belongs deeper in the page.',
   },
   {
     date: '2026-05-08',
     title: 'Switching align-items from stretch to start in the hero grid',
-    summary: 'stretch was forcing the hero photo panel to match the height of the right column, leaving a large empty area below the content.',
+    summary: 'stretch was forcing the hero photo panel to match the height of the right column, leaving a large empty area below the subtitle and tags. The fix was one property — align-items: start — which lets each column collapse to its natural height. The visual difference was immediate and obvious. Most layout bugs are one property away from obvious once you know what to look for.',
+  },
+  {
+    date: '2026-05-07',
+    title: 'Why the accent color failed in light mode',
+    summary: 'The dark-mode accent (#b5d9fd) was reused directly in the light theme tokens. On a white background it produced a ~1.97:1 contrast ratio — well below WCAG AA threshold of 4.5:1. The fix was replacing it with #2563eb in the light token block. The takeaway: design tokens that work in dark mode are not automatically safe for light mode. Each theme needs its own contrast audit, not just a color swap.',
+  },
+  {
+    date: '2026-05-06',
+    title: 'On using GSAP for portfolio animations',
+    summary: 'The original implementation animated the entire hero section as a single unit — one fade, one y offset. Switching to a timeline that cascades portrait → eyebrow → heading → subtitle → tags individually created a much more polished feel without adding complexity. The key insight: GSAP timelines with negative offsets (-=0.25) let you overlap animations smoothly. The result feels intentional rather than just "things fade in".',
+  },
+  {
+    date: '2026-05-05',
+    title: 'corner-frame vs border-radius — the mismatch problem',
+    summary: 'The .project-card class declared border-radius: 2px in scoped CSS, but the computed value was 8px due to a cascade override. The corner-frame pseudo-elements use clip-path polygons designed for sharp corners, so the bracket decorations were floating inside a rounded card. The fix: align the declaration with the computed reality (var(--radius-md)). CSS specificity bugs are easier to spot when you check computed styles in devtools rather than reading the source.',
+  },
+  {
+    date: '2026-05-04',
+    title: 'Building the sidebar layout with Astro named slots',
+    summary: 'The PageLayout uses a named slot (slot="sidebar") to accept the PageSidebar component from each page. This keeps layout concerns in the layout file and content concerns in the page file. The sidebar is sticky (position: sticky; top: 1.5rem) so it stays visible while scrolling through long content. One gotcha: named slots in Astro require the slot attribute on the component itself, not on a wrapping element.',
+  },
+  {
+    date: '2026-05-03',
+    title: 'Static routes vs dynamic routes — when to use getStaticPaths',
+    summary: 'For the four lab projects, the choice was between individual static files (/labs/afterglow.astro) and one dynamic route (/labs/[slug].astro with getStaticPaths). Dynamic routes won for one reason: the data already lives in projects.ts. Adding a fifth project means adding one object to an array — zero file creation required. Static routes would mean copying boilerplate every time. The rule of thumb: if your pages share a template and their data lives in one place, use a dynamic route.',
+  },
+  {
+    date: '2026-05-02',
+    title: 'Theme persistence and the FOUC problem',
+    summary: 'The initial page load had a flash of dark theme before the light theme applied from localStorage. The root HTML always starts with data-theme="dark" on the server. The fix was a short inline script in <head> that reads localStorage and sets the theme attribute before the first paint. This script must be inline (not deferred) and must be in <head> — any other placement causes the flash. The ThemeToggle is:inline for the same reason.',
+  },
+  {
+    date: '2026-05-01',
+    title: 'Ghost link overlay pattern for clickable cards',
+    summary: 'Making a full card clickable without wrapping it in an anchor (which disrupts layout) uses a position:absolute overlay link as the first child inside the card. The card needs position:relative (already provided by .corner-frame), all other children get z-index:2, and the overlay link gets z-index:1 with inset:0. The :has() selector on the parent card enables hover styles without JavaScript. The pattern is clean, accessible, and works with any card layout.',
   },
 ];
 
