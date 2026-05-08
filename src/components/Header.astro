@@ -1,0 +1,91 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  navItems?: NavItem[];
+}
+
+const { navItems = [
+  { label: 'ABOUT', href: '#about' },
+  { label: 'LABS', href: '#labs' },
+  { label: 'NOTES', href: '#notes' },
+  { label: 'WORK', href: '#work' },
+] } = Astro.props;
+---
+
+<header class="site-header" aria-label="Primary">
+  <div class="brand-lockup">
+    <a class="brand-mark" href="#top" aria-label="KTT.DEV home">
+      <SectionLabel>KTT.DEV</SectionLabel>
+      <span class="mini-kicker">~/home/freddie</span>
+    </a>
+    <ThemeToggle />
+  </div>
+
+  <nav class="nav-grid" aria-label="Main navigation">
+    {navItems.map((item) => (
+      <a class="nav-pill" href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+
+  <a class="primary-pill" href="#contact">&gt; CONTACT</a>
+</header>
+
+<style>
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 1.4fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: var(--border-solid);
+  }
+
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand-mark {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .brand-mark :global(.section-label) {
+    margin-bottom: 0;
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .nav-grid .nav-pill {
+    width: 100%;
+  }
+
+  @media (max-width: 1100px) {
+    .site-header {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .nav-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .brand-lockup {
+      align-items: center;
+    }
+  }
+</style>

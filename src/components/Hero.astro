@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import profileAboutImage from '../../../../../imported/freddie-portfolio-v2/src/assets/images/profile-about.jpg';
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  categories?: string[];
+}
+
+const {
+  eyebrow = 'Personal portfolio / prototype review',
+  title = 'Freddie K. — systems, agents, and strange useful tools',
+  subtitle = 'I build AI workflows, memory systems, and terminal-native products that stay useful in real life.',
+  categories = ['AI INFRA', 'SYSTEMS', 'TERMINAL UX', 'OPEN SOURCE'],
+} = Astro.props;
+---
+
+<section class="hero-copy hero-photo-panel corner-frame" aria-labelledby="hero-title">
+  <div class="hero-intro">
+    <figure class="hero-portrait-frame" data-animate="hero-portrait">
+      <Image
+        src={profileAboutImage}
+        alt="Freddie, the builder behind KTT.DEV"
+        width={352}
+        height={470}
+        loading="eager"
+        decoding="async"
+        class="hero-portrait-image"
+      />
+    </figure>
+
+    <div class="hero-text-stack">
+      <div data-animate="hero-eyebrow"><SectionLabel>{eyebrow}</SectionLabel></div>
+      <h1 id="hero-title" class="hero-title hero-title-compact" data-animate="hero-heading">{title}</h1>
+      <p class="mono-copy hero-subtitle" data-animate="hero-subhead">{subtitle}</p>
+    </div>
+  </div>
+
+  <div class="grid-tags hero-tags" aria-label="Categories">
+    {categories.map((category) => (
+      <span data-animate="hero-tag">
+        <span class="tag-dot" aria-hidden="true"></span>
+        {category}
+      </span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-copy {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .hero-photo-panel {
+    overflow: hidden;
+    border: var(--border-solid);
+    border-radius: var(--radius-md);
+    background:
+      linear-gradient(180deg, var(--terminal-overlay), transparent 38%),
+      var(--surface-panel);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .hero-intro {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 2.4vw, 1.75rem);
+    padding: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .hero-portrait-frame {
+    position: relative;
+    width: 7rem;
+    aspect-ratio: 3 / 4;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.35rem;
+    border: var(--border-solid-strong);
+    border-radius: var(--radius-md);
+    background:
+      linear-gradient(180deg, var(--terminal-overlay), transparent),
+      var(--surface-terminal);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .hero-portrait-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0.35rem;
+    pointer-events: none;
+    border-radius: calc(var(--radius-md) - 0.25rem);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+    opacity: 0.2;
+  }
+
+  .hero-portrait-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: var(--border-dashed);
+    border-radius: calc(var(--radius-md) - 0.25rem);
+    object-fit: cover;
+    object-position: 50% 0%;
+    filter: saturate(0.95) contrast(1.02);
+  }
+
+  .hero-text-stack {
+    display: grid;
+    gap: 0.9rem;
+    min-width: 0;
+    max-width: 48rem;
+  }
+
+  .hero-title-compact {
+    max-width: 28ch;
+    font-size: clamp(1.35rem, 2.2vw, 2.05rem);
+    line-height: 1.05;
+    letter-spacing: 0.018em;
+  }
+
+  .hero-subtitle {
+    max-width: 52ch;
+    margin-top: 0;
+  }
+
+  .hero-tags {
+    margin: 0 1rem 1rem;
+  }
+
+  :global(html[data-theme='light']) .hero-portrait-image {
+    filter: saturate(0.98) contrast(1.01);
+  }
+
+  @media (min-width: 720px) {
+    .hero-portrait-frame {
+      width: 11rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .hero-intro {
+      flex-direction: column;
+      padding: 0.9rem;
+    }
+
+    .hero-portrait-frame {
+      width: 7rem;
+    }
+
+    .hero-title-compact {
+      max-width: 18ch;
+      font-size: clamp(1.6rem, 8.5vw, 2.55rem);
+      line-height: 1;
+    }
+
+    .hero-tags {
+      margin: 0 0.75rem 0.75rem;
+    }
+  }
+</style>

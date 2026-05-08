@@ -1,0 +1,232 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProfileStatusCard from '../components/ProfileStatusCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import MetricsStrip from '../components/MetricsStrip.astro';
+import FooterStatus from '../components/FooterStatus.astro';
+import { projects } from '../data/projects';
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>KTT.DEV — Strange tools for real life</title>
+    <meta
+      name="description"
+      content="KTT.DEV portfolio prototype — a dark, grid-based dashboard for AI agents, memory systems, and terminal-native tools."
+    />
+  </head>
+  <body>
+    <main id="top" class="page-shell">
+      <section class="frame hero-frame" aria-label="KTT.DEV portfolio introduction">
+        <Header />
+
+        <div class="hero-grid">
+          <Hero />
+
+          <div class="hero-side">
+            <ProfileStatusCard />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-stack" aria-label="KTT.DEV portfolio sections">
+        <section id="about" class="section-panel frame" aria-labelledby="about-title" data-animate="section-panel">
+          <SectionLabel id="about-title">About</SectionLabel>
+          <p class="mono-copy">
+            Terminal-native systems for memory, decisions, creative work, and small tools that
+            stay useful under pressure.
+          </p>
+        </section>
+
+        <section id="labs" class="section-panel frame" aria-labelledby="labs-title" data-animate="section-panel">
+          <SectionLabel id="labs-title">Labs</SectionLabel>
+          <p class="mono-copy">
+            Active experiments around AI agents, memory workflows, terminal UX, and visual systems.
+            The terminal demo above is the live prototype surface; this section is the stable route target.
+          </p>
+        </section>
+
+        <section id="notes" class="section-panel frame" aria-labelledby="notes-title" data-animate="section-panel">
+          <SectionLabel id="notes-title">Notes</SectionLabel>
+          <p class="mono-copy">
+            Short-form decision logs and build notes will live here. For now this anchors the notes route
+            without hijacking the project grid.
+          </p>
+        </section>
+
+        <section id="work" aria-label="Work and prototype projects" data-animate="work-section">
+          <div class="project-grid" aria-label="Projects">
+            {projects.map((project) => <ProjectCard project={project} />)}
+          </div>
+
+          <MetricsStrip />
+        </section>
+      </section>
+
+      <FooterStatus />
+    </main>
+
+    <script>
+      import { gsap } from 'gsap';
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduceMotion) {
+        // Hero sub-elements
+        gsap.set('[data-animate="hero-portrait"]', { autoAlpha: 0, scale: 0.96, y: 10 });
+        gsap.set('[data-animate="hero-eyebrow"]', { autoAlpha: 0, y: 10 });
+        gsap.set('[data-animate="hero-heading"]', { autoAlpha: 0, y: 18 });
+        gsap.set('[data-animate="hero-subhead"]', { autoAlpha: 0, y: 14 });
+        gsap.set('[data-animate="hero-tag"]', { autoAlpha: 0, x: -10 });
+
+        gsap.set('[data-animate="hero-status-card"], [data-animate="section-panel"], [data-animate="project-card"], [data-animate="metrics-strip"], [data-animate="metric-cell"]', {
+          autoAlpha: 0,
+          y: 18,
+        });
+
+        const heroTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        heroTl
+          .to('[data-animate="hero-portrait"]', { autoAlpha: 1, scale: 1, y: 0, duration: 0.65 })
+          .to('[data-animate="hero-eyebrow"]',  { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.35')
+          .to('[data-animate="hero-heading"]',  { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.28')
+          .to('[data-animate="hero-subhead"]',  { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.22')
+          .to('[data-animate="hero-tag"]',      { autoAlpha: 1, x: 0, duration: 0.32, stagger: 0.07 }, '-=0.18');
+
+        gsap.to('[data-animate="hero-status-card"]', {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: 0.12,
+        });
+
+        gsap.to('[data-animate="section-panel"]', {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.55,
+          ease: 'power2.out',
+          stagger: 0.08,
+          delay: 0.08,
+        });
+
+        gsap.to('[data-animate="project-card"]', {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.55,
+          ease: 'power2.out',
+          stagger: 0.07,
+          delay: 0.22,
+        });
+
+        gsap.to('[data-animate="metrics-strip"]', {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+          delay: 0.42,
+        });
+
+        gsap.to('[data-animate="metric-cell"]', {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power2.out',
+          stagger: 0.06,
+          delay: 0.5,
+        });
+
+        gsap.from('.microchart span', {
+          scaleY: 0.15,
+          transformOrigin: 'bottom center',
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.035,
+          delay: 0.65,
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .hero-frame {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(1.35rem, 2.5vw, 2rem) 0 clamp(1rem, 2vw, 1.5rem);
+    align-items: start;
+  }
+
+  .hero-side {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+    align-content: start;
+  }
+
+  .content-stack {
+    display: grid;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .section-panel {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  #work {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  @media (max-width: 1180px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-side {
+      grid-template-columns: 1fr;
+    }
+
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .page-shell {
+      width: min(100%, calc(100% - 1rem));
+      padding-top: 0.5rem;
+    }
+
+    .hero-frame {
+      padding: 0.75rem;
+    }
+
+    .hero-side,
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
