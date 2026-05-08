@@ -1,0 +1,267 @@
+---
+import { Image } from 'astro:assets';
+import profileImage from '../../../../../imported/freddie-portfolio-v2/src/assets/images/profile-about.jpg';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageSidebar from '../components/PageSidebar.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+
+const sidebarItems = [
+  { label: 'IDENTITY', href: '#identity' },
+  { label: 'STACK',    href: '#stack' },
+  { label: 'APPROACH', href: '#approach' },
+  { label: 'LINKS',    href: '#links' },
+];
+
+const stack = [
+  'Astro', 'TypeScript', 'Python',
+  'AI / LLMs', 'GSAP', 'Terminal UX', 'Systems Design',
+];
+---
+
+<PageLayout
+  title="About"
+  description="Khant Thura Thaung — builder of AI workflows, memory systems, and terminal-native tools."
+>
+  <PageSidebar slot="sidebar" heading="ABOUT" items={sidebarItems} activeHref="#identity" />
+
+  <div class="about-content">
+
+    <section id="identity" class="page-section frame" aria-labelledby="identity-heading" data-animate="page-section">
+      <SectionLabel id="identity-heading">Identity</SectionLabel>
+      <div class="identity-layout">
+        <figure class="identity-photo-frame">
+          <Image
+            src={profileImage}
+            alt="Khant Thura Thaung"
+            width={352}
+            height={470}
+            loading="eager"
+            decoding="async"
+            class="identity-photo"
+          />
+        </figure>
+        <div class="identity-text">
+          <p class="identity-name">FREDDIE K.</p>
+          <p class="mini-kicker">BUILDER @ KTT.DEV</p>
+          <p class="mono-copy identity-bio">
+            I'm Khant Thura Thaung — I build AI workflows, memory systems, and terminal-native tools that stay useful in real life.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="page-section frame" aria-labelledby="stack-heading" data-animate="page-section">
+      <SectionLabel id="stack-heading">Stack</SectionLabel>
+      <div class="stack-tags">
+        {stack.map((tool) => <span class="stack-tag">{tool}</span>)}
+      </div>
+    </section>
+
+    <section id="approach" class="page-section frame" aria-labelledby="approach-heading" data-animate="page-section">
+      <SectionLabel id="approach-heading">Approach</SectionLabel>
+      <div class="approach-text">
+        <p class="mono-copy">Build small. Ship fast. Keep what's useful.</p>
+        <p class="mono-copy">I like building hobby projects, testing ideas, and writing down the parts that were actually worth keeping. Some work stays small. Some turns into a real tool. Both are fine.</p>
+        <p class="mono-copy">I split my time between learning, building, and simplifying things that started too complicated.</p>
+      </div>
+    </section>
+
+    <section id="links" class="page-section frame" aria-labelledby="links-heading" data-animate="page-section">
+      <SectionLabel id="links-heading">Links</SectionLabel>
+      <ul class="links-list">
+        <li>
+          <a class="link-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer">
+            <span class="link-dot" aria-hidden="true"></span>
+            <span class="link-label">GITHUB</span>
+            <span class="link-value">FreddieKT</span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="link-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer">
+            <span class="link-dot" aria-hidden="true"></span>
+            <span class="link-label">X</span>
+            <span class="link-value">@ktythaung</span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="link-row" href="mailto:hello@ktt.dev">
+            <span class="link-dot" aria-hidden="true"></span>
+            <span class="link-label">EMAIL</span>
+            <span class="link-value">hello@ktt.dev</span>
+            <span class="link-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('#identity, #stack, #approach, #links');
+    const sidebarLinks = document.querySelectorAll('.sidebar-item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            sidebarLinks.forEach((link) => {
+              link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
+            });
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  </script>
+</PageLayout>
+
+<style>
+  .about-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .identity-layout {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    align-items: flex-start;
+  }
+
+  .identity-photo-frame {
+    flex: 0 0 auto;
+    width: 7rem;
+    aspect-ratio: 3 / 4;
+    margin: 0;
+    padding: 0.3rem;
+    border: var(--border-solid-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface-terminal);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .identity-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: calc(var(--radius-md) - 0.2rem);
+    object-fit: cover;
+    object-position: 50% 0%;
+    filter: saturate(0.95) contrast(1.02);
+  }
+
+  .identity-text {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .identity-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .identity-bio { max-width: 48ch; }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stack-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border: var(--border-dashed);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .stack-tag::before {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .approach-text {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .links-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: var(--border-solid);
+  }
+
+  .links-list li + li { border-top: var(--border-solid); }
+
+  .link-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    transition: background 160ms ease, color 160ms ease;
+  }
+
+  .link-row:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .link-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  .link-label {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: 5rem;
+  }
+
+  .link-value {
+    font-size: var(--text-sm);
+    color: var(--foreground-soft);
+    flex: 1;
+  }
+
+  .link-arrow {
+    color: var(--accent);
+    margin-left: auto;
+  }
+
+  @media (max-width: 600px) {
+    .identity-layout { flex-direction: column; }
+  }
+</style>
