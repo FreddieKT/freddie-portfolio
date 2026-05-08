@@ -1,0 +1,196 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageSidebar from '../../components/PageSidebar.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const idx = projects.findIndex((p) => p.slug === project.slug);
+const prev = projects[(idx - 1 + projects.length) % projects.length];
+const next = projects[(idx + 1) % projects.length];
+
+const sidebarItems = projects.map((p) => ({
+  label: p.title,
+  href: `/labs/${p.slug}`,
+}));
+---
+
+<PageLayout title={project.title} description={project.summary}>
+  <PageSidebar
+    slot="sidebar"
+    heading="LABS"
+    items={sidebarItems}
+    activeHref={`/labs/${project.slug}`}
+  />
+
+  <article class="labs-detail">
+    <header class="page-section frame lab-hero" data-animate="page-section">
+      <SectionLabel>{project.category}</SectionLabel>
+      <h1 class="lab-title">{project.title}</h1>
+      <p class="mini-kicker">{project.label}</p>
+    </header>
+
+    <section class="page-section frame" aria-label="Summary" data-animate="page-section">
+      <SectionLabel>Summary</SectionLabel>
+      <p class="mono-copy">{project.summary}</p>
+    </section>
+
+    <section class="page-section frame terminal-panel" aria-label="Terminal output" data-animate="page-section">
+      <div class="terminal-head">
+        <div class="terminal-head-left">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>TERMINAL</span>
+        </div>
+        <span class="terminal-path">KTT@devbox:~</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-row">
+          <code class="terminal-cmd">ktt.dev$ {project.command}</code>
+        </div>
+        {project.output.map((line) => (
+          <div class="terminal-row">
+            <span class="terminal-check" aria-hidden="true">✓</span>
+            <span class="terminal-out">{line}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {project.metrics && project.metrics.length > 0 && (
+      <section class="page-section frame" aria-label="Prototype indicators" data-animate="page-section">
+        <SectionLabel>Indicators</SectionLabel>
+        <div class="indicators-grid">
+          {project.metrics.map((m) => (
+            <div class="indicator-cell">
+              <span class="indicator-label">{m.name}</span>
+              <strong class="indicator-value">{m.value}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <nav class="page-section frame project-nav" aria-label="Project navigation" data-animate="page-section">
+      <a class="nav-pill" href={`/labs/${prev.slug}`}>← {prev.title}</a>
+      <a class="nav-pill" href={`/labs/${next.slug}`}>{next.title} →</a>
+    </nav>
+  </article>
+</PageLayout>
+
+<style>
+  .labs-detail {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .lab-hero {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .lab-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--foreground);
+  }
+
+  .terminal-panel {
+    display: grid;
+    gap: 0.75rem;
+    background: var(--panel-overlay);
+  }
+
+  .terminal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: var(--border-solid);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .terminal-head-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .terminal-path { color: var(--accent); }
+
+  .terminal-body {
+    display: grid;
+    gap: 0.55rem;
+    font-size: var(--text-sm);
+  }
+
+  .terminal-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .terminal-cmd {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+
+  .terminal-check { color: var(--success); flex-shrink: 0; }
+  .terminal-out   { color: var(--muted); }
+
+  .indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .indicator-cell {
+    border: var(--border-solid);
+    padding: 0.75rem;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .indicator-label {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .indicator-value {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: var(--accent);
+  }
+
+  .project-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
