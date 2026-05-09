@@ -38,6 +38,8 @@ assert.match(profileCard, /PIXEL STAGE/, 'pixel cubit layer should be labelled a
 assert.doesNotMatch(profileCard, /<span><\/span><span><\/span>/, 'generic pixel avatar placeholder should not return; use the styled cubit mascot instead');
 
 assert.match(globalCss, /width:\s*min\(1360px, calc\(100% - 1\.5rem\)\)/, 'page shell should be slightly wider after reducing hero text dominance');
+assert.match(globalCss, /\.grid-tags\s*>\s*span\s*{/, 'grid tag styles must target only direct child tag labels');
+assert.doesNotMatch(globalCss, /\.grid-tags\s+span\s*{/, 'broad grid tag selector makes nested tag dots render as large pills');
 assert.match(tokenCss, /--panel-overlay:/, 'theme tokens need theme-aware panel overlay');
 assert.doesNotMatch(globalCss, /rgba\(10, 13, 18, 0\.92\)/, 'global styles still contain stale hardcoded dark panel rgba');
 

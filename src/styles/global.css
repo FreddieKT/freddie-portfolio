@@ -188,7 +188,7 @@ textarea {
   border-bottom: var(--border-dashed);
 }
 
-.grid-tags span {
+.grid-tags > span {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -200,11 +200,11 @@ textarea {
   transition: background 160ms ease;
 }
 
-.grid-tags span:hover {
+.grid-tags > span:hover {
   background: var(--accent-soft);
 }
 
-.grid-tags span + span {
+.grid-tags > span + span {
   border-left: var(--border-dashed);
 }
 
