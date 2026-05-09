@@ -21,6 +21,7 @@ const projectsData = read('src/data/projects.ts');
 const notesIndex = read('src/pages/notes.astro');
 const noteDetail = read('src/pages/notes/[slug].astro');
 const labDetail = read('src/pages/labs/[slug].astro');
+const faviconSvg = read('public/favicon.svg');
 const noteFiles = walk('src/content/notes').filter((file) => file.endsWith('.md'));
 
 for (const id of ['about', 'labs', 'notes', 'work', 'contact']) {
@@ -44,6 +45,11 @@ assert.match(themeToggle, /class="sun-icon"/, 'theme toggle needs a visible sun 
 assert.match(themeToggle, /sun-rays/, 'theme toggle should include animated light-mode rays');
 assert.match(themeToggle, /vector-effect="non-scaling-stroke"/, 'theme icon strokes should render crisply and reliably');
 assert.match(themeToggle, /transition:/, 'theme toggle icon should animate between light and dark states');
+assert.match(index, /rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/, 'homepage should use animated SVG favicon');
+assert.match(read('src/layouts/PageLayout.astro'), /rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/, 'inner pages should use animated SVG favicon');
+assert.match(faviconSvg, /@keyframes\s+blink/, 'favicon should include cursor blink animation');
+assert.match(faviconSvg, /@keyframes\s+orbitA/, 'favicon should include orbital pixel animation');
+assert.match(faviconSvg, /FREDDIE K\. animated pixel favicon/, 'favicon should describe the FREDDIE K. identity');
 
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');

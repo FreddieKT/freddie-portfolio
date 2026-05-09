@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges" role="img" aria-label="FREDDIE K. animated pixel favicon">
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: #0b1220;
+      --grid: #17243a;
+      --accent: #8bd3ff;
+      --accent-2: #d7f3ff;
+      --muted: #365574;
+    }
+
+    .pulse {
+      animation: pulse 1.4s steps(2, end) infinite;
+    }
+
+    .cursor {
+      animation: blink 0.9s steps(1, end) infinite;
+    }
+
+    .orbit-a {
+      animation: orbitA 1.8s steps(4, end) infinite;
+    }
+
+    .orbit-b {
+      animation: orbitB 1.8s steps(4, end) infinite;
+    }
+
+    @keyframes blink {
+      0%, 48% { opacity: 1; }
+      49%, 100% { opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes orbitA {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(4px, -4px); }
+      50% { transform: translate(8px, 0); }
+      75% { transform: translate(4px, 4px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes orbitB {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-4px, 4px); }
+      50% { transform: translate(-8px, 0); }
+      75% { transform: translate(-4px, -4px); }
+      100% { transform: translate(0, 0); }
+    }
+  </style>
+
+  <rect width="64" height="64" fill="var(--bg)" />
+  <rect x="4" y="4" width="56" height="56" fill="var(--panel)" />
+  <path d="M4 20H60M4 36H60M20 4V60M36 4V60" stroke="var(--grid)" stroke-width="2" />
+  <path d="M4 4H60V60H4Z" fill="none" stroke="var(--accent)" stroke-width="4" />
+
+  <!-- Pixel F -->
+  <g fill="var(--accent-2)">
+    <rect x="14" y="16" width="6" height="32" />
+    <rect x="20" y="16" width="18" height="6" />
+    <rect x="20" y="29" width="14" height="6" />
+  </g>
+
+  <!-- Pixel K -->
+  <g fill="var(--accent)">
+    <rect x="39" y="16" width="6" height="32" />
+    <rect x="45" y="28" width="6" height="6" />
+    <rect x="51" y="22" width="6" height="6" />
+    <rect x="51" y="34" width="6" height="6" />
+    <rect x="57" y="16" width="3" height="6" />
+    <rect x="57" y="40" width="3" height="8" />
+  </g>
+
+  <g class="pulse" fill="var(--accent)">
+    <rect class="orbit-a" x="10" y="10" width="4" height="4" />
+    <rect class="orbit-b" x="50" y="50" width="4" height="4" />
+  </g>
+
+  <rect class="cursor" x="26" y="48" width="14" height="4" fill="var(--accent-2)" />
+</svg>
