@@ -1,48 +1,51 @@
-# Freddie K. Portfolio
+# freddie-portfolio
 
-Personal portfolio for **Freddie K.** — small AI tools, automation workflows, and terminal-native experiments.
-Live at [`freddie-portfolio.pages.dev`](https://freddie-portfolio.pages.dev).
+Personal portfolio for **Freddie K.** -- small AI tools, automation workflows, and terminal-native experiments.
 
-## Status
-
-**Live production** on Cloudflare Pages. Deployed from `main`, auto-deploys on push.
-
-## Source of Truth
-
-- GitHub: [`FreddieKT/freddie-portfolio`](https://github.com/FreddieKT/freddie-portfolio)
-- Deploy target: Cloudflare Pages
-- Design system: `docs/DESIGN.md`
-- Architecture: `docs/ARCHITECTURE.md`
-- Content map: `docs/CONTENT_MAP.md`
-- Style guide: `docs/STYLE_GUIDE.md`
-- Risk controls: `docs/RISK.md`
-- Readiness checklist: `docs/READINESS.md`
-
-## Production deploy
-
-Host: **Cloudflare Pages** connected to this GitHub repo.
-
-```text
-Repository:        FreddieKT/freddie-portfolio
-Production branch: main
-Framework preset:  Astro
-Build command:     npm run build
-Build output dir:  dist
-Node version:      22.12.0 or newer
-Env var:           PUBLIC_SITE_URL=https://freddie-portfolio.pages.dev
-```
-
-Production assets:
-
-- `public/_headers` — security headers (X-Frame-Options, nosniff, referrer policy)
-- `public/robots.txt` — crawler discovery, points to sitemap
-- `src/pages/sitemap.xml.ts` — auto-generated sitemap from content + projects
-- `src/components/SiteHead.astro` — shared SEO, canonical, Open Graph, and Twitter metadata
+**[freddie-portfolio.pages.dev](https://freddie-portfolio.pages.dev)**
 
 ## Tech Stack
 
-- Astro (static site)
+- [Astro](https://astro.build) -- static site generator
 - TypeScript
-- CSS design tokens / custom properties
-- Static-first pages, no unnecessary client islands
-- GSAP for animation where interaction is meaningful
+- CSS custom properties / design tokens
+- GSAP for animation
+
+## Project Structure
+
+```
+src/
+  components/   Astro components (Hero, Header, Footer, etc.)
+  layouts/      Page layouts
+  pages/        Route pages and API endpoints (sitemap)
+  content/      Content collections (notes, blog posts)
+  data/         Project/Labs data
+  styles/       Global CSS and design tokens
+  config/       Site configuration
+public/         Static assets, favicon, headers, robots.txt
+docs/           Design docs, architecture, style guide
+```
+
+## Local Development
+
+```bash
+npm install
+npm run dev    # start dev server
+nm test       # regression checks
+npm run build  # production build to dist/
+```
+
+## Deploy
+
+Hosted on **Cloudflare Pages**, connected to this repository. Pushes to `main` auto-deploy.
+
+```text
+Framework preset:  Astro
+Build command:     npm run build
+Build output:      dist
+Env var:           PUBLIC_SITE_URL=https://freddie-portfolio.pages.dev
+```
+
+## License
+
+MIT
