@@ -18,6 +18,19 @@ const { title, description = 'KTT.DEV — Strange tools for real life' } = Astro
     <meta name="generator" content={Astro.generator} />
     <title>{title} — KTT.DEV</title>
     <meta name="description" content={description} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} — KTT.DEV`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/favicon.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} — KTT.DEV`} />
+    <meta name="twitter:description" content={description} />
+    
     <script is:inline>
       const t = localStorage.getItem('ktt-dev-theme');
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
