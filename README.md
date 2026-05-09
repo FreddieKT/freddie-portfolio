@@ -1,49 +1,48 @@
 # freddie-portfolio
 
-Personal portfolio for **Freddie K.** -- small AI tools, automation workflows, and terminal-native experiments.
+Personal portfolio for **Freddie K.** — small AI tools, automation workflows, and terminal-native experiments.
 
 **[freddie-portfolio.pages.dev](https://freddie-portfolio.pages.dev)**
 
-## Tech Stack
+## Stack
 
-- [Astro](https://astro.build) -- static site generator
-- TypeScript
-- CSS custom properties / design tokens
-- GSAP for animation
+Astro · TypeScript · CSS design tokens · GSAP
 
-## Project Structure
-
-```
-src/
-  components/   Astro components (Hero, Header, Footer, etc.)
-  layouts/      Page layouts
-  pages/        Route pages and API endpoints (sitemap)
-  content/      Content collections (notes, blog posts)
-  data/         Project/Labs data
-  styles/       Global CSS and design tokens
-  config/       Site configuration
-public/         Static assets, favicon, headers, robots.txt
-docs/           Design docs, architecture, style guide
-```
-
-## Local Development
+## Run locally
 
 ```bash
 npm install
-npm run dev    # start dev server
-nm test       # regression checks
-npm run build  # production build to dist/
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build      # outputs to dist/
+npm test           # runs prototype checks
 ```
 
 ## Deploy
 
-Hosted on **Cloudflare Pages**, connected to this repository. Pushes to `main` auto-deploy.
+Hosted on Cloudflare Pages. Pushes to `main` auto-deploy.
 
 ```text
 Framework preset:  Astro
 Build command:     npm run build
 Build output:      dist
-Env var:           PUBLIC_SITE_URL=https://freddie-portfolio.pages.dev
+```
+
+## Project structure
+
+```
+src/
+  components/   — Astro components (Hero, Header, Footer, cards)
+  data/         — projects, metrics
+  layouts/      — page layout shells
+  pages/        — routes (index, about, notes, labs, contact)
+  content/      — notes (markdown collection)
+public/         — static assets, security headers, robots.txt
+docs/           — design system, content map, risk/readiness
 ```
 
 ## License
