@@ -1,7 +1,7 @@
 ---
 title: "Static vs dynamic rendering: how to actually decide"
 date: "2026-04-10"
-publisher: "KTT.DEV"
+publisher: "Freddie K."
 summary: "The Next.js default is to reach for SSR. The right answer is usually SSG. Here's a framework for deciding which rendering strategy to use for each page."
 tags: ["Architecture", "Astro", "Performance"]
 ---

@@ -1,8 +1,8 @@
-# KTT.DEV Portfolio Implementation Plan
+# Freddie K. Portfolio Implementation Plan
 
 > **For Hermes:** Use Kanban orchestrator workflow for execution. Do not implement large chunks directly in the parent session.
 
-**Goal:** Build an Astro-based portfolio prototype that matches the generated KTT.DEV dashboard reference closely enough for visual review.
+**Goal:** Build an Astro-based portfolio prototype that matches the generated Freddie K. dashboard reference closely enough for visual review.
 
 **Architecture:** Static-first Astro site with token-driven CSS, reusable components, and one polished homepage. The generated prototype is the visual target; Honcho is only an architectural reference and must not be copied directly.
 
@@ -16,7 +16,7 @@
 - Stage: planning/prototype only; not yet replacing the live portfolio.
 - Docs scope: full documentation pack.
 - Build method: Kanban orchestrator workflow.
-- Visual fidelity target: generated KTT.DEV prototype reference image.
+- Visual fidelity target: generated Freddie K. prototype reference image.
 - Theme priority: dark-first, because the reference image is dark.
 - Content integrity: placeholder/demo metrics must not be presented as real live stats unless Freddie provides source data.
 
@@ -78,7 +78,7 @@ npm create astro@latest .
 
 ### Task 2.1: Header component
 
-**Objective:** Implement KTT.DEV header with pixel/block logo treatment, path label, dashed nav buttons, contact CTA, and theme toggle.
+**Objective:** Implement Freddie K. header with pixel/block logo treatment, path label, dashed nav buttons, contact CTA, and theme toggle.
 
 **Files:**
 - Create: `src/components/Header.astro`
@@ -106,7 +106,7 @@ npm create astro@latest .
 
 ### Task 2.4: Profile/status card component
 
-**Objective:** Implement original KTT.DEV pixel avatar/profile card and `BUILDING` status block.
+**Objective:** Implement original Freddie K. pixel avatar/profile card and `BUILDING` status block.
 
 **Files:**
 - Create: `src/components/ProfileStatusCard.astro`

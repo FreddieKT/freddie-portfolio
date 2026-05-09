@@ -1,7 +1,7 @@
 ---
 title: "Terminal UX principles that apply to any interface"
 date: "2026-04-05"
-publisher: "KTT.DEV"
+publisher: "Freddie K."
 summary: "Terminals have survived for 50 years because they get a few things exactly right. These principles aren't just for CLI tools — they make any interface better."
 tags: ["UX", "Terminal", "Design"]
 ---

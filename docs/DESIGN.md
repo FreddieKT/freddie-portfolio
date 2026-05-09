@@ -1,4 +1,4 @@
-# Design System — KTT.DEV Portfolio
+# Design System — Freddie K. Portfolio
 
 ## Design Target
 
@@ -6,7 +6,7 @@ The visual target is the generated prototype saved at:
 
 `assets/reference/prototype-honcho-architecture.png`
 
-We are not copying Honcho. We are adapting the **UI/UX architecture** into original KTT.DEV identity:
+We are not copying Honcho. We are adapting the **UI/UX architecture** into original Freddie K. identity:
 
 - dark, terminal-dashboard portfolio shell
 - retro terminal feel
@@ -92,14 +92,14 @@ Optional light mode base, only after dark visual fidelity is acceptable:
 
 ### Components
 
-- Header: 68px target height, bordered bottom, pixel-style `KTT.DEV` mark, `~/home/freddie` path label.
+- Header: 68px target height, bordered bottom, pixel-style `Freddie K.` mark, `~/home/freddie` path label.
 - Nav buttons: dashed borders, uppercase mono labels.
 - CTA: `> CONTACT` style with pale-blue border/text.
 - Theme toggle: visible but simple; must have an accessible label.
 - Hero: huge uppercase claim with pale-blue cursor/dot accent.
 - Category row: compact labels such as `AI INFRA`, `SYSTEMS`, `TERMINAL UX`, `OPEN SOURCE`.
 - Terminal card: command prompt style, output rows, pale-blue cursor/highlight, bottom status line.
-- Profile/status card: original KTT.DEV pixel avatar/mascot, Freddie identity, `BUILDING` status.
+- Profile/status card: original Freddie K. pixel avatar/mascot, Freddie identity, `BUILDING` status.
 - Project cards: dashed/solid border mix, index number, icon, label/category, description, command snippet, optional clearly-labelled demo metrics.
 - Labs detail pages: compact case-study structure with Summary, Problem, What it does, Stack, Status, Next step, and Terminal output.
 - Metrics strip: system-dashboard band with small charts or static visual indicators.
@@ -128,7 +128,7 @@ Optional light mode base, only after dark visual fidelity is acceptable:
 
 ## Content Integrity Rules
 
-- Use original KTT.DEV wording from `docs/CONTENT_MAP.md` and `docs/STYLE_GUIDE.md`.
+- Use original Freddie K. wording from `docs/CONTENT_MAP.md` and `docs/STYLE_GUIDE.md`.
 - Follow `docs/INSTRUCTIONS.md` before changing page copy, Labs project data, or pre-production readiness language.
 - Do not present placeholder metrics as live facts unless Freddie supplies real numbers.
 - Demo terminal output may be illustrative, but should be treated as prototype copy until verified.

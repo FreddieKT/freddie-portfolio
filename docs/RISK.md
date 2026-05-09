@@ -4,7 +4,7 @@
 
 **Risk:** The portfolio may look too close to Honcho.
 
-**Control:** Use Honcho only as UI/UX architecture reference. Use original KTT.DEV content, logo/avatar, wording, project structure, and visual details.
+**Control:** Use Honcho only as UI/UX architecture reference. Use original Freddie K. content, logo/avatar, wording, project structure, and visual details.
 
 ## Risk 2 — Visual Drift From Prototype
 
@@ -28,7 +28,7 @@
 
 **Risk:** Mixing unrelated business/logistics/n8n content into personal portfolio.
 
-**Control:** Content is focused on KTT.DEV, AI agents, terminal-native tools, creative systems, and portfolio identity.
+**Control:** Content is focused on Freddie K., AI agents, terminal-native tools, creative systems, and portfolio identity.
 
 ## Risk 6 — Accessibility Failure
 

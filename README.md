@@ -1,12 +1,12 @@
-# KTT.DEV Portfolio — Planning Workspace
+# Freddie K. Portfolio — Planning Workspace
 
-This folder is the planning and execution workspace for a potential replacement portfolio for **KTT.DEV / Freddie**.
+This folder is the planning and execution workspace for a potential replacement portfolio for **Freddie K. / Freddie**.
 
 The current stage is **planning/prototype only**. This is not yet a replacement for the existing live portfolio and must not be deployed from this workspace without explicit approval.
 
 ## Goal
 
-Build an Astro-based portfolio prototype that adapts the UI/UX architecture observed in Honcho-style developer-tool landing pages, while using original KTT.DEV content, branding, and visual language.
+Build an Astro-based portfolio prototype that adapts the UI/UX architecture observed in Honcho-style developer-tool landing pages, while using original Freddie K. content, branding, and visual language.
 
 ## Source of Truth
 
@@ -23,7 +23,7 @@ Build an Astro-based portfolio prototype that adapts the UI/UX architecture obse
 
 ## Current Decision
 
-We are building a **prototype for review**, not replacing the live site yet. The reference direction is dark-first, terminal-dashboard, and KTT.DEV-branded.
+We are building a **prototype for review**, not replacing the live site yet. The reference direction is dark-first, terminal-dashboard, and Freddie K.-branded.
 
 ## Tech Stack
 

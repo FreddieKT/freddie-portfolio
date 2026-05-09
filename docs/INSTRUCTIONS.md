@@ -1,4 +1,4 @@
-# Instructions — KTT.DEV Portfolio
+# Instructions — Freddie K. Portfolio
 
 This file is the working rulebook for editing the portfolio before production. Use it when adding pages, changing copy, updating project data, or asking an AI coding agent to continue the work.
 
@@ -75,7 +75,7 @@ metrics
 Plain English meaning:
 
 - `date`: publish date for the lab entry, using `YYYY-MM-DD`
-- `publisher`: publishing identity shown in metadata, usually `KTT.DEV`
+- `publisher`: publishing identity shown in metadata, usually `Freddie K.`
 - `summary`: one short sentence for cards and metadata
 - `problem`: what pain or messy workflow this project responds to
 - `does`: what the tool or experiment actually does
@@ -115,7 +115,7 @@ Keep the dark-first terminal-dashboard identity. Do not remove the grid backgrou
 
 Light mode may exist, but dark mode is the visual source of truth.
 
-Do not copy Honcho assets, mascot, logo, claims, or proprietary wording. The structure can be inspired by developer-tool dashboards; the identity must remain KTT.DEV.
+Do not copy Honcho assets, mascot, logo, claims, or proprietary wording. The structure can be inspired by developer-tool dashboards; the identity must remain Freddie K..
 
 ## Verification before commit
 

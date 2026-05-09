@@ -8,7 +8,7 @@ Primary headline:
 
 Subheading direction:
 
-> AI agents, memory systems, terminal-native products, and creative operating systems by Freddie / KTT.DEV.
+> AI agents, memory systems, terminal-native products, and creative operating systems by Freddie / Freddie K..
 
 Reference-image subheading variant:
 
@@ -41,12 +41,12 @@ Terminal copy should be illustrative prototype output unless backed by real data
 Identity:
 
 - Name: Freddie
-- Role: Builder @ KTT.DEV
+- Role: Builder @ Freddie K.
 - Status: BUILDING
 
 Avatar/mascot:
 
-- Must be original KTT.DEV art.
+- Must be original Freddie K. art.
 - Must not copy Honcho’s mascot.
 
 ## Project Cards

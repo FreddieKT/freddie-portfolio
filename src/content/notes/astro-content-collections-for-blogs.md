@@ -1,7 +1,7 @@
 ---
 title: "Using Astro content collections to build a knowledge base"
 date: "2026-05-09"
-publisher: "KTT.DEV"
+publisher: "Freddie K."
 summary: "Content collections turn markdown files into typed, queryable data. Here's why they're the right architecture for a blog or notes section, and how to set them up from scratch."
 tags: ["Astro", "Architecture", "TypeScript"]
 ---

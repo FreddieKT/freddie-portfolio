@@ -28,11 +28,11 @@
 - [ ] Matches dashed-border system.
 - [ ] Matches pale-blue accent system.
 - [ ] Includes terminal demo card.
-- [ ] Includes profile/status card with original KTT.DEV avatar/mascot.
+- [ ] Includes profile/status card with original Freddie K. avatar/mascot.
 - [ ] Includes project cards.
 - [ ] Includes systems/metrics strip.
 - [ ] Includes footer/status bar.
-- [ ] Uses original KTT.DEV identity.
+- [ ] Uses original Freddie K. identity.
 - [ ] Does not copy Honcho brand assets, mascot, or wording.
 - [ ] Does not present placeholder metrics as verified live facts.
 

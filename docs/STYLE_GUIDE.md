@@ -1,4 +1,4 @@
-# Style Guide — KTT.DEV Portfolio
+# Style Guide — Freddie K. Portfolio
 
 ## Tone
 

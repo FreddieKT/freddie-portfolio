@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build a static-first Astro portfolio prototype with a strong design-system foundation, original KTT.DEV content, and minimal JavaScript.
+Build a static-first Astro portfolio prototype with a strong design-system foundation, original Freddie K. content, and minimal JavaScript.
 
 ## Scope
 

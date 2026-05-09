@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add 4 detail pages (Labs dynamic route, About, Notes, Contact) plus a shared sidebar layout to the KTT.DEV Astro portfolio, initialize git, and wire all homepage links.
+**Goal:** Add 4 detail pages (Labs dynamic route, About, Notes, Contact) plus a shared sidebar layout to the Freddie K. Astro portfolio, initialize git, and wire all homepage links.
 
 **Architecture:** Shared `PageLayout.astro` wraps every detail page with Header + Footer + GSAP fade-in. `PageSidebar.astro` is a reusable sidebar nav component that takes an items array and active href. Labs pages are statically generated from `projects.ts` via Astro's `getStaticPaths()`.
 
@@ -71,7 +71,7 @@ dist/
 
 ```bash
 git add -A
-git commit -m "chore: initial commit — KTT.DEV portfolio v0"
+git commit -m "chore: initial commit — Freddie K. portfolio v0"
 ```
 
 Expected: `[main (root-commit) xxxxxxx] chore: initial commit`
@@ -97,7 +97,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'KTT.DEV — Strange tools for real life' } = Astro.props;
+const { title, description = 'Freddie K. — Strange tools for real life' } = Astro.props;
 ---
 
 <html lang="en" data-theme="dark">
@@ -105,7 +105,7 @@ const { title, description = 'KTT.DEV — Strange tools for real life' } = Astro
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} — KTT.DEV</title>
+    <title>{title} — Freddie K.</title>
     <meta name="description" content={description} />
     <!-- Prevent flash of unstyled theme -->
     <script is:inline>
@@ -734,7 +734,7 @@ const stack = [
         </figure>
         <div class="identity-text">
           <p class="identity-name">FREDDIE K.</p>
-          <p class="mini-kicker">BUILDER @ KTT.DEV</p>
+          <p class="mini-kicker">BUILDER @ Freddie K.</p>
           <p class="mono-copy identity-bio">
             I'm Khant Thura Thaung — I build AI workflows, memory systems, and terminal-native tools that stay useful in real life.
           </p>
@@ -1028,7 +1028,7 @@ const notes: Note[] = [
 const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
 ---
 
-<PageLayout title="Notes" description="Short decision logs and build notes from KTT.DEV.">
+<PageLayout title="Notes" description="Short decision logs and build notes from Freddie K..">
   <PageSidebar slot="sidebar" heading="NOTES" items={sidebarItems} activeHref="/notes" />
 
   <div class="notes-content">
@@ -1173,7 +1173,7 @@ const sidebarItems = [
 ];
 ---
 
-<PageLayout title="Contact" description="How to find Freddie — builder of KTT.DEV.">
+<PageLayout title="Contact" description="How to find Freddie — builder of Freddie K..">
   <PageSidebar slot="sidebar" heading="CONTACT" items={sidebarItems} activeHref="/contact" />
 
   <div class="contact-content">
@@ -1224,7 +1224,7 @@ const sidebarItems = [
         <div class="status-line">
           <span class="status-key">BUILDING</span>
           <span class="status-sep">:</span>
-          <span class="status-val">KTT.DEV labs</span>
+          <span class="status-val">Freddie K. labs</span>
         </div>
         <div class="status-line">
           <span class="status-key">STATUS</span>

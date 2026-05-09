@@ -70,13 +70,13 @@ assert.doesNotMatch(profileCard, /<span><\/span><span><\/span>/, 'generic pixel 
 assert.match(globalCss, /width:\s*min\(1360px, calc\(100% - 1\.5rem\)\)/, 'page shell should be slightly wider after reducing hero text dominance');
 assert.match(globalCss, /\.grid-tags\s*>\s*span\s*{/, 'grid tag styles must target only direct child tag labels');
 assert.doesNotMatch(globalCss, /\.grid-tags\s+span\s*{/, 'broad grid tag selector makes nested tag dots render as large pills');
-assert.match(contentConfig, /publisher:\s*z\.string\(\)\.optional\(\)\.default\('KTT\.DEV'\)/, 'notes schema should include a default publisher');
+assert.match(contentConfig, /publisher:\s*z\.string\(\)\.optional\(\)\.default\('Freddie K\.'\)/, 'notes schema should include a default publisher');
 for (const file of noteFiles) {
-  assert.match(read(file), /^publisher:\s*["']KTT\.DEV["']/m, `${file} missing KTT.DEV publisher frontmatter`);
+  assert.match(read(file), /^publisher:\s*["']Freddie K\.["']/m, `${file} missing Freddie K. publisher frontmatter`);
 }
 assert.match(notesIndex + noteDetail, /note\.data\.publisher/, 'notes pages should render note publisher metadata');
 assert.match(projectsData, /date:\s*'2026-05-09'/, 'labs project data should include published dates');
-assert.match(projectsData, /publisher:\s*'KTT\.DEV'/, 'labs project data should include publisher metadata');
+assert.match(projectsData, /publisher:\s*'Freddie K\.'/, 'labs project data should include publisher metadata');
 assert.match(labDetail, /project\.date[\s\S]*project\.publisher/, 'labs detail should render date and publisher metadata');
 assert.match(tokenCss, /--panel-overlay:/, 'theme tokens need theme-aware panel overlay');
 assert.doesNotMatch(globalCss, /rgba\(10, 13, 18, 0\.92\)/, 'global styles still contain stale hardcoded dark panel rgba');

@@ -1,4 +1,4 @@
-# Kanban Plan — KTT.DEV Portfolio
+# Kanban Plan — Freddie K. Portfolio
 
 ## Workflow Principle
 
@@ -29,7 +29,7 @@ T9  reviewer     final readiness review                                 parent: 
 ## Acceptance Criteria
 
 - Astro project exists in the project folder only after T1 is complete.
-- Homepage visually matches the generated KTT.DEV prototype direction.
+- Homepage visually matches the generated Freddie K. prototype direction.
 - Dark-first grid/checker background, dashed borders, terminal card, profile/status card, project cards, metrics strip, and footer/status bar are represented.
 - Honcho is not copied directly: no Honcho logo, mascot, copy, or proprietary brand wording.
 - Core docs remain present and current.

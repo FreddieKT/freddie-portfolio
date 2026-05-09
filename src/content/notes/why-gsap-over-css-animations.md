@@ -1,7 +1,7 @@
 ---
 title: "Why I use GSAP over CSS animations for portfolio motion"
 date: "2026-05-06"
-publisher: "KTT.DEV"
+publisher: "Freddie K."
 summary: "CSS animations are fine for hover states. For anything that needs to feel alive — sequenced, staggered, timeline-driven — GSAP wins every time."
 tags: ["Animation", "GSAP", "CSS"]
 ---

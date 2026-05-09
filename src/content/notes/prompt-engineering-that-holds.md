@@ -1,7 +1,7 @@
 ---
 title: "Prompt engineering that holds under real-world conditions"
 date: "2026-04-28"
-publisher: "KTT.DEV"
+publisher: "Freddie K."
 summary: "Most prompt advice is optimized for demos. Production prompts face adversarial inputs, model drift, edge cases, and context limits. Here's what actually works."
 tags: ["AI", "Prompts", "Engineering"]
 ---
