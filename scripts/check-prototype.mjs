@@ -77,6 +77,9 @@ assert.match(index, /class="section-pointer" href="\/notes"/, 'homepage notes se
 assert.doesNotMatch(index, /mini-preview-grid/, 'homepage should avoid dense preview-card grids');
 assert.match(metrics, /data-animate=/, 'metric/dashboard components need animation hooks');
 assert.match(hero, /profile-about\.jpg/, 'main hero must reuse the existing About portrait asset');
+assert.match(hero, /\.\.\/assets\/images\/profile-about\.jpg/, 'main hero must import the portrait from a repo-local asset path');
+assert.match(about, /\.\.\/assets\/images\/profile-about\.jpg/, 'about page must import the portrait from a repo-local asset path');
+assert.doesNotMatch(hero + about, /imported\/freddie-portfolio-v2/, "buildable pages must not import assets from Freddie's local imported folder");
 assert.match(hero, /<Image[\s\S]*alt=/, 'main hero portrait must render as an accessible responsive Astro image');
 assert.match(hero, /font-size:\s*clamp\(1\.55rem, 3\.15vw, 3\.05rem\)/, 'hero headline should be reduced so text is not visually dominant');
 assert.match(hero, /max-width:\s*20ch/, 'hero headline should use a wider measure to reduce poster-like line breaks');

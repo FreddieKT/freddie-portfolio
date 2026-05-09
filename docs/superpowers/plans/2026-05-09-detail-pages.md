@@ -692,7 +692,7 @@ git commit -m "feat: add /labs/[slug] dynamic route with sidebar, terminal, indi
 ```astro
 ---
 import { Image } from 'astro:assets';
-import profileImage from '../../../../../imported/freddie-portfolio-v2/src/assets/images/profile-about.jpg';
+import profileImage from 'src/assets/images/profile-about.jpg';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageSidebar from '../components/PageSidebar.astro';
 import SectionLabel from '../components/SectionLabel.astro';

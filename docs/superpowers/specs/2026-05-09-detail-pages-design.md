@@ -61,7 +61,7 @@
 - Active state set via `IntersectionObserver` with `threshold: 0.4` — whichever section has >40% visibility is active
 
 ### Main Content Sections
-1. **Identity** (`id="identity"`) — profile photo (import from same path as `Hero.astro`: `../../../../../imported/freddie-portfolio-v2/src/assets/images/profile-about.jpg`, rendered at `width=352 height=470`) + name "FREDDIE K." in accent, role "BUILDER @ Freddie K.", bio: "I'm Khant Thura Thaung — I build AI workflows, memory systems, and terminal-native tools that stay useful in real life."
+1. **Identity** (`id="identity"`) — profile photo (import from same path as `Hero.astro`: `src/assets/images/profile-about.jpg`, rendered at `width=352 height=470`) + name "FREDDIE K." in accent, role "BUILDER @ Freddie K.", bio: "I'm Khant Thura Thaung — I build AI workflows, memory systems, and terminal-native tools that stay useful in real life."
 2. **Stack** (`id="stack"`) — dashed-tag chips for tools: Astro, TypeScript, Python, AI/LLMs, GSAP, Terminal UX
 3. **Approach** (`id="approach"`) — 2–3 short `mono-copy` paragraphs about build philosophy
 4. **Links** (`id="links"`) — list rows for GitHub (FreddieKT), X (@ktythaung), Email (ktythaung@gmail.com); each row uses the hollow ring dot + label + external link arrow
