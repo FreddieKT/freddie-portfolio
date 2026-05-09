@@ -103,7 +103,7 @@ Optional light mode base, only after dark visual fidelity is acceptable:
 - Project cards: dashed/solid border mix, index number, icon, label/category, description, command snippet, optional clearly-labelled demo metrics.
 - Labs detail pages: compact case-study structure with Summary, Problem, What it does, Stack, Status, Next step, and Terminal output.
 - Metrics strip: system-dashboard band with small charts or static visual indicators.
-- Footer/status bar: `ktt.dev`, social/contact links, timestamp or build label, operational status.
+- Footer/status bar: `Freddie K.`, social/contact links, timestamp or build label, operational status.
 
 ## Must Match From Prototype
 

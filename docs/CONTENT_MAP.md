@@ -120,7 +120,7 @@ Should explain Freddie as a builder of:
 
 Recommended footer content:
 
-- `ktt.dev`
+- `Freddie K.`
 - builder of strange tools for real life
 - GitHub link
 - X/Twitter link

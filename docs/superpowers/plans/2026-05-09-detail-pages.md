@@ -512,11 +512,11 @@ const sidebarItems = projects.map((p) => ({
           <span class="status-dot" aria-hidden="true"></span>
           <span>TERMINAL</span>
         </div>
-        <span class="terminal-path">KTT@devbox:~</span>
+        <span class="terminal-path">freddie@devbox:~</span>
       </div>
       <div class="terminal-body">
         <div class="terminal-row">
-          <code class="terminal-cmd">ktt.dev$ {project.command}</code>
+          <code class="terminal-cmd">freddie.k$ {project.command}</code>
         </div>
         {project.output.map((line) => (
           <div class="terminal-row">

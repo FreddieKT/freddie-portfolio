@@ -77,7 +77,7 @@ You can't do computation in JSON. YAML has anchors, but they're not code — the
 export const config = {
   apiUrl: import.meta.env.DEV
     ? 'http://localhost:3000'
-    : 'https://api.ktt.dev',
+    : 'https://api.freddie-k.example',
 };
 ```
 

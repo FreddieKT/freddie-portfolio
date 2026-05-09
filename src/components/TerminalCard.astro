@@ -17,7 +17,7 @@ const {
   id = 'labs',
   titleId = 'terminal-title',
   title = 'TERMINAL',
-  path = 'KTT@devbox:~',
+  path = 'freddie@devbox:~',
   lines = [
     { command: 'afterglow --today', output: '↳ generating prototype digest…' },
     { command: 'unfog notes/', output: '✓ extracting decision shape' },
@@ -40,7 +40,7 @@ const {
   <div class="terminal-body" aria-label="Prototype command output">
     {lines.map((line) => (
       <div class="terminal-row">
-        <code>{`ktt.dev$ ${line.command}`}</code>
+        <code>{`freddie.k$ ${line.command}`}</code>
         <span>{line.output}</span>
       </div>
     ))}
