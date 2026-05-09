@@ -83,6 +83,7 @@ for (const file of noteFiles) {
 assert.match(notesIndex + noteDetail, /note\.data\.publisher/, 'notes pages should render note publisher metadata');
 assert.match(projectsData, /date:\s*'2026-05-09'/, 'labs project data should include published dates');
 assert.match(projectsData, /publisher:\s*'Freddie K\.'/, 'labs project data should include publisher metadata');
+assert.match(read('src/components/ProjectCard.astro'), /\.metric-row\s*>\s*div\s*{[\s\S]*justify-items:\s*center;[\s\S]*text-align:\s*center;/, 'project metric labels and values should be centered within each column');
 assert.match(labDetail, /project\.date[\s\S]*project\.publisher/, 'labs detail should render date and publisher metadata');
 assert.match(tokenCss, /--panel-overlay:/, 'theme tokens need theme-aware panel overlay');
 assert.doesNotMatch(globalCss, /rgba\(10, 13, 18, 0\.92\)/, 'global styles still contain stale hardcoded dark panel rgba');

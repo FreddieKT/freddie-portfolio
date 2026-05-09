@@ -140,6 +140,13 @@ const { project } = Astro.props;
     border-top: var(--border-solid);
   }
 
+  .metric-row > div {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    min-width: 0;
+  }
+
   .metric-row span {
     color: var(--muted);
     font-size: var(--text-xs);
