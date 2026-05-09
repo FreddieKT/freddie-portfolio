@@ -49,6 +49,7 @@ import { projects } from '../data/projects';
             I turn messy workflows into small tools I can actually use: memory, decisions,
             creative experiments, and automation that does not need a meeting to explain.
           </p>
+          <a class="section-pointer" href="/about">Open about →</a>
         </section>
 
         <section id="labs" class="section-panel frame" aria-labelledby="labs-title" data-animate="section-panel">
@@ -57,6 +58,7 @@ import { projects } from '../data/projects';
             A workbench for AI agents, prompt tooling, terminal UX, and visual systems. Some ideas
             grow into tools. Some stay as sketches. Both are useful.
           </p>
+          <a class="section-pointer" href="/labs/afterglow">Browse labs →</a>
         </section>
 
         <section id="notes" class="section-panel frame" aria-labelledby="notes-title" data-animate="section-panel">
@@ -65,6 +67,7 @@ import { projects } from '../data/projects';
             Notes on AI tools, frontend systems, terminal UX, and the parts of building that are
             worth remembering after the tab is closed.
           </p>
+          <a class="section-pointer" href="/notes">Read notes →</a>
         </section>
 
         <section id="work" aria-label="Work and prototype projects" data-animate="work-section">
@@ -175,6 +178,20 @@ import { projects } from '../data/projects';
     gap: 0.75rem;
     padding: 1rem;
     border-radius: var(--radius-md);
+  }
+
+  .section-pointer {
+    justify-self: start;
+    color: var(--accent);
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-pointer:hover,
+  .section-pointer:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
   }
 
   #work {
