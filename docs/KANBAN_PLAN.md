@@ -8,7 +8,7 @@ This project will use a Kanban orchestrator workflow. The parent session plans a
 
 All real implementation tasks must use:
 
-`dir:/Users/ktythaung/Desktop/Projects/ktt-dev-portfolio`
+`dir:/Users/ktythaung/Desktop/Projects/freddie-portfolio`
 
 Do not use scratch for implementation unless the task is explicitly exploratory.
 

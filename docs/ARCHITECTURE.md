@@ -19,7 +19,7 @@ This repository is currently a **planning/prototype workspace**. Do not replace 
 ## Proposed Structure
 
 ```text
-ktt-dev-portfolio/
+freddie-portfolio/
   src/
     components/
       Header.astro

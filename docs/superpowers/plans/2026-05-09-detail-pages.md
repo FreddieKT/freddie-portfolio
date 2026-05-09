@@ -48,7 +48,7 @@ Tasks 4–7 are **fully independent** after Task 3 completes — dispatch them i
 - [ ] **Step 1: Initialize git repo**
 
 ```bash
-cd /Users/ktythaung/Desktop/Projects/ktt-dev-portfolio
+cd /Users/ktythaung/Desktop/Projects/freddie-portfolio
 git init
 git branch -M main
 ```
@@ -109,7 +109,7 @@ const { title, description = 'Freddie K. — Strange tools for real life' } = As
     <meta name="description" content={description} />
     <!-- Prevent flash of unstyled theme -->
     <script is:inline>
-      const t = localStorage.getItem('ktt-dev-theme');
+      const t = localStorage.getItem('freddie-portfolio-theme');
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
     </script>
   </head>

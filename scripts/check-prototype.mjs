@@ -51,6 +51,9 @@ assert.match(themeToggle, /theme-icon-svg/, 'theme toggle should use an SVG icon
 assert.match(themeToggle, /class="moon-icon"/, 'theme toggle needs a visible moon icon group');
 assert.match(themeToggle, /class="sun-icon"/, 'theme toggle needs a visible sun icon group');
 assert.match(themeToggle, /sun-rays/, 'theme toggle should include animated light-mode rays');
+assert.match(themeToggle, /freddie-portfolio-theme/, 'theme toggle should use the freddie-portfolio localStorage key');
+const pageLayout = read('src/layouts/PageLayout.astro');
+assert.doesNotMatch(themeToggle + pageLayout, /ktt-dev-theme/, 'no source file should reference the old ktt-dev-theme localStorage key');
 assert.match(themeToggle, /vector-effect="non-scaling-stroke"/, 'theme icon strokes should render crisply and reliably');
 assert.match(themeToggle, /transition:/, 'theme toggle icon should animate between light and dark states');
 assert.match(index, /<SiteHead\s*\/>/, 'homepage should use shared SiteHead metadata component');

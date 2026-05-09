@@ -111,7 +111,7 @@ The fix is an inline `<script>` in `<head>` that runs synchronously before the f
 <head>
   <!-- runs before any rendering, eliminates flash -->
   <script is:inline>
-    const t = localStorage.getItem('ktt-dev-theme');
+    const t = localStorage.getItem('freddie-portfolio-theme');
     if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
   </script>
 </head>
@@ -124,7 +124,7 @@ The fix is an inline `<script>` in `<head>` that runs synchronously before the f
 The ThemeToggle component stores the user's choice in `localStorage`:
 
 ```js
-const storageKey = 'ktt-dev-theme';
+const storageKey = 'freddie-portfolio-theme';
 
 const applyTheme = (theme) => {
   root.dataset.theme = theme;

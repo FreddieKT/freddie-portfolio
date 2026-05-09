@@ -12,7 +12,7 @@
 
 ## Current Decisions
 
-- Project folder: `/Users/ktythaung/Desktop/Projects/ktt-dev-portfolio`
+- Project folder: `/Users/ktythaung/Desktop/Projects/freddie-portfolio`
 - Stage: planning/prototype only; not yet replacing the live portfolio.
 - Docs scope: full documentation pack.
 - Build method: Kanban orchestrator workflow.
@@ -44,7 +44,7 @@
 **Command:**
 
 ```bash
-cd /Users/ktythaung/Desktop/Projects/ktt-dev-portfolio
+cd /Users/ktythaung/Desktop/Projects/freddie-portfolio
 npm create astro@latest .
 ```
 
