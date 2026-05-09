@@ -2,64 +2,103 @@
 title: "AI workflow ဆိုတာဘာလဲ"
 date: "2026-05-09"
 publisher: "Freddie K."
-summary: "AI workflow ဆိုတာ AI ကို တစ်ခါမေးပြီးပြီးသွားတာမဟုတ်ဘဲ trigger, data, decision, approval, output တွေကို step-by-step ချိတ်ထားတဲ့ automation flow တစ်ခုပါ။"
+summary: "AI workflow ဆိုတာ trigger, data, AI step, approval, output တွေကို ချိတ်ထားတဲ့ automation flow တစ်ခုပါ။"
 tags: ["AI", "Automation", "Workflow", "Burmese"]
 ---
 
-AI workflow ဆိုတာ AI ကို chat box ထဲမှာ တစ်ခါမေးတာထက် နည်းနည်းပိုပြီး စနစ်ကျတဲ့အရာပါ။ မြန်မာလိုလွယ်လွယ်ပြောရင် **အလုပ်တစ်ခုကို အဆင့်လိုက်စီပြီး AI ကို လိုတဲ့နေရာမှာ ဝင်ကူခိုင်းထားတဲ့ flow** လို့မြင်လို့ရပါတယ်။
+AI workflow ဆိုတာ AI ကို တစ်ခါမေးပြီးပြီးသွားတာမဟုတ်ပါဘူး။
 
-ဥပမာ customer message တစ်ခုဝင်လာတယ်။ System က message ကိုဖတ်တယ်။ AI က reply draft ရေးတယ်။ လူက approve လုပ်တယ်။ ပြီးမှ reply ပို့တယ်။ အဲ့ဒီလို အဆင့်တွေချိတ်ထားတာက AI workflow ပါ။
+အလုပ်တစ်ခုမှာ step တွေရှိတယ်။ ဘာကစမလဲ၊ ဘာ data သုံးမလဲ၊ AI ကဘာလုပ်မလဲ၊ လူကဘယ်နေရာမှာစစ်မလဲ၊ နောက်ဆုံးဘာ output ထွက်မလဲ။ အဲ့ဒီ step တွေကို automation flow အနေနဲ့ချိတ်ထားတာက AI workflow ပါ။
 
-## Workflow ဆိုတာဘာလဲ
+Short version:
 
-Workflow ဆိုတာ **အလုပ်တစ်ခုဖြစ်ဖို့ လိုတဲ့ step တွေကို အစဉ်လိုက်ချိတ်ထားတာ** ပါ။ Restaurant မှာ order ဝင်တာနဲ့တူတယ်။ Customer order ပေးတယ်၊ kitchen ကချက်တယ်၊ cashier က bill ထုတ်တယ်၊ waiter ကပို့တယ်။ တစ်ယောက်တည်းလုပ်တာမဟုတ်ဘဲ role တွေခွဲထားတာ။
+**AI workflow = trigger + data + AI step + approval + output.**
 
-Software မှာလည်းတူတူပါပဲ။ Form submit ဖြစ်တာ၊ webhook ဝင်တာ၊ file upload ဖြစ်တာ၊ schedule time ရောက်တာတွေက workflow ကို စစေတဲ့ **trigger** တွေပါ။ Trigger ဆိုတာ “စလုပ်ပါ” လို့ပြောတဲ့ signal ပါ။
+မြန်မာလိုမှတ်ရင် — AI ကို အလုပ်အဆင့်တွေထဲမှာ helper အနေနဲ့ထည့်ထားတဲ့ automation flow ပါ။
 
-## AI ပါလာရင်ဘာကွာလဲ
+## Trigger ဆိုတာဘာလဲ
 
-Normal automation က rule တိတိကျကျနဲ့အလုပ်လုပ်တယ်။ “ဒီ field က empty ဖြစ်ရင် email ပို့” ဆိုတာမျိုး။ AI workflow ကတော့ fuzzy ဖြစ်တဲ့အရာတွေကိုကိုင်နိုင်တယ်။ Message နားလည်တာ၊ summary ထုတ်တာ၊ tone ပြင်တာ၊ category ခွဲတာ၊ draft ရေးတာတွေ။
+Trigger ဆိုတာ workflow ကို စစေတဲ့ event ပါ။
 
-ဒါပေမယ့် AI ကို system ရဲ့ boss မလုပ်သင့်ဘူး။ Better pattern က AI ကို **worker** အနေနဲ့သုံးတာပါ။ AI က draft ရေးတယ်၊ recommend လုပ်တယ်၊ classify လုပ်တယ်။ Final decision, risky action, customer-facing send step တွေမှာ human approval ထားတာပို safe ပါတယ်။
+ဥပမာ:
 
-## AI workflow တစ်ခုထဲမှာ ဘာတွေပါလဲ
+- Form submit ဖြစ်တာ
+- Facebook message ဝင်တာ
+- File upload ဖြစ်တာ
+- Schedule time ရောက်တာ
+- Webhook request ဝင်တာ
 
-အများအားဖြင့် ဒီ parts တွေပါလာတတ်တယ်။
+Casual wording နဲ့ “something happening” လို့ပြောရင် engineering term က **event** သို့မဟုတ် **trigger** ပါ။ Event ဖြစ်လာလို့ workflow စတယ်။
 
-- **Trigger** — workflow စမယ့် event, ဥပမာ message ဝင်တာ၊ form submit ဖြစ်တာ
-- **Input data** — AI ဖတ်မယ့် data, ဥပမာ customer text, order info, document
-- **AI step** — summarize, classify, draft, rewrite, extract လုပ်တဲ့အဆင့်
-- **Decision logic** — confidence နည်းရင် human ကိုပို့၊ simple case ဆို next step သွား
-- **Approval gate** — လူစစ်တဲ့ checkpoint
-- **Output** — email draft, reply, spreadsheet row, task, report
-- **Logging** — ဘာဖြစ်ခဲ့လဲ နောက်မှပြန်စစ်လို့ရအောင်မှတ်ထားတာ
+## Data ကဘာလုပ်တာလဲ
 
-ဒီမှာ “system remembering things” လို့ casual ပြောရင် technical term က **state management** သို့မဟုတ် **persistence** ပါ။ Workflow တစ်ခုက previous step result ကိုသိဖို့လိုရင် state လိုတယ်။ နောက်နေ့ပြန်ဖတ်လို့ရအောင်သိမ်းထားရင် persistence လိုတယ်။
+AI က အလွတ်ထဲကနေ မလုပ်သင့်ဘူး။ Input data လိုတယ်။
 
-## Simple example
+ဥပမာ customer message, order info, product list, document text, previous chat history စတာတွေ။ Data မမှန်ရင် AI output လည်းမမှန်နိုင်ဘူး။ Garbage in, garbage out ပါ။
 
-Facebook Page message တစ်ခုဝင်လာတယ်ဆိုပါစို့။ Workflow က ဒီလိုသွားနိုင်တယ်။
+ဒီနေရာမှာ “system remembering things” လို့ပြောရင် technical term က **state management** သို့မဟုတ် **persistence** ပါ။ Previous step result ကိုနောက် step မှာသုံးရင် state လိုတယ်။ နောက်မှပြန်ဖတ်လို့ရအောင်သိမ်းထားရင် persistence လိုတယ်။
+
+## AI step ကဘာလုပ်လဲ
+
+AI step က workflow ထဲက helper ပါ။ Boss မဟုတ်ဘူး။
+
+AI ကို ဒီလို task တွေမှာသုံးနိုင်တယ်:
+
+- Summary ထုတ်တာ
+- Message classify လုပ်တာ
+- Reply draft ရေးတာ
+- Tone ပြင်တာ
+- Long text ထဲက key info ထုတ်တာ
+- Customer question ကို category ခွဲတာ
+
+ဥပမာ message တစ်ခုဝင်လာတယ်။ AI က “ဒီ customer က price မေးနေတာ” လို့ classify လုပ်တယ်။ ပြီးရင် reply draft ရေးတယ်။ ဒါပေမယ့် final send ကို AI တန်းမလုပ်သင့်ဘူး။
+
+## Approval gate လိုတဲ့အကြောင်း
+
+Approval gate ဆိုတာ လူစစ်တဲ့ checkpoint ပါ။
+
+AI က မှားနိုင်တယ်။ Context လွဲနိုင်တယ်။ အရမ်း confident ဖြစ်ပြီးမှားပြောနိုင်တယ်။ Customer-facing reply, payment, order change, public post စတဲ့ risky action တွေမှာ human approval ထားတာပို safe ပါတယ်။
+
+Simple rule:
+
+**AI drafts. Human approves. System sends.**
+
+ဒါက production workflow တွေမှာအသုံးများတဲ့ guardrail pattern ပါ။ Guardrail ဆိုတာ system မမှားတဲ့ဘက်ကို runaway မဖြစ်အောင်ကာထားတဲ့ safety rule ပါ။
+
+## Example: Facebook message workflow
+
+Facebook Page message တစ်ခုဝင်လာတယ်ဆိုပါစို့။ Workflow က ဒီလိုဖြစ်နိုင်တယ်။
 
 1. Messenger webhook က message ကိုလက်ခံတယ်။
-2. System က message type ကိုစစ်တယ်။ Question လား၊ spam လား၊ order request လား။
-3. AI က customer စာကို short summary ထုတ်တယ်။
-4. AI က reply draft ရေးတယ်။ Tone ကို friendly ဖြစ်အောင် humanizer pass လုပ်တယ်။
-5. Draft ကို approval queue ထဲထည့်တယ်။
-6. လူက approve လုပ်မှ send ဖြစ်တယ်။
-7. Result ကို log ထဲမှာသိမ်းတယ်။
+2. System က message text ကိုယူတယ်။
+3. AI က message ကို classify လုပ်တယ်။ ဥပမာ price question, order question, spam။
+4. AI က short summary နဲ့ reply draft ရေးတယ်။
+5. Humanizer pass က reply ကိုပို natural ဖြစ်အောင်ပြင်တယ်။
+6. Draft ကို approval queue ထဲထည့်တယ်။
+7. လူက approve လုပ်မှ send ဖြစ်တယ်။
+8. Result ကို log ထဲမှာသိမ်းတယ်။
 
-ဒါက live customer auto-reply ထက် safe ပိုဖြစ်တယ်။ Because AI က မှားနိုင်တယ်။ Workflow design က AI မှားနိုင်တာကို assume လုပ်ပြီး guardrail ထည့်ထားရမယ်။
+ဒီ flow ထဲမှာ AI က reply draft လုပ်ပေးတယ်။ ဒါပေမယ့် final action ကို guardrail နဲ့ထိန်းထားတယ်။
 
-## Good AI workflow ရဲ့ sign
+## Good workflow ရဲ့ sign
 
-Good workflow က fancy ဖြစ်စရာမလိုဘူး။ Clear ဖြစ်ရမယ်။ ဘယ် event ကစလဲ၊ AI ကဘာလုပ်လဲ၊ လူကဘယ်နေရာမှာစစ်လဲ၊ final output ကဘာလဲဆိုတာ ကြည့်တာနဲ့နားလည်ရမယ်။
+Good AI workflow က fancy ဖြစ်စရာမလိုဘူး။ ကြည့်တာနဲ့နားလည်ရမယ်။
 
-Bad workflow ကတော့ AI ကိုနေရာတိုင်းသုံးထားပြီး ဘယ်အဆင့်မှာဘာဖြစ်နေလဲမသိတော့တာ။ Automation ဆိုတာ invisible ဖြစ်လို့ရပေမယ့် untraceable မဖြစ်သင့်ဘူး။ Debug လုပ်လို့ရအောင် logs, labels, status တွေလိုတယ်။
+ဒီမေးခွန်းတွေဖြေလိုက်ရင် workflow clear ဖြစ်တယ်:
 
-## မှတ်ရလွယ်တဲ့ definition
+- ဘာ event ကစတာလဲ?
+- ဘာ data သုံးတာလဲ?
+- AI ကဘာလုပ်တာလဲ?
+- လူကဘယ်နေရာမှာစစ်တာလဲ?
+- Output ကဘာလဲ?
+- Error ဖြစ်ရင်ဘယ်လိုသိမလဲ?
+
+Error ဖြစ်ရင် ပြန်စစ်လို့ရဖို့ **logging** လိုတယ်။ Logging ဆိုတာ workflow မှာဘာဖြစ်ခဲ့လဲ မှတ်ထားတာပါ။ Automation က invisible ဖြစ်လို့ရတယ်။ ဒါပေမယ့် untraceable မဖြစ်သင့်ဘူး။
+
+## Final definition
 
 AI workflow ဆိုတာ **AI + automation + guardrails** ပါ။
 
 AI က နားလည်၊ ရေး၊ ခွဲ၊ ပြင် ကူတယ်။ Automation က step တွေကိုချိတ်ပေးတယ်။ Guardrails က မမှန်တဲ့ action မထွက်အောင်ကာပေးတယ်။
 
-အဲ့ဒီသုံးခု balance ဖြစ်ရင် workflow က အသုံးဝင်တယ်။ AI ကိုအကုန်လွှဲလိုက်ရင်တော့ system မဟုတ်တော့ဘူး။ Lucky guess machine ဖြစ်သွားတတ်တယ်။
+အဲ့ဒီသုံးခု balance ဖြစ်ရင် workflow ကအသုံးဝင်တယ်။ AI ကိုအကုန်လွှဲလိုက်ရင်တော့ system မဟုတ်တော့ဘူး။ Lucky guess machine ဖြစ်သွားတတ်တယ်။
