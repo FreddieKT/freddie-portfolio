@@ -6,6 +6,24 @@ import ProjectCard from '../components/ProjectCard.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import FooterStatus from '../components/FooterStatus.astro';
 import { projects } from '../data/projects';
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('notes');
+const latestNotes = allNotes
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3)
+  .map((note) => ({
+    ...note,
+    slug: note.id.replace(/\.md$/, ''),
+  }));
+
+const featuredLabs = projects.slice(0, 3);
+
+const aboutSignals = [
+  { label: 'Automation', copy: 'workflows that remove repeated manual steps' },
+  { label: 'Memory', copy: 'systems that keep context from disappearing' },
+  { label: 'Interfaces', copy: 'terminal-inspired UI experiments with a practical edge' },
+];
 ---
 
 <html lang="en" data-theme="dark">
@@ -49,6 +67,14 @@ import { projects } from '../data/projects';
             I turn messy workflows into small tools I can actually use: memory, decisions,
             creative experiments, and automation that does not need a meeting to explain.
           </p>
+          <div class="mini-preview-grid" aria-label="About focus areas">
+            {aboutSignals.map((item) => (
+              <article class="mini-preview-card">
+                <strong>{item.label}</strong>
+                <span>{item.copy}</span>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="labs" class="section-panel frame" aria-labelledby="labs-title" data-animate="section-panel">
@@ -57,6 +83,14 @@ import { projects } from '../data/projects';
             A workbench for AI agents, prompt tooling, terminal UX, and visual systems. Some ideas
             grow into tools. Some stay as sketches. Both are useful.
           </p>
+          <div class="mini-preview-grid" aria-label="Featured labs">
+            {featuredLabs.map((project) => (
+              <a class="mini-preview-card mini-preview-link" href={`/labs/${project.slug}`}>
+                <strong>{project.title}</strong>
+                <span>{project.summary}</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         <section id="notes" class="section-panel frame" aria-labelledby="notes-title" data-animate="section-panel">
@@ -65,6 +99,14 @@ import { projects } from '../data/projects';
             Notes on AI tools, frontend systems, terminal UX, and the parts of building that are
             worth remembering after the tab is closed.
           </p>
+          <div class="mini-preview-grid" aria-label="Latest notes">
+            {latestNotes.map((note) => (
+              <a class="mini-preview-card mini-preview-link" href={`/notes/${note.slug}`}>
+                <strong>{note.data.title}</strong>
+                <span>{note.data.summary}</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         <section id="work" aria-label="Work and prototype projects" data-animate="work-section">
@@ -177,6 +219,45 @@ import { projects } from '../data/projects';
     border-radius: var(--radius-md);
   }
 
+  .mini-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .mini-preview-card {
+    display: grid;
+    gap: 0.4rem;
+    min-height: 100%;
+    padding: 0.85rem;
+    border: var(--border-dashed);
+    background: var(--panel-overlay-soft);
+  }
+
+  .mini-preview-card strong {
+    color: var(--accent);
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mini-preview-card span {
+    color: var(--foreground-soft);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .mini-preview-link {
+    transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+
+  .mini-preview-link:hover,
+  .mini-preview-link:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    box-shadow: var(--shadow-glow);
+  }
+
   #work {
     display: grid;
     gap: 1rem;
@@ -196,6 +277,10 @@ import { projects } from '../data/projects';
 
     .project-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mini-preview-grid {
+      grid-template-columns: 1fr;
     }
   }
 

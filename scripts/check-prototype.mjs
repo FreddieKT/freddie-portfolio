@@ -55,6 +55,10 @@ assert.match(faviconSvg, /FREDDIE K\. animated pixel favicon/, 'favicon should d
 
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');
+assert.match(index, /aboutSignals/, 'homepage about section should include visible focus-area cards');
+assert.match(index, /featuredLabs/, 'homepage labs section should include featured lab previews');
+assert.match(index, /latestNotes/, 'homepage notes section should include latest note previews');
+assert.match(index, /mini-preview-grid/, 'homepage about/labs/notes sections should not be blank placeholder panels');
 assert.match(metrics, /data-animate=/, 'metric/dashboard components need animation hooks');
 assert.match(hero, /profile-about\.jpg/, 'main hero must reuse the existing About portrait asset');
 assert.match(hero, /<Image[\s\S]*alt=/, 'main hero portrait must render as an accessible responsive Astro image');
