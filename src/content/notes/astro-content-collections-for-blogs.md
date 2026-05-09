@@ -1,6 +1,7 @@
 ---
 title: "Using Astro content collections to build a knowledge base"
 date: "2026-05-09"
+publisher: "KTT.DEV"
 summary: "Content collections turn markdown files into typed, queryable data. Here's why they're the right architecture for a blog or notes section, and how to set them up from scratch."
 tags: ["Astro", "Architecture", "TypeScript"]
 ---
@@ -59,7 +60,7 @@ summary: "CSS animations are fine for hover states..."
 tags: ["Animation", "GSAP", "CSS"]
 ---
 
-Your content here...
+Write the note body here.
 ```
 
 ## The index page

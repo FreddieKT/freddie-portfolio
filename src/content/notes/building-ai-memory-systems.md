@@ -1,6 +1,7 @@
 ---
 title: "Building AI memory systems that actually work in production"
 date: "2026-05-03"
+publisher: "KTT.DEV"
 summary: "Most AI memory implementations fail because they treat memory as retrieval. Real memory is about what gets recorded, what gets forgotten, and what gets surfaced at the right time."
 tags: ["AI", "Systems", "Memory"]
 ---

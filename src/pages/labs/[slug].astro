@@ -38,12 +38,31 @@ const sidebarItems = projects.map((p) => ({
     <div class="page-section frame combined-panel" data-animate="page-section">
       <div class="markdown-prose">
         <h1>{project.title}</h1>
-        <p class="meta"><strong>{project.category}</strong> &middot; {project.label}</p>
+        <p class="meta"><strong>{project.category}</strong> &middot; {project.label} &middot; {project.date} &middot; {project.publisher}</p>
 
         <h2>Summary</h2>
         <p>{project.summary}</p>
 
-        <h2>Details</h2>
+        <h2>Problem</h2>
+        <p>{project.problem}</p>
+
+        <h2>What it does</h2>
+        <p>{project.does}</p>
+
+        <h2>Stack</h2>
+        <ul>
+          {project.stack.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+
+        <h2>Status</h2>
+        <p>{project.status}</p>
+
+        <h2>Next step</h2>
+        <p>{project.nextStep}</p>
+
+        <h2>Terminal output</h2>
         <ul>
           {project.output.map((line) => (
             <li>{line}</li>

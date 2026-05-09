@@ -1,7 +1,3 @@
----
-const timestamp = 'UTC PROTOTYPE BUILD';
----
-
 <footer id="contact" class="footer-bar frame">
   <div class="footer-identity">
     <p class="footer-brand">ktt.dev</p>
@@ -13,17 +9,14 @@ const timestamp = 'UTC PROTOTYPE BUILD';
     <span>find me on</span>
     <a href="https://github.com/FreddieKT" aria-label="GitHub profile" target="_blank" rel="noreferrer">GitHub</a>
     <a href="https://x.com/ktythaung" aria-label="X profile" target="_blank" rel="noreferrer">X</a>
-    <a href="mailto:hello@ktt.dev">Email</a>
+    <a href="mailto:ktythaung@gmail.com">Email</a>
   </nav>
-
-  <div class="footer-status">
-  </div>
 </footer>
 
 <style>
   .footer-bar {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 1rem;
     align-items: center;
     padding: 1rem;
@@ -33,8 +26,7 @@ const timestamp = 'UTC PROTOTYPE BUILD';
   }
 
   .footer-identity,
-  .footer-links,
-  .footer-status {
+  .footer-links {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -54,15 +46,11 @@ const timestamp = 'UTC PROTOTYPE BUILD';
     font-size: var(--text-sm);
   }
 
-  .footer-links,
-  .footer-status {
+  .footer-links {
     color: var(--muted);
     font-size: var(--text-xs);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-
-  .footer-links {
     justify-content: center;
   }
 
@@ -84,26 +72,19 @@ const timestamp = 'UTC PROTOTYPE BUILD';
     outline-offset: 2px;
   }
 
-  .footer-status {
-    justify-content: end;
-    color: var(--success);
-  }
-
   @media (max-width: 1100px) {
     .footer-bar {
       grid-template-columns: 1fr;
     }
 
-    .footer-links,
-    .footer-status {
+    .footer-links {
       justify-content: start;
     }
   }
 
   @media (max-width: 720px) {
     .footer-identity,
-    .footer-links,
-    .footer-status {
+    .footer-links {
       flex-wrap: wrap;
     }
   }

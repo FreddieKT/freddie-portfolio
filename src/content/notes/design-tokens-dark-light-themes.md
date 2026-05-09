@@ -1,6 +1,7 @@
 ---
 title: "Design tokens that actually survive theme switching"
 date: "2026-05-07"
+publisher: "KTT.DEV"
 summary: "Getting dark/light themes right is harder than swapping background and foreground colors. Here's what breaks, what the FOUC problem is, and how the token system in this portfolio handles it."
 tags: ["CSS", "Design System", "Accessibility"]
 ---

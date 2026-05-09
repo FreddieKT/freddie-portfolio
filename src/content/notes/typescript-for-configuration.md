@@ -1,6 +1,7 @@
 ---
 title: "Using TypeScript as a configuration language"
 date: "2026-04-15"
+publisher: "KTT.DEV"
 summary: "JSON configs break silently. YAML configs have footguns. TypeScript configs give you autocomplete, validation, and refactoring — for free, with no extra tooling."
 tags: ["TypeScript", "Architecture", "Engineering"]
 ---

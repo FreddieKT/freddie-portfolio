@@ -26,6 +26,8 @@ Core impression:
 
 > A calm technical operating system for strange, useful AI tools.
 
+The copy should support that impression without sounding like a startup landing page. Freddie's voice is practical, direct, and human: small AI tools, messy workflows, memory systems, terminal UX, and visual experiments that are useful before they are polished.
+
 ## Visual Language
 
 ### Layout
@@ -99,6 +101,7 @@ Optional light mode base, only after dark visual fidelity is acceptable:
 - Terminal card: command prompt style, output rows, pale-blue cursor/highlight, bottom status line.
 - Profile/status card: original KTT.DEV pixel avatar/mascot, Freddie identity, `BUILDING` status.
 - Project cards: dashed/solid border mix, index number, icon, label/category, description, command snippet, optional clearly-labelled demo metrics.
+- Labs detail pages: compact case-study structure with Summary, Problem, What it does, Stack, Status, Next step, and Terminal output.
 - Metrics strip: system-dashboard band with small charts or static visual indicators.
 - Footer/status bar: `ktt.dev`, social/contact links, timestamp or build label, operational status.
 
@@ -126,5 +129,15 @@ Optional light mode base, only after dark visual fidelity is acceptable:
 ## Content Integrity Rules
 
 - Use original KTT.DEV wording from `docs/CONTENT_MAP.md` and `docs/STYLE_GUIDE.md`.
+- Follow `docs/INSTRUCTIONS.md` before changing page copy, Labs project data, or pre-production readiness language.
 - Do not present placeholder metrics as live facts unless Freddie supplies real numbers.
 - Demo terminal output may be illustrative, but should be treated as prototype copy until verified.
+- Public copy must not include internal implementation wording such as `route target`, `placeholder`, `prototype surface`, or `for now this anchors`.
+- Every Labs project in `src/data/projects.ts` must include `summary`, `problem`, `does`, `stack`, `status`, `nextStep`, `command`, and `output` so detail pages do not become empty shells.
+
+## Production Readiness Copy Rules
+
+- Treat all concept projects as honest prototypes unless a project has shipped proof.
+- Use `concept build`, `active lab`, `prototype`, `archived`, or `shipped` for project status labels.
+- Keep project detail sections short. The page should give proof and direction, not a long sales pitch.
+- Do not add KTM Cargo, private n8n workflows, logistics pricing, personal finance, or unrelated business automation content to this portfolio.

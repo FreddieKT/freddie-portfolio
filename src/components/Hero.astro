@@ -11,9 +11,9 @@ interface Props {
 }
 
 const {
-  eyebrow = 'Personal portfolio / prototype review',
-  title = 'Freddie K. — systems, agents, and strange useful tools',
-  subtitle = 'I build AI workflows, memory systems, and terminal-native products that stay useful in real life.',
+  eyebrow = 'Personal portfolio / active lab',
+  title = 'Freddie K. — small AI tools for messy real life',
+  subtitle = 'I build automation workflows, memory systems, and weird little interfaces that make repeated work easier to handle.',
   categories = ['AI INFRA', 'SYSTEMS', 'TERMINAL UX', 'OPEN SOURCE'],
 } = Astro.props;
 ---
@@ -24,8 +24,8 @@ const {
       <Image
         src={profileAboutImage}
         alt="Freddie, the builder behind KTT.DEV"
-        width={352}
-        height={470}
+        width={176}
+        height={235}
         loading="eager"
         decoding="async"
         class="hero-portrait-image"
@@ -120,8 +120,8 @@ const {
   }
 
   .hero-title-compact {
-    max-width: 28ch;
-    font-size: clamp(1.35rem, 2.2vw, 2.05rem);
+    max-width: 20ch;
+    font-size: clamp(1.55rem, 3.15vw, 3.05rem);
     line-height: 1.05;
     letter-spacing: 0.018em;
   }

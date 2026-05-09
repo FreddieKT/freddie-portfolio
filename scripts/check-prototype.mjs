@@ -12,14 +12,38 @@ const tokenCss = read('src/styles/tokens.css');
 const metrics = read('src/components/MetricsStrip.astro');
 const hero = read('src/components/Hero.astro');
 const profileCard = read('src/components/ProfileStatusCard.astro');
+const footer = read('src/components/FooterStatus.astro');
+const about = read('src/pages/about.astro');
+const contact = read('src/pages/contact.astro');
+const themeToggle = read('src/components/ThemeToggle.astro');
+const contentConfig = read('src/content.config.ts');
+const projectsData = read('src/data/projects.ts');
+const notesIndex = read('src/pages/notes.astro');
+const noteDetail = read('src/pages/notes/[slug].astro');
+const labDetail = read('src/pages/labs/[slug].astro');
+const noteFiles = walk('src/content/notes').filter((file) => file.endsWith('.md'));
 
 for (const id of ['about', 'labs', 'notes', 'work', 'contact']) {
   assert.match(index + read('src/components/FooterStatus.astro'), new RegExp(`id=["']${id}["']`), `missing section id #${id}`);
 }
 
-for (const href of ['#about', '#labs', '#notes', '#work']) {
+for (const href of ['/about', '/labs/afterglow', '/notes', '/#work']) {
   assert.match(header, new RegExp(`href: ['"]${href}['"]`), `navbar missing ${href}`);
 }
+
+assert.match(about + contact + footer, /mailto:ktythaung@gmail\.com/, 'contact surfaces must use Freddie\'s real email');
+assert.doesNotMatch(about + contact + footer, /hello@ktt\.dev/, 'placeholder email must not appear in live contact surfaces');
+assert.doesNotMatch(footer, /SYSTEM OPERATIONAL|footer-status/, 'footer should not show the old system operational status block');
+assert.match(themeToggle, /class="theme-toggle is-dark"/, 'theme toggle should render a default visible dark icon before JS runs');
+assert.doesNotMatch(themeToggle, /class="nav-pill theme-toggle/, 'theme toggle should not inherit full nav-pill sizing');
+assert.match(themeToggle, /width:\s*2\.75rem/, 'theme toggle should stay compact instead of becoming a large nav tile');
+assert.match(themeToggle, /height:\s*2\.75rem/, 'theme toggle should keep a compact square hit area');
+assert.match(themeToggle, /theme-icon-svg/, 'theme toggle should use an SVG icon, not the old CSS-only dot');
+assert.match(themeToggle, /class="moon-icon"/, 'theme toggle needs a visible moon icon group');
+assert.match(themeToggle, /class="sun-icon"/, 'theme toggle needs a visible sun icon group');
+assert.match(themeToggle, /sun-rays/, 'theme toggle should include animated light-mode rays');
+assert.match(themeToggle, /vector-effect="non-scaling-stroke"/, 'theme icon strokes should render crisply and reliably');
+assert.match(themeToggle, /transition:/, 'theme toggle icon should animate between light and dark states');
 
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');
@@ -40,6 +64,14 @@ assert.doesNotMatch(profileCard, /<span><\/span><span><\/span>/, 'generic pixel 
 assert.match(globalCss, /width:\s*min\(1360px, calc\(100% - 1\.5rem\)\)/, 'page shell should be slightly wider after reducing hero text dominance');
 assert.match(globalCss, /\.grid-tags\s*>\s*span\s*{/, 'grid tag styles must target only direct child tag labels');
 assert.doesNotMatch(globalCss, /\.grid-tags\s+span\s*{/, 'broad grid tag selector makes nested tag dots render as large pills');
+assert.match(contentConfig, /publisher:\s*z\.string\(\)\.optional\(\)\.default\('KTT\.DEV'\)/, 'notes schema should include a default publisher');
+for (const file of noteFiles) {
+  assert.match(read(file), /^publisher:\s*["']KTT\.DEV["']/m, `${file} missing KTT.DEV publisher frontmatter`);
+}
+assert.match(notesIndex + noteDetail, /note\.data\.publisher/, 'notes pages should render note publisher metadata');
+assert.match(projectsData, /date:\s*'2026-05-09'/, 'labs project data should include published dates');
+assert.match(projectsData, /publisher:\s*'KTT\.DEV'/, 'labs project data should include publisher metadata');
+assert.match(labDetail, /project\.date[\s\S]*project\.publisher/, 'labs detail should render date and publisher metadata');
 assert.match(tokenCss, /--panel-overlay:/, 'theme tokens need theme-aware panel overlay');
 assert.doesNotMatch(globalCss, /rgba\(10, 13, 18, 0\.92\)/, 'global styles still contain stale hardcoded dark panel rgba');
 

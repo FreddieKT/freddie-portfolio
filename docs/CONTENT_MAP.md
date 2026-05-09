@@ -125,7 +125,6 @@ Recommended footer content:
 - GitHub link
 - X/Twitter link
 - Email/contact link
-- system/status phrase such as `SYSTEM OPERATIONAL`
 
 ## Exclusions
 

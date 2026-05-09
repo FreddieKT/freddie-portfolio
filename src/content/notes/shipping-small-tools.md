@@ -1,6 +1,7 @@
 ---
 title: "On shipping small tools that stay useful"
 date: "2026-04-22"
+publisher: "KTT.DEV"
 summary: "Most side projects die because they try to become products. The ones that survive stay small, solve one thing precisely, and resist the urge to grow."
 tags: ["Building", "Philosophy", "Tools"]
 ---

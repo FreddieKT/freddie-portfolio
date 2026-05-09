@@ -778,10 +778,10 @@ const stack = [
           </a>
         </li>
         <li>
-          <a class="link-row" href="mailto:hello@ktt.dev">
+          <a class="link-row" href="mailto:ktythaung@gmail.com">
             <span class="link-dot" aria-hidden="true"></span>
             <span class="link-label">EMAIL</span>
-            <span class="link-value">hello@ktt.dev</span>
+            <span class="link-value">ktythaung@gmail.com</span>
             <span class="link-arrow" aria-hidden="true">→</span>
           </a>
         </li>
@@ -1203,10 +1203,10 @@ const sidebarItems = [
           </a>
         </li>
         <li>
-          <a class="contact-row" href="mailto:hello@ktt.dev">
+          <a class="contact-row" href="mailto:ktythaung@gmail.com">
             <span class="contact-dot" aria-hidden="true"></span>
             <span class="contact-label">EMAIL</span>
-            <span class="contact-value">hello@ktt.dev</span>
+            <span class="contact-value">ktythaung@gmail.com</span>
             <span class="contact-arrow" aria-hidden="true">→</span>
           </a>
         </li>

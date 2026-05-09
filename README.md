@@ -12,6 +12,7 @@ Build an Astro-based portfolio prototype that adapts the UI/UX architecture obse
 
 - Design reference image: `assets/reference/prototype-honcho-architecture.png`
 - Design system: `docs/DESIGN.md`
+- Portfolio editing rules: `docs/INSTRUCTIONS.md`
 - Technical architecture: `docs/ARCHITECTURE.md`
 - Execution plan: `docs/IMPLEMENTATION_PLAN.md`
 - Kanban workflow: `docs/KANBAN_PLAN.md`

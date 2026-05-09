@@ -30,6 +30,7 @@ const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
             <article class="note-card frame" data-animate="page-section">
               <div class="note-meta">
                 <time class="note-date" datetime={note.data.date}>{note.data.date}</time>
+                <span class="note-publisher" aria-label="Publisher">· {note.data.publisher}</span>
                 {note.data.tags.length > 0 && (
                   <div class="note-tags" aria-label="Tags">
                     {note.data.tags.map((tag: string) => (
@@ -90,7 +91,7 @@ const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
     box-shadow: var(--shadow-glow);
   }
 
-  /* Meta row — date + tags */
+  /* Meta row — date + publisher + tags */
   .note-meta {
     display: flex;
     align-items: center;
@@ -98,7 +99,8 @@ const sidebarItems = [{ label: 'ALL NOTES', href: '/notes' }];
     flex-wrap: wrap;
   }
 
-  .note-date {
+  .note-date,
+  .note-publisher {
     font-size: var(--text-xs);
     color: var(--muted-faint);
     letter-spacing: 0.1em;

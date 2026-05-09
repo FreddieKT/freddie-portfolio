@@ -82,5 +82,4 @@ Recommended:
 ```text
 ktt.dev | builder of strange tools for real life
 find me on: GitHub / X / Email
-SYSTEM OPERATIONAL
 ```

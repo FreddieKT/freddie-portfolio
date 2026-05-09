@@ -1,6 +1,7 @@
 ---
 title: "Building a terminal aesthetic with CSS — no images required"
 date: "2026-05-05"
+publisher: "KTT.DEV"
 summary: "The grid background, monospace everything, dashed borders, glowing dots — all of it is pure CSS. Here's how the visual language of this portfolio works."
 tags: ["CSS", "Design", "Design System"]
 ---
