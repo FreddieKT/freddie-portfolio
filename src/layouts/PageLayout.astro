@@ -2,35 +2,20 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import FooterStatus from '../components/FooterStatus.astro';
+import SiteHead from '../components/SiteHead.astro';
 
 interface Props {
   title: string;
   description?: string;
+  path?: string;
 }
 
-const { title, description = 'FREDDIE K. — Strange tools for real life' } = Astro.props;
+const { title, description, path = Astro.url.pathname } = Astro.props;
 ---
 
 <html lang="en" data-theme="dark">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title} — FREDDIE K.</title>
-    <meta name="description" content={description} />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate icon" type="image/png" href="/favicon.png" />
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={`${title} — FREDDIE K.`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="/favicon.png" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={`${title} — FREDDIE K.`} />
-    <meta name="twitter:description" content={description} />
+    <SiteHead title={title} description={description} path={path} />
     
     <script is:inline>
       const t = localStorage.getItem('ktt-dev-theme');

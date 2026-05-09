@@ -1,0 +1,48 @@
+---
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  path = '/',
+  type = 'website',
+} = Astro.props;
+
+const fullTitle = title === site.name || title === site.title ? title : `${title} — ${site.name}`;
+const siteOrigin = Astro.site?.toString() ?? site.origin;
+const canonicalUrl = new URL(path, siteOrigin).toString();
+const imageUrl = new URL(site.ogImage, siteOrigin).toString();
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={description} />
+<meta name="author" content={site.author} />
+<meta name="theme-color" content="#05070c" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonicalUrl} />
+
+<title>{fullTitle}</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="/favicon.png" />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content={site.xHandle} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
