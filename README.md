@@ -1,65 +1,55 @@
-# Freddie K. Portfolio — Planning Workspace
+# Freddie K. Portfolio
 
-This folder is the planning and execution workspace for a potential replacement portfolio for **Freddie K. / Freddie**.
+Personal portfolio for **Freddie K.** — small AI tools, automation workflows, and terminal-native experiments.
+Live at [`freddie-portfolio.pages.dev`](https://freddie-portfolio.pages.dev).
 
-The current stage is **production-candidate prototype**. It can be deployed for review after the build checks pass, but it should not replace an existing live site without explicit approval.
+## Status
 
-## Goal
-
-Build an Astro-based portfolio prototype that adapts the UI/UX architecture observed in Honcho-style developer-tool landing pages, while using original Freddie K. content, branding, and visual language.
+**Live production** on Cloudflare Pages. Deployed from `main`, auto-deploys on push.
 
 ## Source of Truth
 
-- Design reference image: `assets/reference/prototype-honcho-architecture.png`
+- GitHub: [`FreddieKT/freddie-portfolio`](https://github.com/FreddieKT/freddie-portfolio)
+- Deploy target: Cloudflare Pages
 - Design system: `docs/DESIGN.md`
-- Portfolio editing rules: `docs/INSTRUCTIONS.md`
-- Technical architecture: `docs/ARCHITECTURE.md`
-- Execution plan: `docs/IMPLEMENTATION_PLAN.md`
-- Kanban workflow: `docs/KANBAN_PLAN.md`
-- Risk controls: `docs/RISK.md`
-- Readiness checklist: `docs/READINESS.md`
+- Architecture: `docs/ARCHITECTURE.md`
 - Content map: `docs/CONTENT_MAP.md`
 - Style guide: `docs/STYLE_GUIDE.md`
-
-## Current Decision
-
-We are preparing a **production-candidate review deploy**, not replacing an existing live site yet. The reference direction is dark-first, terminal-dashboard, and Freddie K.-branded.
+- Risk controls: `docs/RISK.md`
+- Readiness checklist: `docs/READINESS.md`
 
 ## Production deploy
 
-Recommended host: **Cloudflare Pages**.
-
-Use these settings:
+Host: **Cloudflare Pages** connected to this GitHub repo.
 
 ```text
-Build command: npm run build
-Build output directory: dist
-Node version: 22.12.0 or newer
-Environment variable: PUBLIC_SITE_URL=https://your-project.pages.dev
+Repository:        FreddieKT/freddie-portfolio
+Production branch: main
+Framework preset:  Astro
+Build command:     npm run build
+Build output dir:  dist
+Node version:      22.12.0 or newer
+Env var:           PUBLIC_SITE_URL=https://freddie-portfolio.pages.dev
 ```
 
-If the project name changes, update `PUBLIC_SITE_URL` in Cloudflare Pages so canonical URLs, Open Graph URLs, and `robots.txt` point at the deployed URL.
+Production assets:
 
-Production assets included:
-
-- `public/_headers` for basic security headers on Cloudflare Pages.
-- `public/robots.txt` for crawler discovery.
-- `src/pages/sitemap.xml.ts` for generated sitemap routes.
-- `src/components/SiteHead.astro` for shared SEO, canonical, Open Graph, and Twitter metadata.
+- `public/_headers` — security headers (X-Frame-Options, nosniff, referrer policy)
+- `public/robots.txt` — crawler discovery, points to sitemap
+- `src/pages/sitemap.xml.ts` — auto-generated sitemap from content + projects
+- `src/components/SiteHead.astro` — shared SEO, canonical, Open Graph, and Twitter metadata
 
 ## Tech Stack
 
-- Astro
+- Astro (static site)
 - TypeScript
-- CSS variables / design tokens
-- Static-first pages
-- Optional island components only where interaction is meaningful
+- CSS design tokens / custom properties
+- Static-first pages, no unnecessary client islands
+- GSAP for animation where interaction is meaningful
 
 ## Non-goals
 
 - Do not copy Honcho branding, mascot, wording, or assets.
-- Do not replace the existing portfolio until explicitly approved.
-- Do not deploy as the final public site without a review build and explicit approval.
 - Do not overbuild a CMS, dashboard, auth system, or backend.
-- Do not introduce logistics/KTM/n8n/private automation content into this portfolio.
+- Do not introduce logistics, KTM, n8n, or private automation content into this portfolio.
 - Do not present prototype metrics as verified live facts unless source data exists.
