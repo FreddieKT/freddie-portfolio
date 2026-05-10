@@ -3,81 +3,125 @@
 ---
 
 <svg class="terminal-illu" viewBox="0 0 480 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Train track line -->
-  <line x1="20" y1="58" x2="460" y2="58" stroke="var(--border-dashed-color)" stroke-width="2"
-        stroke-dasharray="6 4"/>
+  <!-- ============================================================ -->
+  <!-- BACKGROUND GRID                                                -->
+  <!-- ============================================================ -->
+  <line x1="0"  y1="25" x2="480" y2="25" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
+  <line x1="0"  y1="55" x2="480" y2="55" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
+  <line x1="0"  y1="85" x2="480" y2="85" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
 
-  <!-- Station 1: Trigger -->
-  <rect x="30" y="36" width="56" height="44" rx="4"
-        stroke="var(--accent)" stroke-width="2"
-        fill="var(--accent-soft)"/>
-  <text x="58" y="62" fill="var(--accent)" font-size="7"
+  <!-- ============================================================ -->
+  <!-- PIPELINE CONDUIT (data bus running beneath stations)          -->
+  <!-- ============================================================ -->
+  <line x1="18" y1="56" x2="462" y2="56" stroke="var(--grid-line-strong)" stroke-width="1" stroke-dasharray="2 8"/>
+
+  <!-- Vertical tick marks along conduit -->
+  <line x1="62"  y1="53" x2="62"  y2="59" stroke="var(--grid-line-strong)" stroke-width="0.8" opacity="0.4"/>
+  <line x1="148" y1="53" x2="148" y2="59" stroke="var(--grid-line-strong)" stroke-width="0.8" opacity="0.4"/>
+  <line x1="238" y1="53" x2="238" y2="59" stroke="var(--grid-line-strong)" stroke-width="0.8" opacity="0.4"/>
+  <line x1="328" y1="53" x2="328" y2="59" stroke="var(--grid-line-strong)" stroke-width="0.8" opacity="0.4"/>
+  <line x1="418" y1="53" x2="418" y2="59" stroke="var(--grid-line-strong)" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ============================================================ -->
+  <!-- STATION 1: TRIGGER                                            -->
+  <!-- ============================================================ -->
+  <!-- Status dot -->
+  <circle cx="62" cy="48" r="2.5" fill="var(--accent)"/>
+  <!-- Bracket frame -->
+  <text x="33" y="64" fill="var(--accent)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="87" y="64" fill="var(--accent)" font-size="14" font-family="var(--font-mono)">]</text>
+  <!-- Label -->
+  <text x="62" y="64" fill="var(--accent)" font-size="10"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.08em">TRIGGER</text>
-  <text x="58" y="74" fill="var(--muted-faint)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle">📩</text>
 
-  <!-- Station 2: Data -->
-  <rect x="116" y="36" width="56" height="44" rx="4"
-        stroke="var(--foreground)" stroke-width="2"
-        fill="var(--surface)"/>
-  <text x="144" y="62" fill="var(--foreground)" font-size="7"
+  <!-- ============================================================ -->
+  <!-- ARROW 1: TRIGGER → DATA                                      -->
+  <!-- ============================================================ -->
+  <path d="M93 56 L124 56" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="124,52 129,56 124,60" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- STATION 2: DATA                                               -->
+  <!-- ============================================================ -->
+  <circle cx="148" cy="48" r="2.5" fill="var(--foreground-soft)"/>
+  <text x="130" y="64" fill="var(--foreground-soft)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="164" y="64" fill="var(--foreground-soft)" font-size="14" font-family="var(--font-mono)">]</text>
+  <text x="148" y="64" fill="var(--foreground-soft)" font-size="10"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.08em">DATA</text>
-  <text x="144" y="74" fill="var(--muted-faint)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle">📄</text>
 
-  <!-- Station 3: AI -->
-  <rect x="202" y="36" width="56" height="44" rx="4"
-        stroke="var(--accent)" stroke-width="2"
-        fill="var(--accent-soft)"/>
-  <text x="230" y="62" fill="var(--accent)" font-size="7"
+  <!-- ============================================================ -->
+  <!-- ARROW 2: DATA → AI                                           -->
+  <!-- ============================================================ -->
+  <path d="M170 56 L221 56" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="221,52 226,56 221,60" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- STATION 3: AI                                                 -->
+  <!-- ============================================================ -->
+  <circle cx="238" cy="48" r="2.5" fill="var(--accent)"/>
+  <text x="226" y="64" fill="var(--accent)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="248" y="64" fill="var(--accent)" font-size="14" font-family="var(--font-mono)">]</text>
+  <text x="238" y="64" fill="var(--accent)" font-size="10"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.08em">AI</text>
-  <text x="230" y="74" fill="var(--muted-faint)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle">🤖</text>
 
-  <!-- Station 4: Approval -->
-  <rect x="288" y="36" width="56" height="44" rx="4"
-        stroke="var(--success)" stroke-width="2"
-        fill="var(--success-soft)"/>
-  <text x="316" y="62" fill="var(--success)" font-size="7"
+  <!-- ============================================================ -->
+  <!-- ARROW 3: AI → APPROVE                                        -->
+  <!-- ============================================================ -->
+  <path d="M254 56 L295 56" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="295,52 300,56 295,60" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- STATION 4: APPROVE                                            -->
+  <!-- ============================================================ -->
+  <circle cx="328" cy="48" r="2.5" fill="var(--success)"/>
+  <text x="300" y="64" fill="var(--success)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="354" y="64" fill="var(--success)" font-size="14" font-family="var(--font-mono)">]</text>
+  <text x="328" y="64" fill="var(--success)" font-size="10"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.08em">APPROVE</text>
-  <text x="316" y="74" fill="var(--muted-faint)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle">🛂</text>
 
-  <!-- Station 5: Output -->
-  <rect x="374" y="36" width="56" height="44" rx="4"
-        stroke="var(--foreground)" stroke-width="2"
-        fill="var(--surface)"/>
-  <text x="402" y="62" fill="var(--foreground)" font-size="7"
+  <!-- ============================================================ -->
+  <!-- ARROW 4: APPROVE → OUTPUT                                    -->
+  <!-- ============================================================ -->
+  <path d="M360 56 L388 56" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="388,52 393,56 388,60" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- STATION 5: OUTPUT                                             -->
+  <!-- ============================================================ -->
+  <circle cx="418" cy="48" r="2.5" fill="var(--foreground-soft)"/>
+  <text x="393" y="64" fill="var(--foreground-soft)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="441" y="64" fill="var(--foreground-soft)" font-size="14" font-family="var(--font-mono)">]</text>
+  <text x="418" y="64" fill="var(--foreground-soft)" font-size="10"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.08em">OUTPUT</text>
-  <text x="402" y="74" fill="var(--muted-faint)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle">📤</text>
 
-  <!-- Arrows between stations -->
-  <path d="M86 58 L112 58" stroke="var(--muted)" stroke-width="1.5"/>
-  <path d="M108 54 L114 58 L108 62" stroke="var(--muted)" stroke-width="1.5"/>
-
-  <path d="M172 58 L198 58" stroke="var(--muted)" stroke-width="1.5"/>
-  <path d="M194 54 L200 58 L194 62" stroke="var(--muted)" stroke-width="1.5"/>
-
-  <path d="M258 58 L284 58" stroke="var(--muted)" stroke-width="1.5"/>
-  <path d="M280 54 L286 58 L280 62" stroke="var(--muted)" stroke-width="1.5"/>
-
-  <path d="M344 58 L370 58" stroke="var(--muted)" stroke-width="1.5"/>
-  <path d="M366 54 L372 58 L366 62" stroke="var(--muted)" stroke-width="1.5"/>
-
-  <!-- Guardrail arc on top -->
-  <path d="M215 36 L250 20 L280 36" stroke="var(--success)" stroke-width="1.5" fill="none" opacity="0.6"/>
-  <text x="250" y="16" fill="var(--success)" font-size="6"
-        font-family="var(--font-mono)" text-anchor="middle"
-        letter-spacing="0.06em" opacity="0.7">GUARDRAIL</text>
-
+  <!-- ============================================================ -->
+  <!-- GUARDRAIL BRACKET (arching above AI → APPROVE)                -->
+  <!-- ============================================================ -->
+  <!-- Arch path: protective bracket dome -->
+  <path d="M240 54 Q274 10 308 54" stroke="var(--success)" stroke-width="1.2"
+        fill="none" stroke-dasharray="4 3" opacity="0.7"/>
+  <!-- Left endcap tick -->
+  <line x1="240" y1="54" x2="240" y2="46" stroke="var(--success)" stroke-width="1" opacity="0.7"/>
+  <!-- Right endcap tick -->
+  <line x1="308" y1="54" x2="308" y2="46" stroke="var(--success)" stroke-width="1" opacity="0.7"/>
   <!-- Label -->
-  <text x="240" y="110" fill="var(--muted)" font-size="8"
+  <text x="274" y="8" fill="var(--success)" font-size="6.5"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.1em" opacity="0.7">GUARDRAIL</text>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM LABEL + PROGRESS BAR                                   -->
+  <!-- ============================================================ -->
+  <!-- Progress bar -->
+  <rect x="16" y="98" width="448" height="2" rx="1" fill="var(--grid-line-strong)"/>
+  <rect x="16" y="98" width="448" height="2" rx="1" fill="var(--accent)" opacity="0.6"/>
+
+  <text x="240" y="112" fill="var(--muted)" font-size="9"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.12em">AI WORKFLOW PIPELINE</text>
 </svg>

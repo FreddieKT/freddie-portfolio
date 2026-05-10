@@ -1,62 +1,183 @@
 ---
-// Terminal-style approval gate (guardrail) illustration
+// Terminal-style guardrail / approval checkpoint illustration
+// Geometric shapes only — no emojis
 ---
-
 <svg class="terminal-illu" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Left side: incoming arrow + document -->
-  <path d="M10 55 L40 55" stroke="var(--muted)" stroke-width="2"/>
-  <path d="M36 49 L44 55 L36 61" stroke="var(--muted)" stroke-width="2"/>
+  <!-- ============================================================ -->
+  <!-- BACKGROUND GRID                                                -->
+  <!-- ============================================================ -->
+  <line x1="0"  y1="30" x2="320" y2="30" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
+  <line x1="0"  y1="60" x2="320" y2="60" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
+  <line x1="0"  y1="90" x2="320" y2="90" stroke="var(--grid-line-strong)" stroke-width="0.5" stroke-dasharray="4 8"/>
 
-  <rect x="44" y="42" width="20" height="26" rx="2"
+  <!-- ============================================================ -->
+  <!-- 1. AI PROCESSING BLOCK (left)                                 -->
+  <!-- ============================================================ -->
+  <!-- Bracket frame -->
+  <text x="16" y="38" fill="var(--muted)" font-size="16" font-family="var(--font-mono)">[</text>
+  <text x="66" y="38" fill="var(--muted)" font-size="16" font-family="var(--font-mono)">]</text>
+
+  <!-- AI module body -->
+  <rect x="25" y="16" width="36" height="28" rx="2"
         stroke="var(--foreground-soft)" stroke-width="1.5"
         fill="var(--surface)"/>
 
-  <!-- Gate / barrier -->
-  <rect x="80" y="28" width="12" height="56" rx="3"
-        stroke="var(--accent)" stroke-width="2.5"
-        fill="var(--accent-soft)"/>
-  <!-- Gate stripes -->
-  <line x1="80" y1="38" x2="92" y2="38" stroke="var(--accent)" stroke-width="4"/>
-  <line x1="80" y1="48" x2="92" y2="48" stroke="var(--accent)" stroke-width="4"/>
-  <line x1="80" y1="58" x2="92" y2="58" stroke="var(--accent)" stroke-width="4"/>
-  <line x1="80" y1="68" x2="92" y2="68" stroke="var(--accent)" stroke-width="4"/>
+  <!-- Processing lines inside AI block (like terminal activity) -->
+  <line x1="30" y1="23" x2="42" y2="23" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="30" y1="28" x2="48" y2="28" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="30" y1="33" x2="38" y2="33" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  <line x1="46" y1="33" x2="54" y2="33" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
 
-  <!-- Gate arm -->
-  <rect x="92" y="50" width="50" height="6" rx="2"
-        stroke="var(--accent-strong)" stroke-width="2"
-        fill="var(--accent-soft)"/>
-
-  <!-- Checkmark / cross -->
-  <text x="120" y="42" fill="var(--success)" font-size="20">✓</text>
-  <text x="118" y="62" fill="#a34a3f" font-size="14" opacity="0.5">✗</text>
-
-  <!-- Right side: output with person icon -->
-  <path d="M148 55 L170 55" stroke="var(--muted)" stroke-width="2"/>
-  <path d="M166 49 L174 55 L166 61" stroke="var(--muted)" stroke-width="2"/>
-
-  <!-- Human icon -->
-  <circle cx="190" cy="40" r="8" stroke="var(--foreground)" stroke-width="2" fill="none"/>
-  <path d="M182 58 Q190 48 198 58" stroke="var(--foreground)" stroke-width="2" fill="none"/>
-  <line x1="190" y1="48" x2="190" y2="56" stroke="var(--foreground)" stroke-width="2"/>
-
-  <!-- Approved stamp -->
-  <rect x="174" y="78" width="44" height="16" rx="2"
-        stroke="var(--success)" stroke-width="1.5"
-        fill="var(--success-soft)"/>
-  <text x="196" y="89" fill="var(--success)" font-size="7"
-        font-family="var(--font-mono)" text-anchor="middle"
-        letter-spacing="0.08em">APPROVED</text>
+  <!-- Processing dot (blinking indicator) -->
+  <rect x="54" y="30" width="3" height="3" rx="1" fill="var(--accent-strong)"/>
 
   <!-- Label -->
-  <text x="110" y="112" fill="var(--muted)" font-size="9"
+  <text x="43" y="58" fill="var(--muted-faint)" font-size="7"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.15em">AI</text>
+
+  <!-- ============================================================ -->
+  <!-- FLOW ARROW 1: AI → GATE                                      -->
+  <!-- ============================================================ -->
+  <path d="M70 30 L88 30" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="84,26 90,30 84,34" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- 2. APPROVAL GATE / CHECKPOINT (center)                       -->
+  <!-- ============================================================ -->
+  <!-- Left pillar -->
+  <rect x="92" y="12" width="7" height="48" rx="2"
+        stroke="var(--accent)" stroke-width="1.5"
+        fill="var(--accent-soft)"/>
+
+  <!-- Right pillar -->
+  <rect x="171" y="12" width="7" height="48" rx="2"
+        stroke="var(--accent)" stroke-width="1.5"
+        fill="var(--accent-soft)"/>
+
+  <!-- Top crossbar (decorative) -->
+  <line x1="99" y1="17" x2="171" y2="17" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+
+  <!-- Gate barrier arm (horizontal, with zebra stripes) -->
+  <rect x="99" y="34" width="72" height="5" rx="1"
+        stroke="var(--accent-strong)" stroke-width="1"
+        fill="var(--accent-soft)"/>
+  <!-- Zebra stripes on arm -->
+  <rect x="103" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="112" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="121" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="130" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="139" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="148" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+  <rect x="157" y="35" width="5" height="3" rx="0.5" fill="var(--accent)"/>
+
+  <!-- Diamond checkpoint indicator on the gate -->
+  <polygon points="135,26 142,32 135,38 128,32"
+           stroke="var(--accent)" stroke-width="1.5"
+           fill="var(--accent-soft)"/>
+  <!-- Exclamation mark inside diamond -->
+  <line x1="135" y1="28" x2="135" y2="33" stroke="var(--accent-strong)" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="135" cy="35.5" r="0.8" fill="var(--accent-strong)"/>
+
+  <!-- Checkpoint node: circles on pillars -->
+  <circle cx="95.5" cy="36.5" r="2" fill="var(--accent)" opacity="0.6"/>
+  <circle cx="174.5" cy="36.5" r="2" fill="var(--accent)" opacity="0.6"/>
+
+  <!-- Bracket framing -->
+  <text x="90" y="76" fill="var(--muted)" font-size="12" font-family="var(--font-mono)">[</text>
+  <text x="178" y="76" fill="var(--muted)" font-size="12" font-family="var(--font-mono)">]</text>
+
+  <!-- ============================================================ -->
+  <!-- FLOW ARROW 2: GATE → HUMAN                                   -->
+  <!-- ============================================================ -->
+  <path d="M187 36 L205 36" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="201,32 207,36 201,40" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- 3. HUMAN CHECK (center-right)                                -->
+  <!-- ============================================================ -->
+  <!-- Bracket frame -->
+  <text x="209" y="53" fill="var(--muted)" font-size="14" font-family="var(--font-mono)">[</text>
+  <text x="245" y="53" fill="var(--muted)" font-size="14" font-family="var(--font-mono)">]</text>
+
+  <!-- Human: circle head -->
+  <circle cx="227" cy="26" r="7"
+          stroke="var(--foreground)" stroke-width="1.5"
+          fill="var(--surface)"/>
+
+  <!-- Human: geometric body (angular shoulders + torso) -->
+  <!-- Neck -->
+  <line x1="227" y1="33" x2="227" y2="35" stroke="var(--foreground)" stroke-width="1.5"/>
+  <!-- Shoulders (angular geometric shape) -->
+  <polyline points="217,39 227,35 237,39"
+            stroke="var(--foreground)" stroke-width="1.5"
+            fill="none" stroke-linejoin="round"/>
+  <!-- Torso -->
+  <rect x="221" y="39" width="12" height="14" rx="1"
+        stroke="var(--foreground)" stroke-width="1"
+        fill="var(--surface)"/>
+
+  <!-- Human label -->
+  <text x="227" y="65" fill="var(--muted-faint)" font-size="6"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.15em">HUMAN</text>
+
+  <!-- ============================================================ -->
+  <!-- FLOW ARROW 3: HUMAN → APPROVED                               -->
+  <!-- ============================================================ -->
+  <path d="M254 36 L272 36" stroke="var(--muted)" stroke-width="1.5"/>
+  <polyline points="268,32 274,36 268,40" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+
+  <!-- ============================================================ -->
+  <!-- 4. APPROVED OUTPUT (right)                                   -->
+  <!-- ============================================================ -->
+  <!-- Output bracket -->
+  <text x="276" y="28" fill="var(--muted)" font-size="10" font-family="var(--font-mono)">[</text>
+  <text x="308" y="28" fill="var(--muted)" font-size="10" font-family="var(--font-mono)">]</text>
+
+  <!-- Approved badge -->
+  <rect x="283" y="26" width="22" height="14" rx="2"
+        stroke="var(--success)" stroke-width="1.5"
+        fill="var(--success-soft)"/>
+
+  <!-- Geometric checkmark (polyline — NO emoji) -->
+  <polyline points="289,32.5 292.5,36 300,28.5"
+            stroke="var(--success)" stroke-width="2"
+            fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Output lines (data flowing out) -->
+  <line x1="312" y1="33" x2="318" y2="33" stroke="var(--success)" stroke-width="1" opacity="0.5"/>
+  <line x1="312" y1="36" x2="316" y2="36" stroke="var(--success)" stroke-width="1" opacity="0.3"/>
+
+  <!-- ============================================================ -->
+  <!-- 5. MAIN LABEL                                                 -->
+  <!-- ============================================================ -->
+  <!-- Top label -->
+  <text x="135" y="10" fill="var(--muted)" font-size="6"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.15em">GUARDRAIL</text>
+
+  <!-- Bottom label -->
+  <text x="135" y="106" fill="var(--muted)" font-size="9"
         font-family="var(--font-mono)" text-anchor="middle"
         letter-spacing="0.12em">APPROVAL GATE</text>
+
+  <!-- Sub-label: checkpoint pipeline indicator -->
+  <text x="160" y="116" fill="var(--muted-faint)" font-size="5.5"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.1em">AI PIPELINE CHECKPOINT</text>
+
+  <!-- ============================================================ -->
+  <!-- DECORATIVE: bottom progress bar                              -->
+  <!-- ============================================================ -->
+  <rect x="16" y="98" width="288" height="2" rx="1" fill="var(--grid-line-strong)"/>
+  <rect x="16" y="98" width="196" height="2" rx="1" fill="var(--accent)" opacity="0.6"/>
 </svg>
 
 <style>
   .terminal-illu {
     width: 100%;
-    max-width: 280px;
+    max-width: 320px;
     height: auto;
     margin: 1.5rem auto;
     display: block;
