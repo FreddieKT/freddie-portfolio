@@ -1,0 +1,58 @@
+---
+// Terminal-style data funnel illustration
+---
+
+<svg class="terminal-illu" viewBox="0 0 320 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Document icons -->
+  <rect x="25" y="12" width="22" height="28" rx="2"
+        stroke="var(--foreground-soft)" stroke-width="2"
+        fill="var(--surface)" transform="rotate(-8 36 26)"/>
+  <line x1="30" y1="20" x2="42" y2="20" stroke="var(--muted)" stroke-width="1.5" transform="rotate(-8 36 26)"/>
+  <line x1="30" y1="25" x2="42" y2="25" stroke="var(--muted)" stroke-width="1.5" transform="rotate(-8 36 26)"/>
+
+  <rect x="55" y="8" width="22" height="28" rx="2"
+        stroke="var(--accent)" stroke-width="2"
+        fill="var(--accent-soft)" transform="rotate(3 66 22)"/>
+  <line x1="60" y1="16" x2="72" y2="16" stroke="var(--accent)" stroke-width="1.5" transform="rotate(3 66 22)"/>
+  <line x1="60" y1="21" x2="72" y2="21" stroke="var(--accent)" stroke-width="1.5" transform="rotate(3 66 22)"/>
+
+  <rect x="85" y="14" width="22" height="28" rx="2"
+        stroke="var(--foreground-soft)" stroke-width="2"
+        fill="var(--surface)" transform="rotate(12 96 28)"/>
+  <line x1="90" y1="22" x2="102" y2="22" stroke="var(--muted)" stroke-width="1.5" transform="rotate(12 96 28)"/>
+  <line x1="90" y1="27" x2="102" y2="27" stroke="var(--muted)" stroke-width="1.5" transform="rotate(12 96 28)"/>
+
+  <!-- Down arrows -->
+  <path d="M70 42 L70 52" stroke="var(--muted)" stroke-width="2"/>
+  <path d="M66 50 L70 54 L74 50" stroke="var(--muted)" stroke-width="2"/>
+
+  <!-- Funnel shape -->
+  <path d="M20 58 L120 58 L105 80 L35 80 Z"
+        stroke="var(--border-strong)" stroke-width="2"
+        fill="var(--panel-overlay-soft)"/>
+  <!-- Funnel lines inside -->
+  <line x1="28" y1="64" x2="112" y2="64" stroke="var(--grid-line-strong)" stroke-width="1"/>
+  <line x1="32" y1="72" x2="108" y2="72" stroke="var(--grid-line-strong)" stroke-width="1"/>
+
+  <!-- Output arrow -->
+  <path d="M70 80 L70 92" stroke="var(--accent)" stroke-width="2"/>
+  <path d="M66 88 L70 94 L74 88" stroke="var(--accent)" stroke-width="2"/>
+
+  <!-- AI box -->
+  <rect x="54" y="94" width="32" height="14" rx="3"
+        stroke="var(--accent)" stroke-width="2"
+        fill="var(--accent-soft)"/>
+  <text x="70" y="104" fill="var(--accent)" font-size="8"
+        font-family="var(--font-mono)" text-anchor="middle"
+        letter-spacing="0.08em">AI</text>
+</svg>
+
+<style>
+  .terminal-illu {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 1.5rem auto;
+    display: block;
+  }
+</style>
