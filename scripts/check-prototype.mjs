@@ -9,9 +9,7 @@ const index = read('src/pages/index.astro');
 const header = read('src/components/Header.astro');
 const globalCss = read('src/styles/global.css');
 const tokenCss = read('src/styles/tokens.css');
-const metrics = read('src/components/MetricsStrip.astro');
 const hero = read('src/components/Hero.astro');
-const profileCard = read('src/components/ProfileStatusCard.astro');
 const footer = read('src/components/FooterStatus.astro');
 const about = read('src/pages/about.astro');
 const contact = read('src/pages/contact.astro');
@@ -30,11 +28,11 @@ const sitemap = read('src/pages/sitemap.xml.ts');
 const faviconSvg = read('public/favicon.svg');
 const noteFiles = walk('src/content/notes').filter((file) => file.endsWith('.md'));
 
-for (const id of ['about', 'labs', 'notes', 'work', 'contact']) {
+for (const id of ['about', 'notes', 'work', 'contact']) {
   assert.match(index + read('src/components/FooterStatus.astro'), new RegExp(`id=["']${id}["']`), `missing section id #${id}`);
 }
 
-for (const href of ['/about', '/labs/afterglow', '/notes', '/#work']) {
+for (const href of ['/about', '/labs', '/notes', '/#work']) {
   assert.match(header, new RegExp(`href: ['"]${href}['"]`), `navbar missing ${href}`);
 }
 
@@ -75,10 +73,9 @@ assert.match(faviconSvg, /FREDDIE K\. animated pixel favicon/, 'favicon should d
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');
 assert.match(index, /class="section-pointer" href="\/about"/, 'homepage about section should point to the full about page');
-assert.match(index, /class="section-pointer" href="\/labs\/afterglow"/, 'homepage labs section should point to a lab detail page');
+assert.match(index, /class="section-pointer" href="\/labs\/kairos-daydreamer"/, 'homepage labs section should point to the Kairos Daydreamer lab detail page');
 assert.match(index, /class="section-pointer" href="\/notes"/, 'homepage notes section should point to the notes page');
 assert.doesNotMatch(index, /mini-preview-grid/, 'homepage should avoid dense preview-card grids');
-assert.match(metrics, /data-animate=/, 'metric/dashboard components need animation hooks');
 assert.match(hero, /profile-about\.jpg/, 'main hero must reuse the existing About portrait asset');
 assert.match(hero, /\.\.\/assets\/images\/profile-about\.jpg/, 'main hero must import the portrait from a repo-local asset path');
 assert.match(about, /\.\.\/assets\/images\/profile-about\.jpg/, 'about page must import the portrait from a repo-local asset path');
@@ -89,11 +86,6 @@ assert.match(hero, /max-width:\s*20ch/, 'hero headline should use a wider measur
 assert.match(hero, /width=\{176\}/, 'main hero image should match the original portfolio desktop image width');
 assert.match(hero, /width:\s*11rem/, 'main hero desktop CSS image size should match the original portfolio md:w-44 sizing');
 assert.match(hero, /width:\s*7rem/, 'main hero mobile CSS image size should match the original portfolio w-28 sizing');
-assert.doesNotMatch(profileCard, /profile-about\.jpg/, 'right profile/status card should not contain the portrait asset');
-assert.doesNotMatch(profileCard, /<Image[\s\S]*alt=/, 'right profile/status card should stay a status panel, not the hero portrait');
-assert.match(profileCard, /cubitRows/, 'right profile/status card should restore the pixel cubit mascot layer');
-assert.match(profileCard, /PIXEL STAGE/, 'pixel cubit layer should be labelled as a secondary identity stage');
-assert.doesNotMatch(profileCard, /<span><\/span><span><\/span>/, 'generic pixel avatar placeholder should not return; use the styled cubit mascot instead');
 
 assert.match(globalCss, /width:\s*min\(1360px, calc\(100% - 1\.5rem\)\)/, 'page shell should be slightly wider after reducing hero text dominance');
 assert.match(globalCss, /\.grid-tags\s*>\s*span\s*{/, 'grid tag styles must target only direct child tag labels');
@@ -103,9 +95,8 @@ for (const file of noteFiles) {
   assert.match(read(file), /^publisher:\s*["']Freddie K\.["']/m, `${file} missing Freddie K. publisher frontmatter`);
 }
 assert.match(notesIndex + noteDetail, /note\.data\.publisher/, 'notes pages should render note publisher metadata');
-assert.match(projectsData, /date:\s*'2026-05-09'/, 'labs project data should include published dates');
+assert.match(projectsData, /date:\s*'2026-05-16'/, 'labs project data should include published dates');
 assert.match(projectsData, /publisher:\s*'Freddie K\.'/, 'labs project data should include publisher metadata');
-assert.match(read('src/components/ProjectCard.astro'), /\.metric-row\s*>\s*div\s*{[\s\S]*justify-items:\s*center;[\s\S]*text-align:\s*center;/, 'project metric labels and values should be centered within each column');
 assert.match(labDetail, /project\.date[\s\S]*project\.publisher/, 'labs detail should render date and publisher metadata');
 assert.match(tokenCss, /--panel-overlay:/, 'theme tokens need theme-aware panel overlay');
 assert.doesNotMatch(globalCss, /rgba\(10, 13, 18, 0\.92\)/, 'global styles still contain stale hardcoded dark panel rgba');

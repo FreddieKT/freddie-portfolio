@@ -19,8 +19,8 @@ Instead of `config.json`:
   "projects": [
     {
       "id": "01",
-      "slg": "afterglow",
-      "title": "AFTERGLOW"
+      "slg": "kairos-daydreamer",
+      "title": "KAIROS DAYDREAMER"
     }
   ]
 }
@@ -44,8 +44,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     index: '01',
-    slug: 'afterglow',
-    title: 'AFTERGLOW',
+    slug: 'kairos-daydreamer',
+    title: 'KAIROS DAYDREAMER',
     // ...
   },
 ];
