@@ -133,6 +133,7 @@ const {
 
   .hero-tags {
     margin: 0 1rem 1rem;
+    justify-self: start;
   }
 
   :global(html[data-theme='light']) .hero-portrait-image {
@@ -163,6 +164,26 @@ const {
 
     .hero-tags {
       margin: 0 0.75rem 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      width: fit-content;
+      border-left: var(--border-dashed);
+      border-right: var(--border-dashed);
+    }
+
+    /* Reset the flex-based separator — doesn't work correctly when wrapping */
+    .hero-tags > span + span {
+      border-left: none;
+    }
+
+    /* Column separator: even items (col 2) */
+    .hero-tags > span:nth-child(even) {
+      border-left: var(--border-dashed);
+    }
+
+    /* Row separator: second row items */
+    .hero-tags > span:nth-child(n + 3) {
+      border-top: var(--border-dashed);
     }
   }
 </style>
