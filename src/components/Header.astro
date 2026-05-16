@@ -1,6 +1,5 @@
 ---
 import SectionLabel from './SectionLabel.astro';
-import ThemeToggle from './ThemeToggle.astro';
 
 interface NavItem {
   label: string;
@@ -13,20 +12,17 @@ interface Props {
 
 const { navItems = [
   { label: 'ABOUT', href: '/about' },
-  { label: 'LABS',  href: '/labs/afterglow' },
+  { label: 'LABS',  href: '/labs' },
   { label: 'NOTES', href: '/notes' },
   { label: 'WORK',  href: '/#work' },
 ] } = Astro.props;
 ---
 
 <header class="site-header" aria-label="Primary">
-  <div class="brand-lockup">
-    <a class="brand-mark" href="/" aria-label="FREDDIE K. home">
-      <SectionLabel>FREDDIE K.</SectionLabel>
-      <span class="mini-kicker">~/home/freddie</span>
-    </a>
-    <ThemeToggle />
-  </div>
+  <a class="brand-mark" href="/" aria-label="FREDDIE K. home">
+    <SectionLabel>FREDDIE K.</SectionLabel>
+    <span class="mini-kicker">~/home/freddie</span>
+  </a>
 
   <nav class="nav-grid" aria-label="Main navigation">
     {navItems.map((item) => (
@@ -45,13 +41,6 @@ const { navItems = [
     gap: 1rem;
     padding-bottom: 1rem;
     border-bottom: var(--border-solid);
-  }
-
-  .brand-lockup {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
   }
 
   .brand-mark {
@@ -84,8 +73,5 @@ const { navItems = [
       grid-template-columns: 1fr;
     }
 
-    .brand-lockup {
-      align-items: center;
-    }
   }
 </style>

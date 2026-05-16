@@ -42,10 +42,12 @@ import { projects } from '../data/projects';
           <a class="section-pointer" href="/notes">Read notes →</a>
         </section>
 
-        <section id="work" aria-label="Work and prototype projects" data-animate="work-section">
-          <div class="project-grid" aria-label="Projects">
+        <section id="work" class="section-panel frame" aria-labelledby="work-title" data-animate="section-panel">
+          <SectionLabel id="work-title">Labs</SectionLabel>
+          <ul class="project-list" aria-label="Projects">
             {projects.map((project) => <ProjectCard project={project} />)}
-          </div>
+          </ul>
+          <a class="section-pointer" href="/labs/afterglow">Browse labs →</a>
         </section>
       </section>
 
@@ -65,7 +67,7 @@ import { projects } from '../data/projects';
         gsap.set('[data-animate="hero-subhead"]', { autoAlpha: 0, y: 14 });
         gsap.set('[data-animate="hero-tag"]', { autoAlpha: 0, x: -10 });
 
-        gsap.set('[data-animate="section-panel"], [data-animate="project-card"], [data-animate="metrics-strip"], [data-animate="metric-cell"]', {
+        gsap.set('[data-animate="section-panel"], [data-animate="project-card"]', {
           autoAlpha: 0,
           y: 18,
         });
@@ -96,31 +98,6 @@ import { projects } from '../data/projects';
           delay: 0.22,
         });
 
-        gsap.to('[data-animate="metrics-strip"]', {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          delay: 0.42,
-        });
-
-        gsap.to('[data-animate="metric-cell"]', {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power2.out',
-          stagger: 0.06,
-          delay: 0.5,
-        });
-
-        gsap.from('.microchart span', {
-          scaleY: 0.15,
-          transformOrigin: 'bottom center',
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.035,
-          delay: 0.65,
-        });
       }
     </script>
   </body>
@@ -166,25 +143,17 @@ import { projects } from '../data/projects';
     text-underline-offset: 0.25rem;
   }
 
-  #work {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: stretch;
+  .project-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: var(--border-solid);
+    border-radius: var(--radius-md);
   }
 
   @media (max-width: 1180px) {
     .hero-grid {
       grid-template-columns: 1fr;
-    }
-
-    .project-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -196,10 +165,6 @@ import { projects } from '../data/projects';
 
     .hero-frame {
       padding: 0.75rem;
-    }
-
-    .project-grid {
-      grid-template-columns: 1fr;
     }
   }
 </style>
