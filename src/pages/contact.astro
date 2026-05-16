@@ -46,27 +46,6 @@ const sidebarItems = [
           </a>
         </li>
       </ul>
-
-      <div class="status-terminal" style="margin-top: 0.5rem;">
-        <div class="status-line">
-          <span class="status-key">OPEN TO</span>
-          <span class="status-sep">:</span>
-          <span class="status-val">practical automation ideas</span>
-        </div>
-        <div class="status-line">
-          <span class="status-key">BUILDING</span>
-          <span class="status-sep">:</span>
-          <span class="status-val">AI tools and interface experiments</span>
-        </div>
-        <div class="status-line">
-          <span class="status-key">STATUS</span>
-          <span class="status-sep">:</span>
-          <span class="status-val">
-            <span class="status-dot" aria-hidden="true"></span>
-            ACTIVE
-          </span>
-        </div>
-      </div>
     </section>
 
 
@@ -133,36 +112,6 @@ const sidebarItems = [
     margin-left: auto;
   }
 
-  .status-terminal {
-    display: grid;
-    gap: 0.55rem;
-    padding: 0.85rem;
-    border: var(--border-dashed);
-    background: var(--terminal-overlay);
-    font-size: var(--text-sm);
-  }
-
-  .status-line {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-  }
-
-  .status-key {
-    color: var(--accent);
-    font-family: var(--font-mono);
-    min-width: 8rem;
-    letter-spacing: 0.08em;
-  }
-
-  .status-sep { color: var(--muted); }
-
-  .status-val {
-    color: var(--foreground-soft);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
 
 
 </style>
