@@ -1,5 +1,6 @@
 ---
 import SectionLabel from './SectionLabel.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 interface NavItem {
   label: string;
@@ -19,10 +20,13 @@ const { navItems = [
 ---
 
 <header class="site-header" aria-label="Primary">
-  <a class="brand-mark" href="/" aria-label="FREDDIE K. home">
-    <SectionLabel>FREDDIE K.</SectionLabel>
-    <span class="mini-kicker">~/home/freddie</span>
-  </a>
+  <div class="brand-lockup">
+    <a class="brand-mark" href="/" aria-label="FREDDIE K. home">
+      <SectionLabel>FREDDIE K.</SectionLabel>
+      <span class="mini-kicker">~/home/freddie</span>
+    </a>
+    <ThemeToggle />
+  </div>
 
   <nav class="nav-grid" aria-label="Main navigation">
     {navItems.map((item) => (
@@ -41,6 +45,13 @@ const { navItems = [
     gap: 1rem;
     padding-bottom: 1rem;
     border-bottom: var(--border-solid);
+  }
+
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .brand-mark {
