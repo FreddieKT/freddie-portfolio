@@ -13,7 +13,7 @@ interface Props {
 
 const { navItems = [
   { label: 'ABOUT', href: '/about' },
-  { label: 'LABS',  href: '/labs' },
+  { label: 'LABS',  href: '/labs/kairos-daydreamer' },
   { label: 'NOTES', href: '/notes' },
   { label: 'WORK',  href: '/#work' },
 ] } = Astro.props;
@@ -71,6 +71,11 @@ const { navItems = [
 
   .nav-grid .nav-pill {
     width: 100%;
+  }
+
+  .nav-grid .nav-pill,
+  .site-header > .primary-pill {
+    font-size: 0.65625rem;
   }
 
   @media (max-width: 1100px) {
