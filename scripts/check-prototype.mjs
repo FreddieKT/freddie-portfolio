@@ -32,9 +32,25 @@ for (const id of ['about', 'notes', 'work', 'contact']) {
   assert.match(index + read('src/components/FooterStatus.astro'), new RegExp(`id=["']${id}["']`), `missing section id #${id}`);
 }
 
-for (const href of ['/about', '/labs', '/notes', '/#work']) {
-  assert.match(header, new RegExp(`href: ['"]${href}['"]`), `navbar missing ${href}`);
+const pageLayout = read('src/layouts/PageLayout.astro');
+
+for (const href of ['/about', '/labs/kairos-daydreamer', '/notes', '/#work']) {
+  assert.match(header, new RegExp(`href: ['"]${href}['"]`), `header navbar missing ${href}`);
+  assert.match(pageLayout, new RegExp(`href: ['"]${href}['"]`), `page layout navbar missing ${href}`);
 }
+
+const navSource = header + pageLayout;
+assert.doesNotMatch(
+  navSource,
+  /label:\s*['"]LABS['"],\s*href:\s*['"]\/labs['"]/,
+  'primary LABS nav must not point at redirect-only /labs route',
+);
+
+assert.match(
+  header,
+  /\.nav-grid\s+\.nav-pill,\s*\n\s*\.site-header\s*>\s*\.primary-pill\s*{[\s\S]*font-size:\s*0\.65625rem/,
+  'header nav and contact pill should use the approved smaller font size',
+);
 
 assert.match(about + contact + footer, /mailto:ktythaung@gmail\.com/, 'contact surfaces must use Freddie\'s real email');
 assert.doesNotMatch(about + contact + footer, /hello@ktt\.dev/, 'placeholder email must not appear in live contact surfaces');
@@ -50,7 +66,6 @@ assert.match(themeToggle, /class="moon-icon"/, 'theme toggle needs a visible moo
 assert.match(themeToggle, /class="sun-icon"/, 'theme toggle needs a visible sun icon group');
 assert.match(themeToggle, /sun-rays/, 'theme toggle should include animated light-mode rays');
 assert.match(themeToggle, /freddie-portfolio-theme/, 'theme toggle should use the freddie-portfolio localStorage key');
-const pageLayout = read('src/layouts/PageLayout.astro');
 assert.doesNotMatch(themeToggle + pageLayout, /ktt-dev-theme/, 'no source file should reference the old ktt-dev-theme localStorage key');
 assert.match(themeToggle, /vector-effect="non-scaling-stroke"/, 'theme icon strokes should render crisply and reliably');
 assert.match(themeToggle, /transition:/, 'theme toggle icon should animate between light and dark states');
