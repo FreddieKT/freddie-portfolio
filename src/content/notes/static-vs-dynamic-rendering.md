@@ -66,7 +66,7 @@ This portfolio is 100% static. Every page is generated at build time:
 /about → /about/index.html
 /notes → /notes/index.html
 /notes/why-gsap-over-css-animations → /notes/why-gsap-over-css-animations/index.html
-/labs/afterglow → /labs/afterglow/index.html
+/labs/kairos-daydreamer → /labs/kairos-daydreamer/index.html
 ```
 
 Eight HTML files. Deployable to any CDN or object storage. No server to maintain. No runtime errors from server infrastructure. Zero cold starts.
