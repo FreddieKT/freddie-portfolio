@@ -11,6 +11,8 @@ jobs:
   semgrep:
     name: semgrep/ci
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     container:
       image: semgrep/semgrep
     if: (github.actor != 'dependabot[bot]')

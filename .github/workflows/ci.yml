@@ -19,6 +19,8 @@ jobs:
   ci:
     name: Lint, Test & Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
 
@@ -37,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint --if-present || true
+        run: npm run lint --if-present
 
       - name: Test
         run: npm test --if-present
