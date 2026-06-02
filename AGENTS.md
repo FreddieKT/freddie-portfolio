@@ -50,3 +50,10 @@ Freddie Portfolio is a personal portfolio for Freddie K. It presents small AI to
 ## Memory Boundary
 
 Keep portfolio structure, commands, deploy behavior, and content rules here. Global Hermes memory should only keep high-level user preferences, not portfolio implementation details.
+
+## Review guidelines
+- Don't expose private notes, credentials, or relationship context in public code.
+- Ensure no hardcoded API keys or secrets in source files.
+- Check for broken internal links in Astro pages and components.
+- Flag missing error handling on async functions.
+- Verify `public/` and `src/content/` don't contain sensitive data.
