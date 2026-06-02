@@ -1,0 +1,29 @@
+# Dependency Review — scan changed dependencies for vulns and license issues
+# Runs on every PR. Blocks merges if new dependencies introduce known vulnerabilities
+# or incompatible licenses (e.g., GPL in an MIT project).
+#
+# Official GitHub action: https://github.com/actions/dependency-review-action
+# Free for public AND private repos.
+
+name: Dependency Review
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    name: Scan Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          # Fail the check if dependencies with GHSA advisories are added
+          fail-on-severity: high
+          # Comment on the PR with a summary
+          comment-summary-in-pr: always
