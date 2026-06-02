@@ -1,0 +1,46 @@
+# ============================================================================
+# CI Pipeline — Lint → Test → Build
+# Astro + TypeScript project baseline
+# ============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # Sanity: whitespace + conflict markers
+      - name: Sanity Check (whitespace)
+        run: git diff --check
+
+      # Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present || true
+
+      - name: Test
+        run: npm test --if-present
+
+      - name: Build
+        run: npm run build

@@ -1,0 +1,26 @@
+# Dependabot configuration
+#
+# Scoped to github-actions only — routine action-pin bumps, grouped weekly.
+# Source dependencies (npm) are pinned deliberately as part of
+# supply-chain posture.
+
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(actions)"
+      include: "scope"
+    groups:
+      actions-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
