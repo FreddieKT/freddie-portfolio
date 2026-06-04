@@ -78,6 +78,12 @@ const { items, activeHref, heading } = Astro.props;
     transition: color 160ms ease, border-color 160ms ease;
   }
 
+  .sidebar-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
   .sidebar-item:hover,
   .sidebar-item:focus-visible {
     color: var(--accent);

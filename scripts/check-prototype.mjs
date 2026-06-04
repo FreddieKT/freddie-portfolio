@@ -34,16 +34,16 @@ for (const id of ['about', 'notes', 'work', 'contact']) {
 
 const pageLayout = read('src/layouts/PageLayout.astro');
 
-for (const href of ['/about', '/labs/kairos-daydreamer', '/notes', '/#work']) {
+for (const href of ['/about', '/labs', '/notes', '/#work']) {
   assert.match(header, new RegExp(`href: ['"]${href}['"]`), `header navbar missing ${href}`);
   assert.match(pageLayout, new RegExp(`href: ['"]${href}['"]`), `page layout navbar missing ${href}`);
 }
 
 const navSource = header + pageLayout;
-assert.doesNotMatch(
+assert.match(
   navSource,
   /label:\s*['"]LABS['"],\s*href:\s*['"]\/labs['"]/,
-  'primary LABS nav must not point at redirect-only /labs route',
+  'primary LABS nav should point to the labs index page',
 );
 
 assert.match(
@@ -88,7 +88,7 @@ assert.match(faviconSvg, /FREDDIE K\. animated pixel favicon/, 'favicon should d
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');
 assert.match(index, /class="section-pointer" href="\/about"/, 'homepage about section should point to the full about page');
-assert.match(index, /class="section-pointer" href="\/labs\/kairos-daydreamer"/, 'homepage labs section should point to the Kairos Daydreamer lab detail page');
+assert.match(index, /class="section-pointer" href="\/labs"/, 'homepage labs section should point to the labs index page');
 assert.match(index, /class="section-pointer" href="\/notes"/, 'homepage notes section should point to the notes page');
 assert.doesNotMatch(index, /mini-preview-grid/, 'homepage should avoid dense preview-card grids');
 assert.match(hero, /profile-about\.jpg/, 'main hero must reuse the existing About portrait asset');
