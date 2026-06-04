@@ -6,3 +6,7 @@ dist/
 *.output
 .DS_Store
 .claude
+
+# Local QA/test artifacts
+# Keep raw screenshots, Lighthouse HTML/JSON, and CDP reports out of git.
+dogfood-output/
