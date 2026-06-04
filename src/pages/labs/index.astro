@@ -1,3 +1,76 @@
 ---
-return Astro.redirect('/labs/kairos-daydreamer', 301);
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageSidebar from '../../components/PageSidebar.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import { projects } from '../../data/projects';
+
+const sidebarItems = projects.map((project) => ({
+  label: project.title,
+  href: `/labs/${project.slug}`,
+}));
 ---
+
+<PageLayout
+  title="Labs"
+  description="Current labs, experiments, and small systems from Freddie K."
+>
+  <PageSidebar slot="sidebar" heading="LABS" items={sidebarItems} activeHref="/labs" />
+
+  <section class="labs-index">
+    <div class="page-section frame hero-panel" data-animate="page-section">
+      <SectionLabel>Labs</SectionLabel>
+      <h1>Current labs.</h1>
+      <p>
+        A simple index of active experiments and small systems. New case studies can be
+        added here after the story, scope, and public evidence are decided.
+      </p>
+    </div>
+
+    <div class="page-section frame list-panel" data-animate="page-section">
+      <ul class="project-list" aria-label="Portfolio labs">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </ul>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .labs-index {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-panel,
+  .list-panel {
+    background: var(--panel-overlay);
+  }
+
+  .hero-panel h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 0.95;
+    color: var(--foreground);
+    margin: 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-panel p {
+    max-width: 48rem;
+    color: var(--foreground-soft);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .project-list {
+    margin: 0;
+    padding: 0;
+  }
+</style>
