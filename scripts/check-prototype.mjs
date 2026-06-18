@@ -25,7 +25,6 @@ const astroConfig = read('astro.config.mjs');
 const robotsTxt = read('public/robots.txt');
 const cloudflareHeaders = read('public/_headers');
 const sitemap = read('src/pages/sitemap.xml.ts');
-const faviconSvg = read('public/favicon.svg');
 const noteFiles = walk('src/content/notes').filter((file) => file.endsWith('.md'));
 
 for (const id of ['about', 'notes', 'work', 'contact']) {
@@ -74,16 +73,24 @@ assert.match(read('src/layouts/PageLayout.astro'), /<SiteHead[\s\S]*path=\{path\
 assert.match(siteHead, /rel="canonical"/, 'shared head should render canonical URLs');
 assert.match(siteHead, /og:url/, 'shared head should render Open Graph URLs');
 assert.match(siteHead, /twitter:image/, 'shared head should render Twitter image metadata');
-assert.match(siteHead, /rel="icon" type="image\/svg\+xml" href="\/favicon\.svg"/, 'shared head should use animated SVG favicon');
+assert.match(siteHead, /rel="icon" href="\/favicon\.ico"/, 'shared head should use the Sirius micro favicon for browser tabs');
+assert.match(siteHead, /rel="icon" type="image\/png" sizes="512x512" href="\/favicon\.png"/, 'shared head should expose the Sirius Lunar Node PNG favicon');
+assert.match(siteHead, /rel="apple-touch-icon" href="\/apple-touch-icon\.png"/, 'shared head should expose the Sirius Lunar Node Apple touch icon');
 assert.match(astroConfig, /PUBLIC_SITE_URL/, 'Astro config should allow production site URL override');
 assert.match(siteConfig, /freddie-portfolio\.pages\.dev/, 'site config should include a free Cloudflare Pages fallback origin');
 assert.match(robotsTxt, /Sitemap:\s*https:\/\/freddie-portfolio\.pages\.dev\/sitemap\.xml/, 'robots.txt should point crawlers at the sitemap');
 assert.match(cloudflareHeaders, /X-Frame-Options:\s*DENY/, 'Cloudflare headers should include clickjacking protection');
 assert.match(sitemap, /getCollection\('notes'\)/, 'sitemap should include content collection notes');
 assert.match(sitemap, /projects\.map/, 'sitemap should include labs project routes');
-assert.match(faviconSvg, /@keyframes\s+blink/, 'favicon should include cursor blink animation');
-assert.match(faviconSvg, /@keyframes\s+orbitA/, 'favicon should include orbital pixel animation');
-assert.match(faviconSvg, /FREDDIE K\. animated pixel favicon/, 'favicon should describe the FREDDIE K. identity');
+assert.match(header, /sirius-lunar-node\.png/, 'header brand should render the Sirius Lunar Node mark');
+for (const asset of [
+  'public/brand/sirius-lunar-node.png',
+  'public/favicon.png',
+  'public/favicon.ico',
+  'public/apple-touch-icon.png',
+]) {
+  assert.ok(statSync(join(root, asset)).size > 0, `${asset} should exist and be non-empty`);
+}
 
 assert.ok(pkg.dependencies?.gsap, 'gsap dependency must be installed');
 assert.match(index, /gsap/i, 'page must load GSAP animation script');
