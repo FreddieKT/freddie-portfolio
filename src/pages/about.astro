@@ -139,6 +139,7 @@ const stack = [
     display: flex;
     gap: clamp(1rem, 2vw, 1.5rem);
     align-items: flex-start;
+    min-width: 0;
   }
 
   .identity-photo-frame {
@@ -224,6 +225,7 @@ const stack = [
     margin: 0;
     padding: 0;
     border: var(--border-solid);
+    min-width: 0;
   }
 
   .links-list li + li { border-top: var(--border-solid); }
@@ -233,6 +235,7 @@ const stack = [
     align-items: center;
     gap: 0.75rem;
     padding: 0.85rem 1rem;
+    min-width: 0;
     transition: background 160ms ease, color 160ms ease;
   }
 
@@ -262,6 +265,8 @@ const stack = [
     font-size: var(--text-sm);
     color: var(--foreground-soft);
     flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .link-arrow {
@@ -270,6 +275,12 @@ const stack = [
   }
 
   @media (max-width: 600px) {
-    .identity-layout { flex-direction: column; }
+    .page-section {
+      padding: 1rem;
+    }
+
+    .identity-layout {
+      flex-direction: column;
+    }
   }
 </style>

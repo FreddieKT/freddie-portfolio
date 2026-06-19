@@ -77,8 +77,14 @@ const { title, description, path = Astro.url.pathname } = Astro.props;
   }
 
   @media (max-width: 768px) {
+    .page-frame {
+      padding: 0.75rem;
+    }
+
     .page-layout {
       grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
     }
   }
 </style>
