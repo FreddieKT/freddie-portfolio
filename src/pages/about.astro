@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import profileImage from '../assets/images/profile-about.jpg';
-import MusicNotch from '../components/MusicNotch.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageSidebar from '../components/PageSidebar.astro';
 import SectionLabel from '../components/SectionLabel.astro';
@@ -44,7 +43,6 @@ const stack = [
         <div class="identity-text">
           <p class="identity-name">FREDDIE K.</p>
           <p class="mini-kicker">BUILDER @ Freddie K.</p>
-          <div class="identity-music"><MusicNotch label="now playing" /></div>
           <p class="mono-copy identity-bio">
             I'm Khant Thura Thaung, but online I usually go by Freddie. I build small AI tools,
             automation workflows, and strange little systems for problems I keep running into.
@@ -178,11 +176,6 @@ const stack = [
     letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1;
-  }
-
-  .identity-music {
-    display: flex;
-    margin: 0.2rem 0 0.1rem;
   }
 
   .identity-bio { max-width: 48ch; }
