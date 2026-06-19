@@ -118,4 +118,10 @@ const { items, activeHref, heading } = Astro.props;
   .sidebar-list li + li {
     border-top: var(--border-solid);
   }
+
+  @media (max-width: 768px) {
+    .page-sidebar {
+      position: static;
+    }
+  }
 </style>
