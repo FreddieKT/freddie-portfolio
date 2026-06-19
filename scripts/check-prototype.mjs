@@ -82,9 +82,8 @@ assert.match(robotsTxt, /Sitemap:\s*https:\/\/freddie-portfolio\.pages\.dev\/sit
 assert.match(cloudflareHeaders, /X-Frame-Options:\s*DENY/, 'Cloudflare headers should include clickjacking protection');
 assert.match(sitemap, /getCollection\('notes'\)/, 'sitemap should include content collection notes');
 assert.match(sitemap, /projects\.map/, 'sitemap should include labs project routes');
-assert.match(header, /sirius-lunar-node\.png/, 'header brand should render the Sirius Lunar Node mark');
+assert.doesNotMatch(header, /brand-symbol|sirius-lunar-node\.png/, 'Sirius mark should be favicon-only and must not render inside the page header');
 for (const asset of [
-  'public/brand/sirius-lunar-node.png',
   'public/favicon.png',
   'public/favicon.ico',
   'public/apple-touch-icon.png',
