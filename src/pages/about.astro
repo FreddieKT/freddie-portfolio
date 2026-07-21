@@ -2,15 +2,6 @@
 import { Image } from 'astro:assets';
 import profileImage from '../assets/images/profile-about.jpg';
 import PageLayout from '../layouts/PageLayout.astro';
-import PageSidebar from '../components/PageSidebar.astro';
-import SectionLabel from '../components/SectionLabel.astro';
-
-const sidebarItems = [
-  { label: 'IDENTITY', href: '#identity' },
-  { label: 'STACK',    href: '#stack' },
-  { label: 'APPROACH', href: '#approach' },
-  { label: 'LINKS',    href: '#links' },
-];
 
 const stack = [
   'Astro', 'TypeScript', 'Python',
@@ -18,262 +9,68 @@ const stack = [
 ];
 ---
 
-<PageLayout
-  title="About"
-  description="Khant Thura Thaung, also known as Freddie, builds small AI tools, automation workflows, and terminal-native experiments."
->
-  <PageSidebar slot="sidebar" heading="ABOUT" items={sidebarItems} activeHref="#identity" />
-
-  <div class="about-content">
-
-    <section id="identity" class="page-section frame" aria-labelledby="identity-heading" data-animate="page-section">
-      <SectionLabel id="identity-heading">Identity</SectionLabel>
-      <div class="identity-layout">
-        <figure class="identity-photo-frame">
-          <Image
-            src={profileImage}
-            alt="Khant Thura Thaung"
-            width={352}
-            height={470}
-            loading="eager"
-            decoding="async"
-            class="identity-photo"
-          />
-        </figure>
-        <div class="identity-text">
-          <p class="identity-name">FREDDIE K.</p>
-          <p class="mini-kicker">BUILDER @ Freddie K.</p>
-          <p class="mono-copy identity-bio">
-            I'm Khant Thura Thaung, but online I usually go by Freddie. I build small AI tools,
-            automation workflows, and strange little systems for problems I keep running into.
-          </p>
-        </div>
+<PageLayout title="About" description="Khant Thura Thaung, also known as Freddie, builds small AI tools, automation workflows, and terminal-native experiments.">
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Identity</span>
+    <div class="section-content">
+      <figure class="photo-frame">
+        <Image src={profileImage} alt="Khant Thura Thaung" width={176} height={235} loading="eager" decoding="async" />
+      </figure>
+      <div class="identity-text">
+        <p class="identity-name">FREDDIE K.</p>
+        <p class="label">BUILDER @ Freddie K.</p>
+        <p class="copy" style="margin-top:0.75rem">I'm Khant Thura Thaung, but online I usually go by Freddie. I build small AI tools, automation workflows, and strange little systems for problems I keep running into.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="stack" class="page-section frame" aria-labelledby="stack-heading" data-animate="page-section">
-      <SectionLabel id="stack-heading">Stack</SectionLabel>
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Stack</span>
+    <div class="section-content">
       <div class="stack-tags">
-        {stack.map((tool) => <span class="stack-tag">{tool}</span>)}
+        {stack.map((tool) => (<span class="stack-tag">{tool}</span>))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="approach" class="page-section frame" aria-labelledby="approach-heading" data-animate="page-section">
-      <SectionLabel id="approach-heading">Approach</SectionLabel>
-      <div class="approach-text">
-        <p class="mono-copy">Build small. Ship fast. Keep what's useful.</p>
-        <p class="mono-copy">Most of my projects start from an annoyance: too many notes, messy decisions, repeated manual work, or systems that forget what happened yesterday.</p>
-        <p class="mono-copy">I do not like bloated tools. I like prototypes that survive real use, explain themselves quickly, and stay small until they earn the right to grow.</p>
-      </div>
-    </section>
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Approach</span>
+    <div class="section-content">
+      <p class="copy">Build small. Ship fast. Keep what's useful.</p>
+      <p class="copy" style="margin-top:0.75rem">Most of my projects start from an annoyance: too many notes, messy decisions, repeated manual work, or systems that forget what happened yesterday.</p>
+      <p class="copy" style="margin-top:0.75rem">I do not like bloated tools. I like prototypes that survive real use, explain themselves quickly, and stay small until they earn the right to grow.</p>
+    </div>
+  </section>
 
-    <section id="links" class="page-section frame" aria-labelledby="links-heading" data-animate="page-section">
-      <SectionLabel id="links-heading">Links</SectionLabel>
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Links</span>
+    <div class="section-content">
       <ul class="links-list">
-        <li>
-          <a class="link-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer">
-            <span class="link-dot" aria-hidden="true"></span>
-            <span class="link-label">GITHUB</span>
-            <span class="link-value">FreddieKT</span>
-            <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
-        <li>
-          <a class="link-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer">
-            <span class="link-dot" aria-hidden="true"></span>
-            <span class="link-label">X</span>
-            <span class="link-value">@ktythaung</span>
-            <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
-        <li>
-          <a class="link-row" href="mailto:ktythaung@gmail.com">
-            <span class="link-dot" aria-hidden="true"></span>
-            <span class="link-label">EMAIL</span>
-            <span class="link-value">ktythaung@gmail.com</span>
-            <span class="link-arrow" aria-hidden="true">→</span>
-          </a>
-        </li>
+        <li><a class="link-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer"><span class="link-label">GITHUB</span><span class="link-value">FreddieKT</span><span class="link-arrow">↗</span></a></li>
+        <li><a class="link-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer"><span class="link-label">X</span><span class="link-value">@ktythaung</span><span class="link-arrow">↗</span></a></li>
+        <li><a class="link-row" href="mailto:ktythaung@gmail.com"><span class="link-label">EMAIL</span><span class="link-value">ktythaung@gmail.com</span><span class="link-arrow">→</span></a></li>
       </ul>
-    </section>
-
-  </div>
-
-  <script>
-    const sections = document.querySelectorAll('#identity, #stack, #approach, #links');
-    const sidebarLinks = document.querySelectorAll('.sidebar-item');
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            sidebarLinks.forEach((link) => {
-              link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
-            });
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-
-    sections.forEach((s) => observer.observe(s));
-  </script>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .about-content {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .page-section {
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .identity-layout {
-    display: flex;
-    gap: clamp(1rem, 2vw, 1.5rem);
-    align-items: flex-start;
-    min-width: 0;
-  }
-
-  .identity-photo-frame {
+  .photo-frame {
     flex: 0 0 auto;
-    width: 7rem;
+    width: 9.5rem;
     aspect-ratio: 3 / 4;
-    margin: 0;
-    padding: 0.3rem;
-    border: var(--border-solid-strong);
-    border-radius: var(--radius-md);
-    background: var(--surface-terminal);
-    box-shadow: var(--shadow-glow);
+    margin: 0 0 1rem 0;
   }
-
-  .identity-photo {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: calc(var(--radius-md) - 0.2rem);
-    object-fit: cover;
-    object-position: 50% 0%;
-    filter: saturate(0.95) contrast(1.02);
-  }
-
-  .identity-text {
-    display: grid;
-    gap: 0.5rem;
-    min-width: 0;
-  }
-
-  .identity-name {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    color: var(--accent);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-
-  .identity-bio { max-width: 48ch; }
-
-  .stack-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .stack-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.85rem;
-    border: var(--border-dashed);
-    font-size: var(--text-xs);
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .stack-tag::before {
-    content: '';
-    width: 0.45rem;
-    height: 0.45rem;
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    opacity: 0.7;
-    flex-shrink: 0;
-  }
-
-  .approach-text {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .links-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: var(--border-solid);
-    min-width: 0;
-  }
-
-  .links-list li + li { border-top: var(--border-solid); }
-
-  .link-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.85rem 1rem;
-    min-width: 0;
-    transition: background 160ms ease, color 160ms ease;
-  }
-
-  .link-row:hover {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-
-  .link-dot {
-    width: 0.55rem;
-    height: 0.55rem;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    flex-shrink: 0;
-    opacity: 0.75;
-  }
-
-  .link-label {
-    font-size: var(--text-xs);
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    min-width: 5rem;
-  }
-
-  .link-value {
-    font-size: var(--text-sm);
-    color: var(--foreground-soft);
-    flex: 1;
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .link-arrow {
-    color: var(--accent);
-    margin-left: auto;
-  }
-
-  @media (max-width: 600px) {
-    .page-section {
-      padding: 1rem;
-    }
-
-    .identity-layout {
-      flex-direction: column;
-    }
-  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; border-radius: 4px; }
+  .identity-text { min-width: 0; }
+  .identity-name { margin: 0; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stack-tag { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; border: 1px solid var(--rule-soft); font-size: 0.75rem; color: var(--ink-dim); letter-spacing: 0.08em; border-radius: 999px; }
+  .links-list { list-style: none; margin: 0; padding: 0; }
+  .link-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule-soft); transition: color 160ms ease; }
+  .link-row:last-child { border-bottom: none; }
+  .link-row:hover { color: var(--accent); }
+  .link-label { font-size: 0.75rem; color: var(--ink-dim); letter-spacing: 0.12em; min-width: 5rem; }
+  .link-value { font-size: 0.875rem; color: var(--ink-soft); flex: 1; }
+  .link-arrow { color: var(--accent); margin-left: auto; }
 </style>

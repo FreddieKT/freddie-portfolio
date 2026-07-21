@@ -1,117 +1,33 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import PageSidebar from '../components/PageSidebar.astro';
-import SectionLabel from '../components/SectionLabel.astro';
-
-const sidebarItems = [
-  { label: 'REACH OUT', href: '/contact' },
-];
 ---
 
-<PageLayout title="Contact" description="Contact Freddie for AI workflow experiments, frontend systems, and practical automation ideas.">
-  <PageSidebar slot="sidebar" heading="CONTACT" items={sidebarItems} activeHref="/contact" />
+<PageLayout title="Contact" description="Say hi — I'm always happy to chat about tools, automation, or whatever you're building.">
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Contact</span>
+    <div class="section-content">
+      <p class="copy">I build tools, tinker with AI, and occasionally ship things that work. Here's where to find me.</p>
+    </div>
+  </section>
 
-  <div class="contact-content">
-
-    <header class="page-section frame" data-animate="page-section">
-      <SectionLabel>Contact</SectionLabel>
-      <p class="mono-copy">Building small tools, AI workflows, and visual systems. Here's how to find me.</p>
-    </header>
-
-    <section class="page-section frame" aria-label="Contact methods and status" data-animate="page-section">
-      <SectionLabel>Reach out & Status</SectionLabel>
-      <ul class="contact-list">
-        <li>
-          <a class="contact-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer">
-            <span class="contact-dot" aria-hidden="true"></span>
-            <span class="contact-label">GITHUB</span>
-            <span class="contact-value">FreddieKT</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
-        <li>
-          <a class="contact-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer">
-            <span class="contact-dot" aria-hidden="true"></span>
-            <span class="contact-label">X</span>
-            <span class="contact-value">@ktythaung</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
-        <li>
-          <a class="contact-row" href="mailto:ktythaung@gmail.com">
-            <span class="contact-dot" aria-hidden="true"></span>
-            <span class="contact-label">EMAIL</span>
-            <span class="contact-value">ktythaung@gmail.com</span>
-            <span class="contact-arrow" aria-hidden="true">→</span>
-          </a>
-        </li>
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Reach out</span>
+    <div class="section-content">
+      <ul class="links-list">
+        <li><a class="link-row" href="https://github.com/FreddieKT" target="_blank" rel="noreferrer"><span class="link-label">GITHUB</span><span class="link-value">FreddieKT</span><span class="link-arrow">&#8599;</span></a></li>
+        <li><a class="link-row" href="https://x.com/ktythaung" target="_blank" rel="noreferrer"><span class="link-label">X</span><span class="link-value">@ktythaung</span><span class="link-arrow">&#8599;</span></a></li>
+        <li><a class="link-row" href="mailto:ktythaung@gmail.com"><span class="link-label">EMAIL</span><span class="link-value">ktythaung@gmail.com</span><span class="link-arrow">&#8594;</span></a></li>
       </ul>
-    </section>
-
-
-  </div>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .contact-content {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .page-section {
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .contact-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: var(--border-solid);
-  }
-
-  .contact-list li + li { border-top: var(--border-solid); }
-
-  .contact-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.9rem 1rem;
-    transition: background 160ms ease;
-  }
-
-  .contact-row:hover { background: var(--accent-soft); }
-
-  .contact-dot {
-    width: 0.55rem;
-    height: 0.55rem;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    flex-shrink: 0;
-    opacity: 0.75;
-  }
-
-  .contact-label {
-    font-size: var(--text-xs);
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    min-width: 5rem;
-  }
-
-  .contact-value {
-    font-size: var(--text-sm);
-    color: var(--foreground-soft);
-    flex: 1;
-  }
-
-  .contact-arrow {
-    color: var(--accent);
-    margin-left: auto;
-  }
-
-
-
+  .links-list { list-style: none; margin: 0; padding: 0; }
+  .link-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule-soft); transition: color 160ms ease; }
+  .link-row:last-child { border-bottom: none; }
+  .link-row:hover { color: var(--accent); }
+  .link-label { font-size: 0.75rem; color: var(--ink-dim); letter-spacing: 0.12em; min-width: 5rem; }
+  .link-value { font-size: 0.875rem; color: var(--ink-soft); flex: 1; }
+  .link-arrow { color: var(--accent); margin-left: auto; }
 </style>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FREDDIE K. — Elevated Terminal (design exploration)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SHARED TOKENS — the terminal/KAIROS DNA, disciplined
+   ============================================================ */
+:root {
+  --bg: #0b0d10;
+  --bg-deep: #080b0f;
+  --surface: rgba(16, 20, 26, 0.94);
+  --ink: #f4f7fb;
+  --ink-soft: #c9d2e0;
+  --muted: #8a96a8;
+  --faint: #5d6878;
+  --accent: #b5d9fd;
+  --accent-strong: #79bdf2;
+  --accent-dim: rgba(181, 217, 253, 0.12);
+  --ok: #7ee787;
+  --rule: rgba(244, 247, 251, 0.14);
+  --rule-soft: rgba(244, 247, 251, 0.08);
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --r: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--bg); }
+
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+::selection { background: rgba(181, 217, 253, 0.25); }
+:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 3px; }
+
+/* ============================================================
+   SHARED PRIMITIVES
+   ============================================================ */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.label::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+.kicker {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.copy {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+.pointer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  width: fit-content;
+}
+.pointer:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--ok);
+  box-shadow: 0 0 0.6rem rgba(126, 231, 135, 0.4);
+}
+
+/* ============================================================
+   SHARED DOM SHELL
+   ============================================================ */
+.shell {
+  width: min(1080px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 2.5rem;
+}
+
+.hd { display: flex; align-items: center; gap: 1.5rem; }
+.brand { display: grid; gap: 0.35rem; }
+.brand-name { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; }
+.brand-path { font-size: 0.75rem; color: var(--faint); letter-spacing: 0.04em; }
+
+.nav { display: flex; gap: 0.25rem; margin-left: auto; }
+.nav a {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  border-radius: var(--r);
+  transition: color 140ms ease, background 140ms ease;
+}
+.nav a:hover { color: var(--accent); background: var(--accent-dim); }
+
+.contact-cta {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  transition: border-color 140ms ease, background 140ms ease;
+}
+.contact-cta:hover { border-color: var(--accent); background: var(--accent-dim); }
+
+.hero { display: flex; gap: 2rem; align-items: flex-start; }
+.portrait {
+  flex: 0 0 auto;
+  width: 9.5rem;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: 0.3rem;
+  background: var(--bg-deep);
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+  border-radius: calc(var(--r) - 2px);
+  filter: saturate(0.95) contrast(1.02);
+}
+.hero-text { display: grid; gap: 0.9rem; min-width: 0; }
+.hero-title { font-weight: 600; letter-spacing: -0.01em; line-height: 1.04; text-wrap: balance; }
+.hero-title .accent { color: var(--accent); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 999px;
+}
+.tag::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  opacity: 0.7;
+}
+
+.sections { display: grid; }
+.section { display: grid; gap: 0.8rem; align-content: start; }
+
+.plist { display: grid; }
+.prow {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0.75rem;
+  transition: background 140ms ease;
+}
+.prow:hover { background: var(--accent-dim); }
+.prow-num { font-size: 0.75rem; color: var(--faint); letter-spacing: 0.1em; }
+.prow-body { display: grid; gap: 0.2rem; min-width: 0; }
+.prow-title { font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.05em; }
+.prow-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.prow-state {
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  white-space: nowrap;
+}
+.prow-state.live { color: var(--ok); }
+/* Date column only in Signal Rail */
+body:not([data-variant="c"]) .prow-date { display: none; }
+
+.ft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.ft .brand-name { color: var(--accent); font-size: 0.6875rem; }
+.ft-links { display: flex; gap: 0.9rem; margin-left: auto; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.ft-links a { color: var(--muted); padding: 0.4rem 0.2rem; }
+.ft-links a:hover { color: var(--accent); }
+
+/* ============================================================
+   VARIANT SWITCHER (in-page control)
+   ============================================================ */
+.switcher {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  background: rgba(10, 13, 18, 0.92);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+.switcher button {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: color 140ms ease, background 140ms ease;
+}
+.switcher button:hover { color: var(--ink); }
+.switcher button[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--accent);
+}
+
+/* ============================================================
+   VARIANT A — "COMMAND DECK"
+   The current site, disciplined: one frame, hairline sections,
+   glow only on the portrait, hierarchy via scale not boxes.
+   ============================================================ */
+body[data-variant="a"] .shell {
+  margin-top: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.015)),
+    var(--surface);
+  padding: 0 0 0.25rem;
+  overflow: hidden;
+}
+body[data-variant="a"] .hd {
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-variant="a"] .hero {
+  padding: 2.5rem 1.4rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-variant="a"] .portrait { box-shadow: 0 0 1.2rem rgba(181, 217, 253, 0.14); }
+body[data-variant="a"] .hero-title { font-size: clamp(2.4rem, 4.6vw, 3.6rem); }
+body[data-variant="a"] .sections { gap: 0; }
+body[data-variant="a"] .section {
+  padding: 1.5rem 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-variant="a"] .plist { border: 1px solid var(--rule-soft); border-radius: var(--r); }
+body[data-variant="a"] .prow { border-bottom: 1px solid var(--rule-soft); }
+body[data-variant="a"] .prow:last-child { border-bottom: none; }
+body[data-variant="a"] .ft { padding: 1.1rem 1.4rem; }
+
+/* ============================================================
+   VARIANT B — "EDITORIAL TERMINAL"
+   No boxes at all. Hairlines + massive type + whitespace.
+   Hierarchy comes from scale and rhythm alone.
+   ============================================================ */
+body[data-variant="b"] .shell { width: min(880px, calc(100% - 2.5rem)); padding-top: 2rem; }
+body[data-variant="b"] .hd { padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+body[data-variant="b"] .hero {
+  flex-direction: column-reverse;
+  gap: 1.75rem;
+  padding: 3.5rem 0 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-variant="b"] .portrait { width: 7.5rem; border: none; padding: 0; background: none; }
+body[data-variant="b"] .hero-title {
+  font-size: clamp(3rem, 7.5vw, 5.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+}
+body[data-variant="b"] .copy { font-size: 1.05rem; max-width: 46ch; }
+body[data-variant="b"] .tags { gap: 0.6rem; }
+body[data-variant="b"] .tag { border: none; padding: 0.25rem 0; color: var(--faint); }
+body[data-variant="b"] .sections { gap: 0; }
+body[data-variant="b"] .section {
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem;
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-variant="b"] .section > *:not(.label) { grid-column: 2; }
+body[data-variant="b"] .section .label { grid-column: 1; grid-row: 1; align-self: start; padding-top: 0.2rem; }
+body[data-variant="b"] .section .label::before { display: none; }
+body[data-variant="b"] .plist { margin-top: 0.5rem; }
+body[data-variant="b"] .prow {
+  grid-template-columns: 2.5rem 1fr auto;
+  padding: 1.4rem 0.5rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+body[data-variant="b"] .prow:first-child { border-top: 1px solid var(--rule-soft); }
+body[data-variant="b"] .prow-title { font-size: 1.35rem; letter-spacing: 0.02em; }
+body[data-variant="b"] .prow-state { border: none; color: var(--faint); }
+body[data-variant="b"] .prow-state.live { color: var(--ok); }
+body[data-variant="b"] .ft { padding: 2rem 0 1rem; }
+
+/* ============================================================
+   VARIANT C — "SIGNAL RAIL"
+   Fixed left rail (brand / nav / status), content column right.
+   Dot-grid confined to the hero. Projects as data rows w/ state.
+   ============================================================ */
+body[data-variant="c"] .shell {
+  width: min(1180px, calc(100% - 2.5rem));
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 0;
+  padding: 0 0 3rem;
+}
+body[data-variant="c"] .hd {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1.75rem 1.5rem;
+  border-right: 1px solid var(--rule);
+}
+body[data-variant="c"] .nav {
+  margin-left: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+  width: 100%;
+}
+body[data-variant="c"] .nav a { padding: 0.6rem 0.75rem; }
+body[data-variant="c"] .contact-cta { margin-top: auto; width: 100%; text-align: center; }
+body[data-variant="c"] main { min-width: 0; }
+body[data-variant="c"] .hero {
+  padding: 2.5rem 2rem 2.25rem;
+  border-bottom: 1px solid var(--rule);
+  background-image: radial-gradient(rgba(181, 217, 253, 0.13) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -6px -6px;
+}
+body[data-variant="c"] .portrait { width: 7rem; }
+body[data-variant="c"] .hero-title { font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
+body[data-variant="c"] .hero-status {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+body[data-variant="c"] .sections { gap: 0; }
+body[data-variant="c"] .section { padding: 1.75rem 2rem; border-bottom: 1px solid var(--rule); }
+body[data-variant="c"] .prow {
+  grid-template-columns: 2.25rem 1fr auto auto;
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+body[data-variant="c"] .prow:last-child { border-bottom: none; }
+body[data-variant="c"] .prow-date { font-size: 0.6875rem; color: var(--faint); letter-spacing: 0.06em; }
+body[data-variant="c"] .ft { padding: 1.5rem 2rem; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  body[data-variant="c"] .shell { grid-template-columns: 1fr; }
+  body[data-variant="c"] .hd {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 1rem 1.25rem;
+  }
+  body[data-variant="c"] .nav { flex-direction: row; width: auto; margin-left: auto; }
+  body[data-variant="c"] .contact-cta { margin-top: 0; width: auto; }
+}
+@media (max-width: 720px) {
+  .hd { flex-wrap: wrap; }
+  .nav { order: 3; width: 100%; margin-left: 0; }
+  .hero { flex-direction: column; gap: 1.25rem; }
+  .prow { grid-template-columns: 2rem 1fr; }
+  .prow-state, .prow-date { display: none; }
+  body[data-variant="b"] .section { grid-template-columns: 1fr; gap: 0.75rem; }
+  body[data-variant="b"] .section > *:not(.label) { grid-column: 1; }
+  body[data-variant="b"] .section .label { grid-column: 1; }
+  .ft-links { margin-left: 0; }
+}
+</style>
+</head>
+<body data-variant="a">
+
+<div class="switcher" role="group" aria-label="Design variants">
+  <button type="button" data-variant="a" aria-pressed="true">A · Command Deck</button>
+  <button type="button" data-variant="b" aria-pressed="false">B · Editorial</button>
+  <button type="button" data-variant="c" aria-pressed="false">C · Signal Rail</button>
+</div>
+
+<div class="shell" data-screen-label="home">
+  <header class="hd" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="FREDDIE K. home">
+      <span class="brand-name">FREDDIE K.</span>
+      <span class="brand-path">~/home/freddie</span>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#about">ABOUT</a>
+      <a href="#work">LABS</a>
+      <a href="#notes">NOTES</a>
+    </nav>
+    <a class="contact-cta" href="#contact">&gt; CONTACT</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Introduction">
+      <figure class="portrait">
+        <img src="assets/profile-about.jpg" alt="Freddie, the builder behind Freddie K.">
+      </figure>
+      <div class="hero-text">
+        <span class="label">personal site / ongoing experiments</span>
+        <h1 class="hero-title">Hey, I'm <span class="accent">Freddie.</span></h1>
+        <p class="copy">I build small tools, automate the boring stuff, and tinker with AI systems. This is where I keep the things that actually work.</p>
+        <div class="hero-status"><span class="status-dot" aria-hidden="true"></span><span>Bangkok · open to interesting problems</span></div>
+        <div class="tags" aria-label="Categories">
+          <span class="tag">BUILDING</span>
+          <span class="tag">AUTOMATION</span>
+          <span class="tag">AI / AGENTS</span>
+          <span class="tag">OPEN SOURCE</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section id="about" class="section" aria-label="About">
+        <span class="label">About</span>
+        <p class="copy">I'm Khant (Freddie). I like building things that solve real problems — mostly because I got tired of doing the same thing twice. This site is a loose collection of tools, experiments, and notes from the stuff I've been working on.</p>
+        <a class="pointer" href="#about">More about me →</a>
+      </section>
+
+      <section id="notes" class="section" aria-label="Notes">
+        <span class="label">Notes</span>
+        <p class="copy">Short write-ups on things I've learned: AI workflows, terminal tools, frontend tricks, and whatever else sticks after the tabs are closed.</p>
+        <a class="pointer" href="#notes">Read notes →</a>
+      </section>
+
+      <section id="work" class="section" aria-label="Projects and experiments">
+        <span class="label">Projects &amp; Experiments</span>
+        <ul class="plist">
+          <li>
+            <a class="prow" href="#work">
+              <span class="prow-num">01</span>
+              <span class="prow-body">
+                <span class="prow-title">POS STARTER KIT</span>
+                <span class="prow-label">multi-tenant point-of-sale · SAAS · TypeScript / React</span>
+              </span>
+              <span class="prow-date">2026-06</span>
+              <span class="prow-state">SHIPPING</span>
+            </a>
+          </li>
+          <li>
+            <a class="prow" href="#work">
+              <span class="prow-num">02</span>
+              <span class="prow-body">
+                <span class="prow-title">KTM CARGO</span>
+                <span class="prow-label">cross-border freight system · LOGISTICS · TypeScript / React</span>
+              </span>
+              <span class="prow-date">2026-06</span>
+              <span class="prow-state live">● LIVE</span>
+            </a>
+          </li>
+          <li>
+            <a class="prow" href="#work">
+              <span class="prow-num">03</span>
+              <span class="prow-body">
+                <span class="prow-title">PAPERCLIP</span>
+                <span class="prow-label">AI agent orchestration · AI INFRASTRUCTURE · TypeScript / Next.js</span>
+              </span>
+              <span class="prow-date">2026-05</span>
+              <span class="prow-state">BUILDING</span>
+            </a>
+          </li>
+          <li>
+            <a class="prow" href="#work">
+              <span class="prow-num">04</span>
+              <span class="prow-body">
+                <span class="prow-title">KAIROS DAYDREAMER</span>
+                <span class="prow-label">idea collision agent · PERSONAL KNOWLEDGE LAB · Hermes Agent</span>
+              </span>
+              <span class="prow-date">2026-05</span>
+              <span class="prow-state">LAB</span>
+            </a>
+          </li>
+        </ul>
+        <a class="pointer" href="#work">Browse labs →</a>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact" class="ft">
+    <span class="brand-name">FREDDIE K.</span>
+    <span aria-hidden="true">|</span>
+    <span>builder of strange tools for real life</span>
+    <nav class="ft-links" aria-label="Social links">
+      <a href="https://github.com/FreddieKT" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://x.com/ktythaung" target="_blank" rel="noreferrer">X</a>
+      <a href="mailto:ktythaung@gmail.com">Email</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var KEY = "fk-redesign-variant";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".switcher button"));
+
+  function apply(variant) {
+    document.body.dataset.variant = variant;
+    buttons.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.variant === variant));
+    });
+    try { localStorage.setItem(KEY, variant); } catch (e) {}
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.dataset.variant); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === "a" || saved === "b" || saved === "c") apply(saved);
+})();
+</script>
+
+</body>
+</html>

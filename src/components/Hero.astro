@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import profileAboutImage from '../assets/images/profile-about.jpg';
-import SectionLabel from './SectionLabel.astro';
 
 interface Props {
   eyebrow?: string;
@@ -11,180 +10,80 @@ interface Props {
 }
 
 const {
-  eyebrow = 'Personal portfolio / active lab',
-  title = 'Welcome to Freddie K.’s workspace.',
-  subtitle = 'A practical tinkerer focused on AI, automation, and systems.',
-  categories = ['AI INFRA', 'SYSTEMS', 'TERMINAL UX', 'OPEN SOURCE'],
+  eyebrow = 'personal site / ongoing experiments',
+  title = "Hey, I'm Freddie.",
+  subtitle = 'I build small tools, automate the boring stuff, and tinker with AI systems. This is where I keep the things that actually work.',
+  categories = ['BUILDING', 'AUTOMATION', 'AI / AGENTS', 'OPEN SOURCE'],
 } = Astro.props;
 ---
 
-<section class="hero-copy hero-photo-panel" aria-labelledby="hero-title">
-  <div class="hero-intro">
-    <figure class="hero-portrait-frame" data-animate="hero-portrait">
-      <Image
-        src={profileAboutImage}
-        alt="Freddie, the builder behind Freddie K."
-        width={176}
-        height={235}
-        loading="eager"
-        decoding="async"
-        class="hero-portrait-image"
-      />
-    </figure>
-
-    <div class="hero-text-stack">
-      <div data-animate="hero-eyebrow"><SectionLabel>{eyebrow}</SectionLabel></div>
-      <h1 id="hero-title" class="hero-title hero-title-compact" data-animate="hero-heading">{title}</h1>
-      <p class="mono-copy hero-subtitle" data-animate="hero-subhead">{subtitle}</p>
+<section class="hero section-hairline" aria-labelledby="hero-title">
+  <div class="hero-text">
+    <span class="label">{eyebrow}</span>
+    <h1 id="hero-title" class="hero-title">Hey, I'm <span class="accent">Freddie.</span></h1>
+    <p class="copy hero-subtitle">{subtitle}</p>
+    <div class="tags" aria-label="Categories">
+      {categories.map((cat) => (<span class="tag">{cat}</span>))}
     </div>
   </div>
-
-  <div class="grid-tags hero-tags" aria-label="Categories">
-    {categories.map((category) => (
-      <span data-animate="hero-tag">
-        <span class="tag-dot" aria-hidden="true"></span>
-        {category}
-      </span>
-    ))}
-  </div>
+  <figure class="portrait">
+    <Image
+      src={profileAboutImage}
+      alt="Freddie, the builder behind Freddie K."
+      width={140}
+      height={186}
+      loading="eager"
+      decoding="async"
+    />
+  </figure>
 </section>
 
 <style>
-  .hero-copy {
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-    min-width: 0;
-  }
-
-  .hero-photo-panel {
-    overflow: visible;
-    border: none;
-    border-radius: var(--radius-md);
-  }
-
-  .hero-intro {
+  .hero {
     display: flex;
-    align-items: flex-start;
-    gap: clamp(1rem, 2.4vw, 1.75rem);
-    padding: clamp(1rem, 2vw, 1.5rem);
+    flex-direction: column-reverse;
+    gap: 1.75rem;
+    padding: 3rem 0 2.75rem;
   }
-
-  .hero-portrait-frame {
-    position: relative;
-    width: 7rem;
-    aspect-ratio: 3 / 4;
-    flex: 0 0 auto;
-    margin: 0;
-    padding: 0.35rem;
-    border: var(--border-solid-strong);
-    border-radius: var(--radius-md);
-    background:
-      linear-gradient(180deg, var(--terminal-overlay), transparent),
-      var(--surface-terminal);
-    box-shadow: var(--shadow-glow);
-  }
-
-  .hero-portrait-frame::after {
-    content: '';
-    position: absolute;
-    inset: 0.35rem;
-    pointer-events: none;
-    border-radius: calc(var(--radius-md) - 0.25rem);
-    background-image: repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.05) 0,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 5px
-    );
-    opacity: 0.2;
-  }
-
-  .hero-portrait-image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: var(--border-dashed);
-    border-radius: calc(var(--radius-md) - 0.25rem);
-    object-fit: cover;
-    object-position: 50% 0%;
-    filter: saturate(0.95) contrast(1.02);
-  }
-
-  .hero-text-stack {
+  .hero-text {
     display: grid;
     gap: 0.9rem;
     min-width: 0;
-    max-width: 48rem;
   }
-
-  .hero-title-compact {
-    max-width: 20ch;
-    font-size: clamp(1.55rem, 3.15vw, 3.05rem);
-    line-height: 1.05;
-    letter-spacing: 0.018em;
+  .hero-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(3rem, 7.5vw, 5.25rem);
+    letter-spacing: -0.025em;
+    line-height: 0.98;
   }
-
-  .hero-subtitle {
-    max-width: 52ch;
-    margin-top: 0;
+  .hero-title .accent { color: var(--accent); }
+  .hero-subtitle { font-size: 1.05rem; max-width: 46ch; }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
-
-  .hero-tags {
-    margin: 0 1rem 1rem;
-    justify-self: start;
+  .tag {
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    padding: 0.25rem 0;
   }
-
-  :global(html[data-theme='light']) .hero-portrait-image {
-    filter: saturate(0.98) contrast(1.01);
+  .portrait {
+    flex: 0 0 auto;
+    width: 7.5rem;
+    margin: 0;
+    border: none;
   }
-
-  @media (min-width: 720px) {
-    .hero-portrait-frame {
-      width: 11rem;
-    }
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
   }
-
   @media (max-width: 720px) {
-    .hero-intro {
-      flex-direction: column;
-      padding: 0.9rem;
-    }
-
-    .hero-portrait-frame {
-      width: 7rem;
-    }
-
-    .hero-title-compact {
-      max-width: 22ch;
-      font-size: clamp(1.3rem, 6vw, 1.8rem);
-      line-height: 1.12;
-      text-wrap: balance;
-    }
-
-    .hero-tags {
-      margin: 0 0.75rem 0.75rem;
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      width: fit-content;
-      border-left: var(--border-dashed);
-      border-right: var(--border-dashed);
-    }
-
-    /* Reset the flex-based separator — doesn't work correctly when wrapping */
-    .hero-tags > span + span {
-      border-left: none;
-    }
-
-    /* Column separator: even items (col 2) */
-    .hero-tags > span:nth-child(even) {
-      border-left: var(--border-dashed);
-    }
-
-    /* Row separator: second row items */
-    .hero-tags > span:nth-child(n + 3) {
-      border-top: var(--border-dashed);
-    }
+    .hero { padding: 2rem 0; gap: 1.25rem; }
+    .hero-title { font-size: clamp(2rem, 10vw, 3.2rem); }
   }
 </style>

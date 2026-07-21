@@ -1,0 +1,18 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Home — Elevated Terminal": {
+      "versions": [
+        {
+          "path": "Home — Elevated Terminal.html",
+          "createdAt": "2026-07-21T18:25:45.951Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-07-21T18:25:45.957Z",
+  "updatedAt": "2026-07-21T18:25:45.957Z"
+}

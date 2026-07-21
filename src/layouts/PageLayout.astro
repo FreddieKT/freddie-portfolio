@@ -22,69 +22,18 @@ const { title, description, path = Astro.url.pathname } = Astro.props;
     </script>
   </head>
   <body>
-    <main id="top" class="page-shell">
-      <div class="frame page-frame">
-        <Header navItems={[
-          { label: 'ABOUT', href: '/about' },
-          { label: 'LABS',  href: '/labs' },
-          { label: 'NOTES', href: '/notes' },
-          { label: 'WORK',  href: '/#work' },
-        ]} />
-        <div class="page-layout">
-          <slot name="sidebar" />
-          <div class="page-main">
-            <slot />
-          </div>
+    <div class="shell">
+      <Header navItems={[
+        { label: 'ABOUT', href: '/about' },
+        { label: 'LABS',  href: '/labs' },
+        { label: 'NOTES', href: '/notes' },
+      ]} />
+      <main>
+        <div class="sections">
+          <slot />
         </div>
-      </div>
+      </main>
       <FooterStatus />
-    </main>
-
-    <script>
-      import { gsap } from 'gsap';
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!reduceMotion) {
-        gsap.set('[data-animate="sidebar-item"]', { autoAlpha: 0, x: -12 });
-        gsap.set('[data-animate="page-section"]', { autoAlpha: 0, y: 16 });
-        gsap.to('[data-animate="sidebar-item"]', {
-          autoAlpha: 1, x: 0, duration: 0.4, ease: 'power2.out', stagger: 0.06,
-        });
-        gsap.to('[data-animate="page-section"]', {
-          autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08, delay: 0.1,
-        });
-      }
-    </script>
+    </div>
   </body>
 </html>
-
-<style>
-  .page-frame {
-    padding: 1rem 1rem 0.75rem;
-  }
-
-  .page-layout {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: clamp(1rem, 2vw, 1.5rem);
-    padding: clamp(1rem, 2vw, 1.5rem) 0;
-    align-items: start;
-  }
-
-  .page-main {
-    display: grid;
-    gap: 1rem;
-    min-width: 0;
-  }
-
-  @media (max-width: 768px) {
-    .page-frame {
-      padding: 0.75rem;
-    }
-
-    .page-layout {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      padding: 0.75rem 0;
-    }
-  }
-</style>

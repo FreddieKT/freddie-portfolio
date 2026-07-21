@@ -1,96 +1,76 @@
 ---
-import SectionLabel from './SectionLabel.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-interface Props {
-  navItems?: NavItem[];
-}
+interface NavItem { label: string; href: string; }
+interface Props { navItems?: NavItem[]; }
 
 const { navItems = [
   { label: 'ABOUT', href: '/about' },
   { label: 'LABS',  href: '/labs' },
   { label: 'NOTES', href: '/notes' },
-  { label: 'WORK',  href: '/#work' },
 ] } = Astro.props;
 ---
 
-<header class="site-header" aria-label="Primary">
+<header class="hd section-hairline" aria-label="Primary">
   <div class="brand-lockup">
-    <a class="brand-mark" href="/" aria-label="FREDDIE K. home">
-      <SectionLabel>FREDDIE K.</SectionLabel>
-      <span class="mini-kicker">~/home/freddie</span>
+    <a class="brand" href="/" aria-label="FREDDIE K. home">
+      <span class="brand-name">FREDDIE K.</span>
+      <span class="brand-path">~/home/freddie</span>
     </a>
     <ThemeToggle />
   </div>
-
-  <nav class="nav-grid" aria-label="Main navigation">
+  <nav class="nav" aria-label="Main navigation">
     {navItems.map((item) => (
-      <a class="nav-pill" href={item.href}>{item.label}</a>
+      <a class="nav-link" href={item.href}>{item.label}</a>
     ))}
   </nav>
-
-  <a class="primary-pill" href="/contact">&gt; CONTACT</a>
+  <a class="contact-link" href="/contact">&gt; CONTACT</a>
 </header>
 
 <style>
-  .site-header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 1.4fr) auto;
+  .hd {
+    display: flex;
     align-items: center;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: var(--border-solid);
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    flex-wrap: wrap;
   }
-
   .brand-lockup {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    gap: 0.75rem;
   }
-
-  .brand-mark {
-    display: grid;
-    gap: 0.5rem;
+  .brand { display: grid; gap: 0.35rem; }
+  .brand-name { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; }
+  .brand-path { font-size: 0.75rem; color: var(--ink-faint); letter-spacing: 0.04em; }
+  .nav {
+    display: flex;
+    gap: 0.15rem;
+    margin-left: auto;
   }
-
-  .brand-mark :global(.section-label) {
-    margin-bottom: 0;
+  .nav-link {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-dim);
+    border-radius: 4px;
+    transition: color 140ms ease, background 140ms ease;
   }
-
-  .nav-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
+  .nav-link:hover { color: var(--accent); background: var(--accent-soft); }
+  .contact-link {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    transition: border-color 140ms ease;
   }
-
-  .nav-grid .nav-pill {
-    width: 100%;
-  }
-
-  .nav-grid .nav-pill,
-  .site-header > .primary-pill {
-    font-size: 0.65625rem;
-  }
-
-  @media (max-width: 1100px) {
-    .site-header {
-      grid-template-columns: 1fr;
-    }
-  }
-
+  .contact-link:hover { border-color: var(--accent); }
   @media (max-width: 720px) {
-    .nav-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .brand-lockup {
-      align-items: center;
-    }
+    .hd { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+    .brand-lockup { justify-content: space-between; }
+    .nav { margin-left: 0; flex-wrap: wrap; }
+    .contact-link { text-align: center; }
   }
 </style>

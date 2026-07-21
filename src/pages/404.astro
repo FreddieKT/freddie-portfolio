@@ -1,44 +1,25 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import SectionLabel from '../components/SectionLabel.astro';
 ---
 
-<PageLayout title="404 - Not Found">
-  <div class="not-found-container frame page-section">
-    <SectionLabel>Error 404</SectionLabel>
-    <h1 class="error-title">Route not found</h1>
-    <p class="mono-copy">The requested path does not exist or has been moved.</p>
-    <a href="/" class="return-link" data-animate="sidebar-item">← Return to root</a>
-  </div>
+<PageLayout title="404 — Not Found">
+  <section class="editorial-section">
+    <span class="label">Error</span>
+    <div class="section-content">
+      <h1 class="four-title">404</h1>
+      <p class="copy">This page doesn't exist. Maybe it never did.</p>
+      <a class="pointer" href="/">Back home →</a>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .not-found-container {
-    display: grid;
-    gap: 1.5rem;
-    padding: 3rem 2rem;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 50vh;
-    border-radius: var(--radius-md);
-  }
-  .error-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 4rem);
-    color: var(--foreground);
-    margin: 0;
-    text-transform: uppercase;
-  }
-  .return-link {
-    color: var(--accent);
-    font-size: var(--text-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding-top: 1rem;
-    text-decoration: none;
-  }
-  .return-link:hover {
-    text-decoration: underline;
+  .four-title {
+    font-weight: 700;
+    font-size: clamp(4rem, 10vw, 7rem);
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
   }
 </style>

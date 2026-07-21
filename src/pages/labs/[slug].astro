@@ -1,7 +1,5 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import PageSidebar from '../../components/PageSidebar.astro';
-import SectionLabel from '../../components/SectionLabel.astro';
 import { projects, type Project } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -11,144 +9,69 @@ export function getStaticPaths() {
   }));
 }
 
-interface Props {
-  project: Project;
-}
+interface Props { project: Project; }
 
 const { project } = Astro.props;
 const idx = projects.findIndex((p) => p.slug === project.slug);
 const prev = projects[(idx - 1 + projects.length) % projects.length];
 const next = projects[(idx + 1) % projects.length];
-
-const sidebarItems = projects.map((p) => ({
-  label: p.title,
-  href: `/labs/${p.slug}`,
-}));
 ---
 
 <PageLayout title={project.title} description={project.summary}>
-  <PageSidebar
-    slot="sidebar"
-    heading="LABS"
-    items={sidebarItems}
-    activeHref={`/labs/${project.slug}`}
-  />
-
-  <article class="labs-detail">
-    <div class="page-section frame combined-panel" data-animate="page-section">
-      <div class="markdown-prose">
-        <h1>{project.title}</h1>
-        <p class="meta"><strong>{project.category}</strong> &middot; {project.label} &middot; {project.date} &middot; {project.publisher}</p>
-
+  <section class="editorial-section" data-animate="page-section">
+    <span class="label">Lab</span>
+    <div class="section-content">
+      <h1 class="lab-title">{project.title}</h1>
+      <p class="lab-meta">{project.category} · {project.label} · {project.date} · {project.publisher}</p>
+      <div class="lab-copy">
         <h2>Summary</h2>
         <p>{project.summary}</p>
-
         <h2>Problem</h2>
         <p>{project.problem}</p>
-
         <h2>What it does</h2>
         <p>{project.does}</p>
-
         <h2>Stack</h2>
-        <ul>
-          {project.stack.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-
+        <ul>{project.stack.map((s) => (<li>{s}</li>))}</ul>
         <h2>Status</h2>
         <p>{project.status}</p>
-
         <h2>Next step</h2>
         <p>{project.nextStep}</p>
-
-        <h2>Terminal output</h2>
-        <ul>
-          {project.output.map((line) => (
-            <li>{line}</li>
-          ))}
-        </ul>
       </div>
     </div>
+  </section>
 
-    <nav class="page-section frame project-nav" aria-label="Project navigation" data-animate="page-section">
-      <a class="nav-pill" href={`/labs/${prev.slug}`}>← {prev.title}</a>
-      <a class="nav-pill" href={`/labs/${next.slug}`}>{next.title} →</a>
-    </nav>
-  </article>
+  <nav class="lab-nav" data-animate="page-section">
+    <a class="nav-pill" href={`/labs/${prev.slug}`}>← {prev.title}</a>
+    <a class="nav-pill" href={`/labs/${next.slug}`}>{next.title} →</a>
+  </nav>
 </PageLayout>
 
 <style>
-  .labs-detail {
-    display: grid;
-    gap: 1rem;
+  .lab-title {
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.015em;
+    line-height: 1;
+    margin: 0 0 0.4rem;
   }
-
-  .page-section {
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-  }
-
-  .combined-panel {
-    background: var(--panel-overlay);
-  }
-
-  .markdown-prose {
-    font-family: var(--font-mono);
-    color: var(--foreground-soft);
-    line-height: 1.6;
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .markdown-prose h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--foreground);
-    margin: 0 0 0.5rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
-  .markdown-prose h2 {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    color: var(--foreground);
-    margin: 2rem 0 0.75rem 0;
-    padding-bottom: 0.25rem;
-    border-bottom: var(--border-dashed);
-    text-transform: uppercase;
-  }
-
-  .markdown-prose p {
-    margin: 0 0 1rem 0;
-  }
-
-  .markdown-prose .meta {
-    font-size: var(--text-sm);
-    color: var(--muted);
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .markdown-prose ul {
-    margin: 0;
-    padding-left: 1.5rem;
-  }
-
-  .markdown-prose li {
-    margin-bottom: 0.5rem;
-  }
-
-  .markdown-prose li::marker {
-    color: var(--accent);
-  }
-
-  .project-nav {
+  .lab-meta { font-size: 0.8125rem; color: var(--ink-dim); letter-spacing: 0.05em; margin-bottom: 2rem; text-transform: uppercase; }
+  .lab-copy { font-size: 0.9375rem; color: var(--ink-soft); line-height: 1.6; }
+  .lab-copy h2 { font-size: 1.1rem; margin: 2rem 0 0.75rem; color: var(--ink); padding-bottom: 0.25rem; border-bottom: 1px solid var(--rule-soft); }
+  .lab-copy p { margin: 0 0 1rem; }
+  .lab-copy ul { padding-left: 1.5rem; }
+  .lab-copy li { margin-bottom: 0.5rem; }
+  .lab-copy li::marker { color: var(--accent); }
+  .lab-nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     gap: 1rem;
+    padding: 0.5rem 0 1.5rem;
   }
+  .nav-pill {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    padding: 0.5rem 0.75rem;
+  }
+  .nav-pill:hover { color: var(--accent); }
 </style>
