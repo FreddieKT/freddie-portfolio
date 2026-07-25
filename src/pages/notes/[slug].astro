@@ -2,7 +2,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageSidebar from '../../components/PageSidebar.astro';
-import SectionLabel from '../../components/SectionLabel.astro';
+
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
@@ -209,7 +209,7 @@ const sidebarItems = [
     font-weight: 600;
   }
 
-  .prose :global(code):not(.prose :global(pre) :global(code)) {
+  .prose :global(code) {
     font-family: var(--font-mono);
     font-size: 0.875em;
     color: var(--accent);

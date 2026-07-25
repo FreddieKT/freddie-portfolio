@@ -5,10 +5,10 @@ export interface MetricSignal {
   chart: 'bars' | 'line';
 }
 
-// Prototype indicators only. These are deliberately not live or verified stats.
+// Live-ish — update when projects ship or new experiments land.
 export const metricSignals: MetricSignal[] = [
-  { label: 'TOOLS BUILT', value: '4', icon: '</>', chart: 'line' },
-  { label: 'EXPERIMENTS', value: 'OPEN', icon: '◇', chart: 'bars' },
-  { label: 'PROTOTYPE SIGNALS', value: 'STATIC', icon: '::', chart: 'line' },
-  { label: 'SYSTEM STATUS', value: 'BUILDING', icon: '◌', chart: 'bars' },
+  { label: 'PROJECTS', value: '4', icon: '</>', chart: 'line' },
+  { label: 'LIVE SYSTEMS', value: '2', icon: '◇', chart: 'bars' },
+  { label: 'EXPERIMENTS', value: '3', icon: '::', chart: 'line' },
+  { label: 'BUILDING', value: 'MORE', icon: '◌', chart: 'bars' },
 ];
