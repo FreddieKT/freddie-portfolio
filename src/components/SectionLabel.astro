@@ -5,7 +5,7 @@ interface Props {
   class?: string;
 }
 
-const { as = 'p', id, class: className = '' } = Astro.props;
+const { as = 'p', id, class: className = '' }: Props = Astro.props;
 const Tag = as;
 ---
 

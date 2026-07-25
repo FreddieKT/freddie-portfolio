@@ -10,10 +10,17 @@
     "build": "rm -rf .astro && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node scripts/check-prototype.mjs"
+    "check": "astro check",
+    "test": "node scripts/check-prototype.mjs",
+    "csp": "node scripts/check-csp.mjs"
   },
   "dependencies": {
-    "astro": "^6.4.3",
+    "astro": "7.1.3",
     "gsap": "^3.13.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/node": "^26.1.1",
+    "typescript": "^6.0.3"
   }
 }

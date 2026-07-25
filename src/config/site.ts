@@ -1,8 +1,8 @@
 export const site = {
   name: 'FREDDIE K.',
-  title: 'FREDDIE K. — Strange tools for real life',
+  title: 'FREDDIE K. — building things that work',
   description:
-    "FREDDIE K. is Freddie's portfolio for small AI tools, automation workflows, memory systems, and terminal-native experiments.",
+    "Hey, I'm Freddie. I build small tools, automate boring stuff, and tinker with AI systems. This is where I keep the things that actually work.",
   origin: 'https://freddie-portfolio.pages.dev',
   ogImage: '/favicon.png',
   author: 'Freddie K.',

@@ -15,7 +15,6 @@ const { navItems = [
   { label: 'ABOUT', href: '/about' },
   { label: 'LABS',  href: '/labs' },
   { label: 'NOTES', href: '/notes' },
-  { label: 'WORK',  href: '/#work' },
 ] } = Astro.props;
 ---
 
@@ -65,7 +64,7 @@ const { navItems = [
 
   .nav-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
   }
 

@@ -33,10 +33,13 @@ for (const id of ['about', 'notes', 'work', 'contact']) {
 
 const pageLayout = read('src/layouts/PageLayout.astro');
 
-for (const href of ['/about', '/labs', '/notes', '/#work']) {
+for (const href of ['/about', '/labs', '/notes']) {
   assert.match(header, new RegExp(`href: ['"]${href}['"]`), `header navbar missing ${href}`);
   assert.match(pageLayout, new RegExp(`href: ['"]${href}['"]`), `page layout navbar missing ${href}`);
 }
+
+// WORK remains a homepage section, while LABS is the dedicated project index.
+assert.match(index, /<section id="work"[\s\S]*href="\/labs"/, 'homepage work section should link to the labs index');
 
 const navSource = header + pageLayout;
 assert.match(
